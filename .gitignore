@@ -1,3 +1,4 @@
 reads-frontend/node_modules
 reads-frontend/build
 node_modules/
+.env
