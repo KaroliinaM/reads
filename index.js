@@ -1,14 +1,16 @@
 require('dotenv').config()
 const express=require('express')
 const fetch=require('node-fetch')
+const cors = require('cors')
 const parseString = require('xml2js').parseString;
 const app=express()
+app.use(cors())
 
 KEY = process.env.GR_KEY
 
-app.get('/', (req, res) => {
-  //  res.send('<h1>Hello World</h1>')
-    fetch(`https://www.goodreads.com/book/isbn/0060512148?format=xml&key=${KEY}`)
+app.get('/book/:isbn', (req, res) => {
+    const isbn=req.params.isbn
+    fetch(`https://www.goodreads.com/book/isbn/${isbn}?format=xml&key=${KEY}`)
     .then(res=>res.text())
     .then(body => {
         parseString(body, (err, result) => {
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
                 description:bookData.description[0],
                 authors: bookData.authors.map(a => a.author[0].name[0])
             }
+            console.log('isbn', isbn)
             return res.json(book)   
         });
     })

@@ -1,16 +1,32 @@
 import React, {useState} from 'react';
 import Book from './components/Book'
 
-const App =({books})=> {
+const App =()=> {
   const [isbn, setIsbn]=useState('')
+  const [bookByIsbn, setBookByIsbn]=useState(null)
 
-  const bookByIsbn=books.filter(b=>  b.isbn===isbn)
+  //const bookByIsbn=books.find(b=>  b.isbn===isbn)
+  const submitForm = (event) => {
+    event.preventDefault()
+    console.log(isbn)
+    
+    fetch(`http://localhost:3001/book/${isbn}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setBookByIsbn(data)
+      })
+  }
+
 
 return(
   <div>Hello World
-    <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
-    {bookByIsbn.length>0 && 
-      <Book book={bookByIsbn[0]} />
+    <form onSubmit={submitForm}>
+      <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
+      <button type='submit'>lähetä</button>
+    </form>
+    {bookByIsbn && 
+      <Book book={bookByIsbn} />
     }
     
     

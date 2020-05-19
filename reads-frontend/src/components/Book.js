@@ -3,7 +3,7 @@ import React from 'react'
 const Book = ({book}) => {
     return(
         <div className='book-container'>
-            <img src={book.image} alt="Smiley face" />
+            <img src={book.image_url} alt="cover" />
             <div className='book-info-container'>
                 <h1>{book.title}</h1>
                 <h2>{book.authors[0]}</h2>
