@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Book from './components/Book'
 
+const App =({books})=> {
+  const [isbn, setIsbn]=useState('')
 
-const App =({books})=> (
+  const bookByIsbn=books.filter(b=>  b.isbn===isbn)
+
+return(
   <div>Hello World
-    {console.log(books)}
-    {console.log(books[0].image)}
-    <img src={books[0].image} alt="Smiley face" /> 
+    <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
+    {bookByIsbn.length>0 && 
+      <Book book={bookByIsbn[0]} />
+    }
+    
     
   </div>
-)
+)}
 
 export default App;
