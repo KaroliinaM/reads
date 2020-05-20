@@ -2,9 +2,27 @@ require('dotenv').config()
 const express=require('express')
 const fetch=require('node-fetch')
 const cors = require('cors')
+const Pool = require('pg').Pool
 const parseString = require('xml2js').parseString;
 const app=express()
 app.use(cors())
+
+const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDB,
+  password: process.env.PGPASS,
+  port: process.env.PGPORT,
+})
+
+
+app.get('/db', (request, response) => {
+    pool.query('SELECT * FROM book ORDER BY id ASC', (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+})})
 
 KEY = process.env.GR_KEY
 
