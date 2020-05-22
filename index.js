@@ -29,11 +29,12 @@ app.get('/readlists', (request, response) => {
 app.post('/readlists', (request, response) => {
     const {name} = request.body
     console.log('name', name)
-     pool.query('insert into readlist values(default, $1)', [name], (error, result) => {
+     pool.query('insert into readlist values(default, $1) returning id', [name], (error, result) => {
         if(error) {
             throw error
         }
-        response.status(201).send('added')
+        console.log(result.rows[0].id)
+        response.status(201).send({id:result.rows[0].id, name: name})
     }) 
 })
 
