@@ -6,6 +6,7 @@ const Pool = require('pg').Pool
 const parseString = require('xml2js').parseString;
 const app=express()
 app.use(cors())
+app.use(express.json())
 
 const pool = new Pool({
   user: process.env.PGUSER,
@@ -15,6 +16,26 @@ const pool = new Pool({
   port: process.env.PGPORT,
 })
 
+
+app.get('/readlists', (request, response) => {
+    pool.query('SELECT * FROM readlist', (error, results) => {
+        if(error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+})
+
+app.post('/newlist', (request, response) => {
+    const {name} = request.body
+    console.log('name', name)
+     pool.query('insert into readlist values(default, $1)', [name], (error, result) => {
+        if(error) {
+            throw error
+        }
+        response.status(201).send('added')
+    }) 
+})
 
 app.get('/db', (request, response) => {
     pool.query('SELECT * FROM book ORDER BY id ASC', (error, results) => {
