@@ -1,34 +1,12 @@
-import React, {useState} from 'react';
-import Book from './components/Book'
+import React from 'react';
+import SearchBookContainer from './containers/SearchBookContainer'
 
 const App =()=> {
-  const [isbn, setIsbn]=useState('')
-  const [bookByIsbn, setBookByIsbn]=useState(null)
-
-  //const bookByIsbn=books.find(b=>  b.isbn===isbn)
-  const submitForm = (event) => {
-    event.preventDefault()
-    console.log(isbn)
-    
-    fetch(`http://localhost:3001/book/${isbn}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setBookByIsbn(data)
-      })
-  }
 
 
 return(
   <div>Hello World
-    <form onSubmit={submitForm}>
-      <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
-      <button type='submit'>lähetä</button>
-    </form>
-    {bookByIsbn && 
-      <Book book={bookByIsbn} />
-    }
-    
+    <SearchBookContainer />
     
   </div>
 )}

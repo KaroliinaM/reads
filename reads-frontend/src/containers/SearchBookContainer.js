@@ -20,7 +20,7 @@ const SearchBookContainer =()=> {
 
 
 return(
-  <div>Hello World
+  <div>
     <form onSubmit={submitForm}>
       <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button type='submit'>lähetä</button>
@@ -28,8 +28,6 @@ return(
     {bookByIsbn && 
       <Book book={bookByIsbn} />
     }
-    
-    
   </div>
 )}
 
