@@ -1,0 +1,31 @@
+{
+    "readlists": [
+        {
+            "id": 1,
+            "name" : "luetut" 
+        },
+        {
+            "id":2,
+            "name": "luettavat"
+        }
+    ],
+    "book": [{
+        "id": "0060512148",
+        "isbn": "0060512148",
+        "isbn13": "9780060512149",
+        "title": "Angels",
+        "authors": ["Marian Keyes"],
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1407711412l/82747._SX98_.jpg",
+        "description": "Maggie has always been the white sheep of the Walsh family.Unlike her comically dysfunctional sisters,Rachel(heroine of Rachel's Holiday) and Claire (heroine of Watermelon), she married a decent man who adored her and found herself a solid career. Where Rachel was reckless and Claire dramatic, Maggie settled early for safety. Or so she believed until she discovers that her husband is having an affair and her boss is going to fire her. Suddenly, her perfectly organized life has become a perfect mess."
+      },
+      {
+        "id": "0440241901",
+        "isbn": "0440241901",
+        "isbn13": "9780440241904",
+        "title": "Can You Keep a Secret?",
+        "authors": ["Sophie Kinsella"],
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1330464293l/33724._SY160_.jpg",
+        "description": "Meet Emma Corrigan, a young woman with a huge heart, an irrepressible spirit, and a few little secrets: Secrets from her boyfriend: I've always thought Connor looks a bit like Ken. As in Barbie and Ken. Secrets from her mother: I lost my virginity in the spare bedroom with Danny Nussbaum while Mum and Dad were downstairs watching Ben-Hur"
+      }
+    ]
+}

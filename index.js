@@ -26,7 +26,7 @@ app.get('/readlists', (request, response) => {
     })
 })
 
-app.post('/newlist', (request, response) => {
+app.post('/readlists', (request, response) => {
     const {name} = request.body
     console.log('name', name)
      pool.query('insert into readlist values(default, $1)', [name], (error, result) => {
