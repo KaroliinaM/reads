@@ -47,7 +47,7 @@ app.get('/author', (request, response) => {
 })
 
 
-app.post('/book', (request, response) => {
+app.post('/books', (request, response) => {
     const book=request.body
     const join={}
     pool.query('select * from author where name=$1', [book.author])
