@@ -5,9 +5,12 @@ const ReadListContainer = ({id}) => {
     const [readList, setReadList] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3001/books')
+        fetch('http://localhost:3001/books/')
         .then(response => response.json())
-        .then(data => setReadList(data))
+        .then(data => {
+            console.log(data)
+            setReadList(data)
+        })
     }, [])
 
     return (
