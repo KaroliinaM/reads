@@ -64,6 +64,7 @@
       ]
     },
     {
+      "id": "0451530039",
       "title": "The Three Musketeers",
       "isbn": "0451530039",
       "isbn13": "9780451530035",
@@ -82,6 +83,24 @@
       "description": "Maggie has always been the white sheep of the Walsh family.Unlike her comically dysfunctional sisters,Rachel(heroine of Rachel's Holiday) and Claire (heroine of Watermelon), she married a decent man who adored her and found herself a solid career. Where Rachel was reckless and Claire dramatic, Maggie settled early for safety. Or so she believed until she discovers that her husband is having an affair and her boss is going to fire her. Suddenly, her perfectly organized life has become a perfect mess.",
       "readlist_id": 1,
       "id": 1
+    },
+    {
+      "title": "Can You Keep a Secret?",
+      "isbn": "0440241901",
+      "isbn13": "9780440241904",
+      "description": "Meet Emma Corrigan, a young woman with a huge heart, an irrepressible spirit, and a few little secrets: Secrets from her boyfriend: I've always thought Connor looks a bit like Ken. As in Barbie and Ken. Secrets from her mother: I lost my virginity in the spare bedroom with Danny Nussbaum while Mum and Dad were downstairs watching Ben-Hur",
+      "author": "Sophie Kinsella",
+      "readlist_id": 1,
+      "id": 2
+    },
+    {
+      "title": "The Undomestic Goddess",
+      "isbn": "0552772747",
+      "isbn13": "9780552772747",
+      "description": "Workaholic attorney Samantha Sweeting has just done the unthinkable. She’s made a mistake so huge, it’ll wreck any chance of a partnership. <br /><br />Going into utter meltdown, she walks out of her London office, gets on a train, and ends up in the middle of nowhere. Asking for directions at a big, beautiful house, she’s mistaken for an interviewee and finds herself being offered a job as housekeeper. Her employers have no idea they’ve hired a lawyer–and Samantha has no idea how to work the oven. She can’t sew on a button, bake a potato, or get the #@%# ironing board to open. How she takes a deep breath and begins to cope–and finds love–is a story as delicious as the bread she learns to bake. <br /><br />But will her old life ever catch up with her? And if it does…will she want it back?",
+      "author": "Sophie Kinsella",
+      "readlist_id": 1,
+      "id": 3
     }
   ]
 }
