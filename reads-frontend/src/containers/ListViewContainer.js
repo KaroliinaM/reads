@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import AddReadListForm from '../components/AddReadListForm'
 
 const ListViewContainer = () => {
     const [readLists, setReadLists] = useState([])
     const [listInput, setListInput] = useState('')
+    const [inputVisible, setInputVisible] = useState(false)
 
     useEffect(() => {
         console.log('useEffect')
@@ -10,6 +12,8 @@ const ListViewContainer = () => {
         .then(response => response.json())
         .then(data => setReadLists(data))
     }, [])
+
+    const toggleVisibility = () => setInputVisible(!inputVisible)
 
     const submitForm = (event) => {
         event.preventDefault()
@@ -36,13 +40,15 @@ const ListViewContainer = () => {
     return(
         <>
             <ul>
-                <form onSubmit={submitForm}>
-                    <input value={listInput} onChange={(e) => setListInput(e.target.value)} />
-                    <button type='submit'>Lisää</button>
-                </form>
                 {readLists.map(list=>{
                     return<li key={list.id}>{list.name}</li>
                 })}
+                <button onClick={toggleVisibility}>toggle</button>
+                {inputVisible && <AddReadListForm
+                    listInput={listInput}
+                    setListInput={setListInput}
+                    submitForm={submitForm}
+                />}
             </ul>
         </>
 
