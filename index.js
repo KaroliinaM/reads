@@ -75,6 +75,17 @@ app.post('/books', (request, response) => {
     .catch(e => console.log(e))
 })
 
+app.get('/books/:id', (request, response) => {
+    const list = request.params.id
+    console.log('list',list)
+    pool.query('select title, author.name, description from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and readlist_id=$1',
+    [list])
+    .then(result =>  {
+        return response.status(200).json(result.rows)
+    })
+    .catch(e => console.log(e))
+})
+
 app.get('/db', (request, response) => {
     pool.query('SELECT * FROM book ORDER BY id ASC', (error, results) => {
       if (error) {
