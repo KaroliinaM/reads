@@ -17,6 +17,9 @@ return(
       <Link to="/etsi">etsi</Link>
     </div>
     <Switch>
+      <Route path="/list/:id">
+        <ReadListContainer />
+      </Route>
       <Route path="/etsi">
         <SearchBookContainer />
       </Route>

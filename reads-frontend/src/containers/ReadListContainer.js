@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import ReadListItem from '../components/ReadListItem'
 
-const ReadListContainer = ({id}) => {
+const ReadListContainer = () => {
     const [readList, setReadList] = useState([])
+    const id=useParams().id
 
     useEffect(() => {
-        fetch('http://localhost:3001/books/')
+        fetch(`http://localhost:3001/books/${id}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
             setReadList(data)
         })
-    }, [])
+    }, [id])
 
     return (
         <>

@@ -1,8 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const ReadList = ({list}) => (
     <div>
-        {list.name}
+        <Link to={`/list/${list.id}`} >{list.name}</Link>
     </div>
 )
 
