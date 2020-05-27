@@ -20,8 +20,22 @@ KEY = process.env.GR_KEY
 
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
-    fetch(`https://www.goodreads.com/book/isbn/${isbn}?format=xml&key=${KEY}`)
-    .then(res=>res.text())
+    fetch(`http://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
+    .then(response=> response.json())
+    .then(data => {
+        console.log(data)
+        const bookData=data[`ISBN:${isbn}`]
+        console.log(bookData.authors)
+        const book = {
+            title:bookData.title,
+            isbn:bookData.identifiers.isbn_10[0],
+            image_url:bookData.cover.medium,
+            description: "",
+            authors: bookData.authors.map(a => a.name) 
+        }
+        console.log(book)
+    })
+/*     .then(res=>res.text())
     .then(body => {
         parseString(body, (err, result) => {
             console.log(result.GoodreadsResponse)
@@ -37,7 +51,7 @@ app.get('/book/:isbn', (req, res) => {
             console.log('isbn', isbn)
             return res.json(book)   
         });
-    })
+    }) */
     .catch(e => console.log(e));
 })
 
