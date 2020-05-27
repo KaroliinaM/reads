@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Book from '../components/Book'
 import ListPicker from '../components/ListPicker'
+import BookService from '../services/BookService'
 
 
 const SearchBookContainer =()=> {
@@ -9,8 +10,7 @@ const SearchBookContainer =()=> {
   const [readLists, setReadLists] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/readlists')
-    .then(response => response.json())
+    BookService.getReadLists()
     .then(data => setReadLists(data))
   },[])
 
@@ -18,14 +18,12 @@ const SearchBookContainer =()=> {
   const submitForm = (event) => {
     event.preventDefault()
     console.log(isbn)
-    
-    fetch(`http://localhost:3001/book/${isbn}`)
-      .then(response => response.json())
-      .then(data => {
+    BookService.getBookByIsbn(isbn)
+    .then(data => {
         console.log(data)
         console.log(data.authors[0])
         setBookByIsbn(data)
-      })
+    })
   }
   const addBookToList = (listId) => {
     const book = {

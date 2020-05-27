@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import ReadListItem from '../components/ReadListItem'
+import BookService from '../services/BookService'
 
 const ReadListContainer = () => {
     const [readList, setReadList] = useState([])
     const id=useParams().id
 
     useEffect(() => {
-        fetch(`http://localhost:3001/books/${id}`)
-        .then(response => response.json())
+        BookService.getReadList(id)
         .then(data => {
             console.log(data)
             setReadList(data)
@@ -17,9 +17,9 @@ const ReadListContainer = () => {
 
     return (
         <>
-                {readList.map(book => {
-                    return(<ReadListItem key={book.id} item={book} />)
-                })}
+            {readList.map(book => {
+                return(<ReadListItem key={book.id} item={book} />)
+            })}
         </>
     )
 }

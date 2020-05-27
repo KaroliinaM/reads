@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import AddReadListForm from '../components/AddReadListForm'
 import ReadList from '../components/ReadList'
+import BookService from '../services/BookService'
 
 const ListViewContainer = () => {
     const [readLists, setReadLists] = useState([])
@@ -8,9 +9,7 @@ const ListViewContainer = () => {
     const [inputVisible, setInputVisible] = useState(false)
 
     useEffect(() => {
-        console.log('useEffect')
-        fetch('http://localhost:3001/readlists')
-        .then(response => response.json())
+       BookService.getReadLists()
         .then(data => setReadLists(data))
     }, [])
 
@@ -22,16 +21,8 @@ const ListViewContainer = () => {
         const newList = {
             name: listInput
         }
-        fetch('http://localhost:3001/readlists', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newList)
-        })
-        .then(response => response.json())
+        BookService.postNewList(newList)
         .then(data => {
-            console.log('data',data)
             setReadLists(readLists.concat(data))
             setListInput('')
         })
