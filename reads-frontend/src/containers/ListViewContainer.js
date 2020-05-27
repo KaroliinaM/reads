@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AddReadListForm from '../components/AddReadListForm'
+import ReadList from '../components/ReadList'
 
 const ListViewContainer = () => {
     const [readLists, setReadLists] = useState([])
@@ -39,17 +40,15 @@ const ListViewContainer = () => {
 
     return(
         <>
-            <ul>
-                {readLists.map(list=>{
-                    return<li key={list.id}>{list.name}</li>
-                })}
-                <button onClick={toggleVisibility}>toggle</button>
-                {inputVisible && <AddReadListForm
-                    listInput={listInput}
-                    setListInput={setListInput}
-                    submitForm={submitForm}
-                />}
-            </ul>
+            {readLists.map(list=>{
+                return<ReadList key={list.id} list={list} />
+            })}
+            <button onClick={toggleVisibility}>toggle</button>
+            {inputVisible && <AddReadListForm
+                listInput={listInput}
+                setListInput={setListInput}
+                submitForm={submitForm}
+            />}
         </>
 
     )
