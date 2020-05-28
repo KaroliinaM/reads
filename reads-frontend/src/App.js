@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBookContainer from './containers/SearchBookContainer'
 import ListViewContainer from './containers/ListViewContainer'
 import ReadListContainer from './containers/ReadListContainer'
+import BookDetailsContainer from './containers/BookDetailsContainer'
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -22,6 +23,9 @@ return(
       </Route>
       <Route path="/etsi">
         <SearchBookContainer />
+      </Route>
+      <Route path ='/book/:id'>
+        <BookDetailsContainer />
       </Route>
       <Route path="/">
         <ListViewContainer />
