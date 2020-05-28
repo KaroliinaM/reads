@@ -75,11 +75,23 @@ const getBooksByList = (request, response) => {
     .catch(e => console.log(e))
 }
 
+const getBookById = (request, response) => {
+    const id=request.params.id
+    console.log(id)
+    pool.query('select book.id as id, title, image_url, author.name as author from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and book.id=$1',
+    [id])
+    .then(result=> {
+        return response.status(200).json(...result.rows)
+    })
+    .catch(e => console.log(e))
+}
+
 
 module.exports ={
     getReadLists,
     postReadList,
     getAuthor,
     postBook,
-    getBooksByList
+    getBooksByList,
+    getBookById,
 }

@@ -13,6 +13,7 @@ app.get('/readlists', db.getReadLists)
 app.post('/readlists', db.postReadList)
 app.get('/author', db.getAuthor)
 app.post('/books', db.postBook)
+app.get('/books/:id', db.getBookById)
 app.get('/readlists/:id', db.getBooksByList)
 
 
