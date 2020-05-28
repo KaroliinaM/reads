@@ -13,7 +13,7 @@ app.get('/readlists', db.getReadLists)
 app.post('/readlists', db.postReadList)
 app.get('/author', db.getAuthor)
 app.post('/books', db.postBook)
-app.get('/books/:id', db.getBooksByList)
+app.get('/readlists/:id', db.getBooksByList)
 
 
 KEY = process.env.GR_KEY
