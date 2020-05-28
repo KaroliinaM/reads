@@ -1,94 +1,43 @@
 {
   "readlists": [
     {
-      "id": 1,
-      "name": "luetut"
-    },
-    {
-      "id": 2,
-      "name": "luettavat"
-    },
-    {
-      "id": 3,
-      "name": "Uusi"
-    },
-    {
-      "id": 4,
-      "name": "Seuraava"
-    },
-    {
-      "name": "Vielä",
-      "id": 5
-    },
-    {
-      "name": "uusi",
-      "id": 6
-    },
-    {
-      "name": "Lista",
-      "id": 7
-    },
-    {
-      "name": "UUSI",
-      "id": 8
-    },
-    {
-      "name": "Lista",
-      "id": 9
-    },
-    {
-      "id": 10
-    },
-    {
-      "name": "uusiLista",
-      "id": 11
-    },
-    {
-      "name": "Uusi",
-      "id": 12
+      "name": "Luetut",
+      "id": 1
     }
   ],
   "book": [
     {
       "id": "0060512148",
-      "isbn": "0060512148",
-      "isbn13": "9780060512149",
       "title": "Angels",
+      "isbn": "0060512148",
+      "image_url": "https://covers.openlibrary.org/b/id/6857992-M.jpg",
       "authors": [
         "Marian Keyes"
-      ],
-      "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1407711412l/82747._SX98_.jpg",
-      "description": "Maggie has always been the white sheep of the Walsh family.Unlike her comically dysfunctional sisters,Rachel(heroine of Rachel's Holiday) and Claire (heroine of Watermelon), she married a decent man who adored her and found herself a solid career. Where Rachel was reckless and Claire dramatic, Maggie settled early for safety. Or so she believed until she discovers that her husband is having an affair and her boss is going to fire her. Suddenly, her perfectly organized life has become a perfect mess."
+      ]
     },
     {
       "id": "0440241901",
+      "title": "Can you keep a secret?",
       "isbn": "0440241901",
-      "isbn13": "9780440241904",
-      "title": "Can You Keep a Secret?",
+      "image_url": "https://covers.openlibrary.org/b/id/6391908-M.jpg",
       "authors": [
         "Sophie Kinsella"
-      ],
-      "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1330464293l/33724._SY160_.jpg",
-      "description": "Meet Emma Corrigan, a young woman with a huge heart, an irrepressible spirit, and a few little secrets: Secrets from her boyfriend: I've always thought Connor looks a bit like Ken. As in Barbie and Ken. Secrets from her mother: I lost my virginity in the spare bedroom with Danny Nussbaum while Mum and Dad were downstairs watching Ben-Hur"
+      ]
     },
     {
-      "id": "0552772747",
+      "id": "9780440335627",
       "title": "The Undomestic Goddess",
-      "isbn": "0552772747",
-      "isbn13": "9780552772747",
-      "image_url": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1283008208l/122043._SX98_.jpg",
-      "description": "Workaholic attorney Samantha Sweeting has just done the unthinkable. She’s made a mistake so huge, it’ll wreck any chance of a partnership. <br /><br />Going into utter meltdown, she walks out of her London office, gets on a train, and ends up in the middle of nowhere. Asking for directions at a big, beautiful house, she’s mistaken for an interviewee and finds herself being offered a job as housekeeper. Her employers have no idea they’ve hired a lawyer–and Samantha has no idea how to work the oven. She can’t sew on a button, bake a potato, or get the #@%# ironing board to open. How she takes a deep breath and begins to cope–and finds love–is a story as delicious as the bread she learns to bake. <br /><br />But will her old life ever catch up with her? And if it does…will she want it back?",
+      "isbn": "9780440335627",
+      "image_url": "https://covers.openlibrary.org/b/id/6424512-M.jpg",
       "authors": [
         "Sophie Kinsella"
       ]
     },
     {
       "id": "0451530039",
-      "title": "The Three Musketeers",
+      "title": "The three musketeers",
       "isbn": "0451530039",
-      "isbn13": "9780451530035",
-      "image_url": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1309286580l/10560._SY160_.jpg",
-      "description": "<b>The classic adventure from the author of <i>The Count of Monte Cristo </i>and <i>The Man in the Iron Mask</i>.</b><br /><br />In this swashbuckling epic, d’Artagnan, not yet twenty, sets off for Paris in hopes of joining the Musketeers, that legion of heroes highly favored by King Louis XIII and feared by evil Cardinal Richelieu. By fighting alongside Athos, Porthos, and Aramis as they battle their enemies, d’Artagnan proves he has the heart of a Musketeer and earns himself a place in their ranks. Soon d’Artagnan and the gallant trio must use all their wits and sword skills to preserve the queen’s honor and thwart the wicked schemes of Cardinal Richelieu. With this classic tale, Dumas embroiders upon history a colorful world of swordplay, intrigue, and romance, earning The Three Musketeers its reputation as one of the most thrilling adventure novels ever written.<br /><br />An Unabridged Translation, Revised and Updated by Eleanor Hochman<br /><br />With an Introduction by Thomas Flanagan and an Afterword by Marcelle Clements<br /> ",
+      "image_url": "https://covers.openlibrary.org/b/id/9944195-M.jpg",
       "authors": [
         "Alexandre Dumas"
       ]
@@ -96,30 +45,18 @@
   ],
   "books": [
     {
-      "title": "Angels",
-      "isbn": "0060512148",
-      "isbn13": "9780060512149",
-      "description": "Maggie has always been the white sheep of the Walsh family.Unlike her comically dysfunctional sisters,Rachel(heroine of Rachel's Holiday) and Claire (heroine of Watermelon), she married a decent man who adored her and found herself a solid career. Where Rachel was reckless and Claire dramatic, Maggie settled early for safety. Or so she believed until she discovers that her husband is having an affair and her boss is going to fire her. Suddenly, her perfectly organized life has become a perfect mess.",
+      "title": "The three musketeers",
+      "isbn": "0451530039",
+      "author": "Alexandre Dumas",
       "readlist_id": 1,
       "id": 1
     },
     {
-      "title": "Can You Keep a Secret?",
-      "isbn": "0440241901",
-      "isbn13": "9780440241904",
-      "description": "Meet Emma Corrigan, a young woman with a huge heart, an irrepressible spirit, and a few little secrets: Secrets from her boyfriend: I've always thought Connor looks a bit like Ken. As in Barbie and Ken. Secrets from her mother: I lost my virginity in the spare bedroom with Danny Nussbaum while Mum and Dad were downstairs watching Ben-Hur",
+      "title": "The Undomestic Goddess",
+      "isbn": "9780440335627",
       "author": "Sophie Kinsella",
       "readlist_id": 1,
       "id": 2
-    },
-    {
-      "title": "The Undomestic Goddess",
-      "isbn": "0552772747",
-      "isbn13": "9780552772747",
-      "description": "Workaholic attorney Samantha Sweeting has just done the unthinkable. She’s made a mistake so huge, it’ll wreck any chance of a partnership. <br /><br />Going into utter meltdown, she walks out of her London office, gets on a train, and ends up in the middle of nowhere. Asking for directions at a big, beautiful house, she’s mistaken for an interviewee and finds herself being offered a job as housekeeper. Her employers have no idea they’ve hired a lawyer–and Samantha has no idea how to work the oven. She can’t sew on a button, bake a potato, or get the #@%# ironing board to open. How she takes a deep breath and begins to cope–and finds love–is a story as delicious as the bread she learns to bake. <br /><br />But will her old life ever catch up with her? And if it does…will she want it back?",
-      "author": "Sophie Kinsella",
-      "readlist_id": 1,
-      "id": 3
     }
   ]
 }

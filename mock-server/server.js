@@ -6,7 +6,7 @@ const port = process.env.PORT || 3001;
 
 server.use(middlewares)
 server.use(jsonServer.rewriter({
-    '/readlists/:id': '/books/'
+    '/readlists/:id': '/books'
   }));
 server.use(router)
 server.listen(port, () => {

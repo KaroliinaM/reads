@@ -26,9 +26,10 @@ app.get('/book/:isbn', (req, res) => {
         console.log(data)
         const bookData=data[`ISBN:${isbn}`]
         console.log(bookData.authors)
+        //const isbn: bookData.identifiers.isbn_10[0
         const book = {
             title:bookData.title,
-            isbn:bookData.identifiers.isbn_10[0],
+            isbn: isbn,
             image_url:bookData.cover.medium,
             authors: bookData.authors.map(a => a.name) 
         }

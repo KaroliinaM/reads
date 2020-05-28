@@ -17,7 +17,7 @@ const postNewList = (newList) => {
 }
 
 const getReadList = (id) => {
-    return fetch(`http://localhost:3001/books/${id}`)
+    return fetch(`http://localhost:3001/readlists/${id}`)
     .then(response => response.json())
 }
 
