@@ -30,28 +30,11 @@ app.get('/book/:isbn', (req, res) => {
             title:bookData.title,
             isbn:bookData.identifiers.isbn_10[0],
             image_url:bookData.cover.medium,
-            description: "",
             authors: bookData.authors.map(a => a.name) 
         }
         console.log(book)
+        return res.json(book)
     })
-/*     .then(res=>res.text())
-    .then(body => {
-        parseString(body, (err, result) => {
-            console.log(result.GoodreadsResponse)
-            const bookData=result.GoodreadsResponse.book[0]
-            const book = {
-                title:bookData.title[0],
-                isbn:bookData.isbn[0],
-                isbn13:bookData.isbn13[0],
-                image_url:bookData.image_url[0],
-                description:bookData.description[0],
-                authors: bookData.authors.map(a => a.author[0].name[0])
-            }
-            console.log('isbn', isbn)
-            return res.json(book)   
-        });
-    }) */
     .catch(e => console.log(e));
 })
 
