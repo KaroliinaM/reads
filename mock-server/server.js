@@ -5,5 +5,10 @@ const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 3001;
 
 server.use(middlewares)
+server.use(jsonServer.rewriter({
+    '/readlists/:id': '/books/'
+  }));
 server.use(router)
-server.listen(port)
+server.listen(port, () => {
+    console.log(`server runnin on port ${port}`)
+} )
