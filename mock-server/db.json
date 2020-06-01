@@ -47,14 +47,14 @@
     {
       "title": "The three musketeers",
       "isbn": "0451530039",
-      "author": "Alexandre Dumas",
+      "authors": "Alexandre Dumas",
       "readlist_id": 1,
       "id": 1
     },
     {
       "title": "The Undomestic Goddess",
       "isbn": "9780440335627",
-      "author": "Sophie Kinsella",
+      "authors": "Sophie Kinsella",
       "readlist_id": 1,
       "id": 2
     }

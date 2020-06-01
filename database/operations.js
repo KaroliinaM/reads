@@ -38,7 +38,7 @@ const getAuthor= (request, response) => {
 
 const postBook = ( request, response) => {
     const book=request.body
-    const join={}
+    let join={}
     pool.query('select * from author where name=$1', [book.author])
     .then(result => {
         if(result.rows.length==0) {
@@ -78,11 +78,24 @@ const getBooksByList = (request, response) => {
 const getBookById = (request, response) => {
     const id=request.params.id
     console.log(id)
-    pool.query('select book.id as id, title, image_url, author.name as author from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and book.id=$1',
+    let book={}
+    pool.query('select author.name from booktoauthor, author where booktoauthor.author_id=author.id and booktoauthor.book_id=$1', [id])
+    .then(result => {
+        book.authors=result.rows.map(a => a.name)
+        pool.query('select book.id as id, title, image_url from book where book.id=$1',
+        [id])
+        .then( result => {
+            book.id=result.rows[0].id
+            book.title=result.rows[0].title
+            book.image_url=result.rows[0].image_url
+            return response.status(200).json(book)
+        })
+    })
+/*     pool.query('select book.id as id, title, image_url, author_id from book, booktoauthor where book.id=booktoauthor.book_id and book.id=$1',
     [id])
     .then(result=> {
         return response.status(200).json(...result.rows)
-    })
+    }) */
     .catch(e => console.log(e))
 }
 
