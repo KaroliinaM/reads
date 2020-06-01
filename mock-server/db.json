@@ -45,18 +45,41 @@
   ],
   "books": [
     {
-      "title": "The three musketeers",
-      "isbn": "0451530039",
-      "authors": "Alexandre Dumas",
+      "title": "Angels",
+      "isbn": "0060512148",
+      "authors": [
+        "Marian Keyes"
+      ],
       "readlist_id": 1,
       "id": 1
     },
     {
-      "title": "The Undomestic Goddess",
-      "isbn": "9780440335627",
-      "authors": "Sophie Kinsella",
+      "title": "The three musketeers",
+      "isbn": "0451530039",
+      "authors": [
+        "Alexandre Dumas"
+      ],
       "readlist_id": 1,
       "id": 2
+    },
+    {
+      "title": "The Undomestic Goddess",
+      "isbn": "9780440335627",
+      "authors": [
+        "Sophie Kinsella"
+      ],
+      "readlist_id": 1,
+      "id": 3
+    },
+    {
+      "title": "Can you keep a secret?",
+      "isbn": "0440241901",
+      "image_url": "https://covers.openlibrary.org/b/id/6391908-M.jpg",
+      "authors": [
+        "Sophie Kinsella"
+      ],
+      "readlist_id": 1,
+      "id": 4
     }
   ]
 }

@@ -64,12 +64,16 @@ const postBook = ( request, response) => {
     .catch(e => console.log(e))
 }
 
+//TODO:fix
 const getBooksByList = (request, response) => {
     const list = request.params.id
     console.log('list',list)
     pool.query('select book.id as id, title, author.name as author, description from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and readlist_id=$1',
     [list])
     .then(result =>  {
+        result.rows.forEach(book => {
+            book.authors=new Array(book.author)
+        })
         return response.status(200).json(result.rows)
     })
     .catch(e => console.log(e))

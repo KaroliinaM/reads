@@ -30,8 +30,9 @@ const SearchBookContainer =()=> {
       title: bookByIsbn.title,
       isbn: bookByIsbn.isbn,
       isbn13: bookByIsbn.isbn13,
+      image_url: bookByIsbn.image_url,
       description: bookByIsbn.description,
-      author: bookByIsbn.authors[0],
+      authors: bookByIsbn.authors,
       readlist_id:listId
     }
     fetch('http://localhost:3001/books', {

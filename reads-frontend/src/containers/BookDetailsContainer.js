@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import Book from '../components/Book'
 
 const BookDetailsContainer = () => {
-    const [book, setBook] = useState({})
+    const [book, setBook] = useState(null)
     const id=useParams().id
     console.log(id)
     useEffect(() => {
@@ -15,7 +15,9 @@ const BookDetailsContainer = () => {
         })
     }, [id])
     return (
-        <>ggg</>
+        <>
+            {book && <Book book={book} />}
+        </>
     )
 }
 
