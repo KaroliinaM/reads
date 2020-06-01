@@ -81,5 +81,43 @@
       "readlist_id": 1,
       "id": 4
     }
+  ],
+  "sample": [
+    {
+      "author": "Dan Brown",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_5550155184-L_175_300.jpg",
+      "readgeekid": 12317620,
+      "title": "The Da Vinci Code"
+    },
+    {
+      "author": "Joseph Heller",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_9780684833392-L_175_300.jpg",
+      "readgeekid": 11344001,
+      "title": "Catch-22"
+    },
+    {
+      "author": "Stephenie Meyer",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_0316015849-L_175_300.jpg",
+      "readgeekid": 494579,
+      "title": "Twilight"
+    },
+    {
+      "author": "Douglas Adams",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_1563892715-L_175_300.jpg",
+      "readgeekid": 336012,
+      "title": "The Hitch Hiker's Guide to the Galaxy"
+    },
+    {
+      "author": "F. Scott Fitzgerald",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_9780743273565-L_175_300.jpg",
+      "readgeekid": 9445914,
+      "title": "The Great Gatsby"
+    },
+    {
+      "author": "Jerome D. Salinger",
+      "image_url": "https://www.readgeek.com/images/cover/.tmb/thumb_0877547165-L_175_300.jpg",
+      "readgeekid": 14793539,
+      "title": "The Catcher in the Rye"
+    }
   ]
 }

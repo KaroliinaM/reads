@@ -19,9 +19,34 @@ app.get('/readlists/:id', db.getBooksByList)
 
 KEY = process.env.GR_KEY
 
+
+app.get('/recommendations/sample', (request, response) => {
+    console.log('toimii')
+    fetch('https://www.readgeek.com/api/user/1?taste_test=6', {
+        method: 'get',
+        headers: {
+            'Authorization': process.env.READGEEK_AUTH
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.user.taste_test)
+        const books=data.user.taste_test.map(book=>{
+            return {
+                author: book.author,
+                image_url: book.cover,
+                readgeekid: book.readgeekid,
+                title: book.title
+            }
+        })
+        return response.status(200).json(books)
+    })
+    .catch(e => console.log(e))
+})
+
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
-    fetch(`http://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
+    fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
     .then(response=> response.json())
     .then(data => {
         console.log(data)
