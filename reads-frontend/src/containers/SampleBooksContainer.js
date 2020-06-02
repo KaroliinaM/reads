@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ReadListItem from '../components/ReadListItem'
 
 const SampleBooksContainer = () => {
     const [books, setBooks] = useState([])
@@ -11,7 +12,7 @@ const SampleBooksContainer = () => {
 
     if(books.length>0) {
         return books.map(book => {
-            return <p key={book.title}>{book.title}</p>
+            return <ReadListItem key={book.title} item={book} />
         })
     }
 
