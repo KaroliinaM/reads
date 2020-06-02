@@ -43,6 +43,18 @@ app.get('/recommendations/sample', (request, response) => {
     })
     .catch(e => console.log(e))
 })
+app.post('/recommendations/rate', (request, response) => {
+    const params=request.body
+    console.log(params)
+    const data={
+        books: {
+            [`readgeekid:${params.readgeekid}`]:{
+                rated: params.rated
+            }
+        }
+    }
+    console.log(data)
+})
 
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
