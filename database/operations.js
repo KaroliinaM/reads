@@ -39,10 +39,10 @@ const getAuthor= (request, response) => {
 const postBook = ( request, response) => {
     const book=request.body
     let join={}
-    pool.query('select * from author where name=$1', [book.author])
+    pool.query('select * from author where name=$1', [book.authors[0]])
     .then(result => {
         if(result.rows.length==0) {
-            return pool.query('insert into author values(default, $1) returning id', [book.author])
+            return pool.query('insert into author values(default, $1) returning id', [book.authors[0]])
         } else {
             return result
         } 
