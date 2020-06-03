@@ -13,6 +13,17 @@ const SampleBooksContainer = () => {
 
     const handleChange= (book, e) =>{
         console.log('value', e, book)
+        const data= {...book, rated: 3}
+        console.log(data)
+        fetch('http://localhost:3001/recommendations/rate', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response=> response.json())
+        .then(result => console.log(result))
     }
 
     if(books.length>0) {
@@ -22,7 +33,7 @@ const SampleBooksContainer = () => {
                         <Rating 
                             stop={10} 
                             fractions={2}
-                            onChange={(e)=>handleChange(book.readgeekid, e)} 
+                            onChange={(e)=>handleChange(book, e)} 
                         /> 
                     </div>)
         })
