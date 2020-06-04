@@ -4,7 +4,7 @@ const fetch=require('node-fetch')
 const cors = require('cors')
 const moment=require('moment')
 const parseString = require('xml2js').parseString;
-const db =require('./database/operations')
+const db =require('./controllers/operations')
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -16,7 +16,7 @@ app.get('/author', db.getAuthor)
 app.post('/books', db.postBook)
 app.get('/books/:id', db.getBookById)
 app.get('/readlists/:id', db.getBooksByList)
-
+/*
 
 KEY = process.env.GR_KEY
 
@@ -90,7 +90,7 @@ app.get('/book/:isbn', (req, res) => {
     })
     .catch(e => console.log(e));
 })
-
+ */
 module.exports = app
 
 /* const PORT=3001

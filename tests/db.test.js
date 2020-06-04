@@ -1,6 +1,6 @@
 const supertest=require('supertest')
 const app=require('../app')
-const {pool} =require('../database/operations')
+const {pool} =require('../utils/Database')
 
 const api=supertest(app)
 
