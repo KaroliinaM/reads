@@ -111,4 +111,5 @@ module.exports ={
     postBook,
     getBooksByList,
     getBookById,
+    pool
 }
