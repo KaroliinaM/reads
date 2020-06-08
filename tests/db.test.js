@@ -1,6 +1,7 @@
 const supertest=require('supertest')
 const app=require('../app')
 const {pool} =require('../utils/Database')
+const db = require('../models/queries')
 
 const api=supertest(app)
 
@@ -10,6 +11,13 @@ let book1
 let book2
 let book3
 let book4
+
+beforeAll( async ()=> {
+    await db.emptyBookToAuthor()
+    await db.emptyBook()
+    await db.emptyAuthor()
+    await db.emptyReadlist()
+})
 
 test('database calls respond', async ()=> {
     await api
@@ -45,28 +53,28 @@ test('add books', async () => {
     const bookdata1={
         "title": "title1",
         "isbn": "isbn",
-        "imageurl": "imageurl",
+        "image_url": "imageurl",
         "authors": ["Author1"],
         "readlist_id": readlist1.id
     }
     const bookdata2={
         "title": "title2",
         "isbn": "isbn",
-        "imageurl": "imageurl",
+        "image_url": "imageurl",
         "authors": ["Author2"],
         "readlist_id": readlist1.id
     }
     const bookdata3={
         "title": "title3",
         "isbn": "isbn",
-        "imageurl": "imageurl",
+        "image_url": "imageurl",
         "authors": ["Author1"],
         "readlist_id": readlist2.id
     }
     const bookdata4={
         "title": "title4",
         "isbn": "isbn",
-        "imageurl": "imageurl",
+        "image_url": "imageurl",
         "authors": ["Author2"],
         "readlist_id": readlist2.id
     }
