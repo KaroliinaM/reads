@@ -118,6 +118,33 @@ test('add books', async () => {
     expect(response7.body.map(o => o.id)).toContainEqual(book4.id)
 
     console.log(book1, book2, book3, book4)
+
+    const response8 = await api
+        .get(`/books/${book1.id}`)
+
+    console.log('res8',response8)
+    console.log('bookdata8', bookdata1)
+
+    expect(response8.body.title).toEqual(bookdata1.title)
+    expect(bookdata1.authors).toEqual(response8.body.authors)
+
+    const response9 = await api
+    .get(`/books/${book2.id}`)
+
+    expect(response9.body.title).toEqual(bookdata2.title)
+    expect(bookdata2.authors).toEqual(response9.body.authors)
+
+    const response10 = await api
+    .get(`/books/${book3.id}`)
+
+    expect(response10.body.title).toEqual(bookdata3.title)
+    expect(bookdata3.authors).toEqual(response10.body.authors)
+
+    const response11 = await api
+    .get(`/books/${book4.id}`)
+
+    expect(response11.body.title).toEqual(bookdata4.title)
+    expect(bookdata4.authors).toEqual(response11.body.authors)
 })
 
 
