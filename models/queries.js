@@ -14,9 +14,9 @@ const insertAuthor = (author) => {
     })
 }
 
-const insertBook = (title, isbn, image_url, description, readlist_id, readgeekid) => {
-    return pool.query('insert into book values(default, $1, $2, null, $3, $4, $5, $6) returning id'
-    , [title, isbn, image_url, description, readlist_id, readgeekid])
+const insertBook = (title, isbn, image_url, description, readlist_id, readgeekid, rated) => {
+    return pool.query('insert into book values(default, $1, $2, $3, $4, $5, $6, $7) returning id'
+    , [title, isbn, image_url, description, readlist_id, readgeekid, rated])
     .then(result => {
         return result.rows
     })

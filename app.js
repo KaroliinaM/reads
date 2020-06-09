@@ -5,9 +5,11 @@ const cors = require('cors')
 const moment=require('moment')
 const parseString = require('xml2js').parseString;
 const db =require('./controllers/operations')
+const Book = require('./models/Book')
 const app=express()
 app.use(cors())
 app.use(express.json())
+
 
 
 app.get('/readlists', db.getReadLists)
@@ -16,7 +18,7 @@ app.get('/author', db.getAuthor)
 app.post('/books', db.postBook)
 app.get('/books/:id', db.getBookById)
 app.get('/readlists/:id', db.getBooksByList)
-/*
+
 
 KEY = process.env.GR_KEY
 
@@ -44,32 +46,39 @@ app.get('/recommendations/sample', (request, response) => {
     })
     .catch(e => console.log(e))
 })
+
+
+
 app.post('/recommendations/rate', (request, response) => {
     const params=request.body
     console.log(params)
-    const data={
-        books: {
-            [`readgeekid:${params.readgeekid}`]:{
-                rated: params.rated,
-                date_rated: moment(new Date()).format('YYYY-MM-DD')
+    Book.addBook(params)
+    .then(res => {
+        const data={
+            books: {
+                [`readgeekid:${params.readgeekid}`]:{
+                    rated: params.rated,
+                    date_rated: moment(new Date()).format('YYYY-MM-DD')
+                }
             }
         }
-    }
-    console.log(data)
-    fetch('https://www.readgeek.com/api/user/1', {
-        method: 'patch',
-        headers: {
-            'Authorization': process.env.READGEEK_AUTH
-        },
-        body: JSON.stringify(data)
+        console.log(data)
+        return fetch('https://www.readgeek.com/api/user/1', {
+            method: 'patch',
+            headers: {
+                'Authorization': process.env.READGEEK_AUTH
+            },
+            body: JSON.stringify(data)
+        })
     })
     .then(response => response.json())
     .then(data => {
         return response.status(201).json(data)
+        
     })
-    .catch(e => console.log(e))
+    .catch(e => console.log(e)) 
 })
-
+/*
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
     fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
