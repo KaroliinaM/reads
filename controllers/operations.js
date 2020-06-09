@@ -59,7 +59,7 @@ const postBook = ( request, response) => {
     const book=request.body
     Book.addBook(book)
     .then(result=>{
-        return response.status(201).json(book)
+        return response.status(201).json(result)
     })
     .catch(e=> console.log(e))
 /*    let join={}

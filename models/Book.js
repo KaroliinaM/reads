@@ -5,7 +5,16 @@ const getAuthor = (name)=> {
     return db.getAuthorByName(name)
 }
 
-const addBook = (book) => {
+const addBook = (data) => {
+    const book={
+        title:data.title,
+        isbn:data.isbn,
+        image_url:data.image_url,
+        description: data.description,
+        readlist_id:data.readlist_id,
+        readgeekid:data.readgeekid,
+        authors: data.authors
+    }
     let join={}
     return db.getAuthorByName(book.authors[0])
     .then(result => {
@@ -18,7 +27,7 @@ const addBook = (book) => {
     .then(result=> {
         join.author_id=result[0].id
         console.log("authorid", join.author_id)
-        return db.insertBook(book.title, book.isbn, book.image_url, book.readlist_id)
+        return db.insertBook(book.title, book.isbn, book.image_url, book.description, book.readlist_id, book.readgeekid)
     })
     .then(result => {
         join.book_id=result[0].id
