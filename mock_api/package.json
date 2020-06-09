@@ -1,0 +1,14 @@
+{
+  "name": "mock_api",
+  "version": "0.0.1",
+  "description": "Mock api for backend development and testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karoliina Mietola",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,4 +1,5 @@
 require('dotenv').config()
+const config=require('./utils/config')
 const express=require('express')
 const fetch=require('node-fetch')
 const cors = require('cors')
@@ -25,10 +26,11 @@ KEY = process.env.GR_KEY
 
 app.get('/recommendations/sample', (request, response) => {
     console.log('toimii')
-    fetch('https://www.readgeek.com/api/user/1?taste_test=6', {
+    console.log(config.READGEEK_URL)
+    fetch(`${config.READGEEK_URL}?taste_test=6`, {
         method: 'get',
         headers: {
-            'Authorization': process.env.READGEEK_AUTH
+            'Authorization': config.READGEEK_AUTH
         }
     })
     .then(response => response.json())
@@ -63,10 +65,10 @@ app.post('/recommendations/rate', (request, response) => {
             }
         }
         console.log(data)
-        return fetch('https://www.readgeek.com/api/user/1', {
+        return fetch(config.READGEEK_URL, {
             method: 'patch',
             headers: {
-                'Authorization': process.env.READGEEK_AUTH
+                'Authorization': config.READGEEK_AUTH
             },
             body: JSON.stringify(data)
         })
