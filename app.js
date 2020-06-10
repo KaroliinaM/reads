@@ -83,15 +83,26 @@ app.post('/recommendations/rate', (request, response) => {
 
 app.get('/recommendations/list', (request, response) => {
     console.log('täällä')
-    fetch('https://www.readgeek.com/api/user/2?recommendations[books]=50', {
+    fetch(`${config.READGEEK_URL}?recommendations[books]=50`, {
         method: 'get',
         headers: {
-            'Authorization': process.env.READGEEK_AUTH
+            'Authorization': config.READGEEK_AUTH
         }
     })
     .then(response=>response.json())
     .then(data => {
-        return response.status(200).json(data.user.recommendations)
+        const books=data.user.recommendations.map(book=> {
+            return {
+                title: book.title,
+                authors: [book.author],
+                isbn: book.isbn13,
+                prediction: book.prediction,
+                image_url: book.cover,
+                genres: book.genres,
+                description: book.blurb
+            }     
+        })
+        return response.status(200).json(books)
     })
     .catch(e => console.log(e))
 })

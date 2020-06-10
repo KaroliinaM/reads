@@ -4,6 +4,7 @@ import ListViewContainer from './containers/ListViewContainer'
 import ReadListContainer from './containers/ReadListContainer'
 import BookDetailsContainer from './containers/BookDetailsContainer'
 import SampleBooksContainer from './containers/SampleBooksContainer'
+import RecommendContainer from './containers/RecommendContainer'
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -30,6 +31,9 @@ return(
       </Route>
       <Route path= '/rate'>
         <SampleBooksContainer />
+      </Route>
+      <Route path='/recommendations'>
+        <RecommendContainer />
       </Route>
       <Route path="/">
         <ListViewContainer />

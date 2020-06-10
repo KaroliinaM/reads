@@ -8,7 +8,8 @@ server.use(middlewares)
 server.use(jsonServer.rewriter({
     '/readlists/:id': '/books',
     '/recommendations/sample': '/sample',
-    '/recommendations/rate': '/rate'
+    '/recommendations/rate': '/rate',
+    '/recommendations/list': '/recommended'
   }));
 server.use(router)
 server.listen(port, () => {

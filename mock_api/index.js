@@ -3,6 +3,7 @@ const express=require('express')
 const app=express()
 const port=3002
 const books=require('./books')
+const {recommendations}=require('./recommendations')
 
 
 const res={
@@ -71,7 +72,11 @@ const res2={
 
 app.get('/readgeek', (request, response) => {
     console.log(request.query)
-    response.json(res)
+    if(!!request.query.taste_test) {
+      return response.json(res)
+    }
+    return response.json(recommendations)
+    
 })
 
 app.patch('/readgeek', (request, response) => {
