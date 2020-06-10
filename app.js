@@ -80,10 +80,25 @@ app.post('/recommendations/rate', (request, response) => {
     })
     .catch(e => console.log(e)) 
 })
-/*
+
+app.get('/recommendations/list', (request, response) => {
+    console.log('täällä')
+    fetch('https://www.readgeek.com/api/user/2?recommendations[books]=50', {
+        method: 'get',
+        headers: {
+            'Authorization': process.env.READGEEK_AUTH
+        }
+    })
+    .then(response=>response.json())
+    .then(data => {
+        return response.status(200).json(data.user.recommendations)
+    })
+    .catch(e => console.log(e))
+})
+
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
-    fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
+    fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
     .then(response=> response.json())
     .then(data => {
         console.log(data)
@@ -101,7 +116,7 @@ app.get('/book/:isbn', (req, res) => {
     })
     .catch(e => console.log(e));
 })
- */
+ 
 module.exports = app
 
 /* const PORT=3001

@@ -2,6 +2,7 @@ const express=require('express')
 
 const app=express()
 const port=3002
+const books=require('./books')
 
 
 const res={
@@ -77,7 +78,11 @@ app.patch('/readgeek', (request, response) => {
     response.status(201).json(res2)
 })
 
+app.get('/openlibrary', (request, response) => {
+  response.status(200).json(books.twilight)
+})
+
 
 app.listen(port, () => {
-    console.log(`runsing on port ${port}`)
+    console.log(`running on port ${port}`)
 })
