@@ -9,7 +9,7 @@ const RecommendContainer = () => {
         fetch('http://localhost:3001/recommendations/list')
         .then(response => response.json())
         .then(data => setRecommendations(data))
-    })
+    }, [])
 
 
     return recommendations.map(recommendation => {

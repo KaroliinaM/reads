@@ -36,11 +36,13 @@ test('add readlists', async () => {
         .post('/readlists')
         .send(data)
     readlist1=response.body
+    readlist1.user_id=null
 
     const response2 = await api
         .post('/readlists')
         .send(data2)
     readlist2=response2.body
+    readlist2.user_id=null
     console.log(readlist1, readlist2)
 
 
