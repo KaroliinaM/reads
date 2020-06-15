@@ -4,9 +4,12 @@ const express=require('express')
 const fetch=require('node-fetch')
 const cors = require('cors')
 const moment=require('moment')
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 const parseString = require('xml2js').parseString;
 const db =require('./controllers/operations')
 const Book = require('./models/Book')
+const queries=require('./models/queries')
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -22,6 +25,61 @@ app.get('/readlists/:id', db.getBooksByList)
 
 
 KEY = process.env.GR_KEY
+
+app.post('/user/register', (request, response) => {
+    console.log('polku on')
+    const user= request.body
+    console.log(user)
+    let credentials={
+        username: user.username
+    }
+    const saltRounds=10
+    bcrypt.hash(user.password, saltRounds)
+    .then(data => {
+        credentials.password=data
+        return bcrypt.hash(user.email, saltRounds)
+    })
+    .then(data => {
+        credentials.email=data
+        console.log(credentials)
+        return queries.addUser(credentials.email, credentials.username, credentials.password)
+    })
+    .then(res => console.log('res', res))
+    .carch(e => console.log(e))
+})
+
+app.post('/user/login', (request, response) => {
+    const creds=request.body
+    console.log(creds)
+    let user = {}
+    queries.getUser(creds.username)
+    .then(data => {
+        console.log(data[0].password)
+        console.log(creds.password)
+        user = data
+        if(data.length>0) {
+            return bcrypt.compare(creds.password, data[0].password)
+        } else {
+            return false
+        }
+    })
+    .then(result => {
+        if(!result) {
+            return response.status(401).json('invalid credentials')
+        } else {
+            const userForToken={
+                id: user.id,
+                username: user.username
+            }
+            const token=jwt.sign(userForToken, process.env.SECRET)
+            response.status(201)
+            .send({username: user.username, id: user.id, token: token})
+
+        }
+    })
+    .catch(e => console.log(e))
+})
+
 
 
 app.get('/recommendations/sample', (request, response) => {
