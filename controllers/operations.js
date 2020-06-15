@@ -1,6 +1,17 @@
 
 const ReadList=require('../models/ReadList')
 const Book=require('../models/Book')
+const jwt=require('jsonwebtoken')
+require('dotenv').config()
+
+const getTokenFrom= (request) => {
+    const authorization=request.get('authorization')
+    if(authorization && authorization.toLowerCase().startsWith('bearer')){
+        return authorization.substring(7)
+    }
+    return null
+}
+
 /* const Pool = require('pg').Pool
 const pool = new Pool({
     user: process.env.PGUSER,
@@ -11,7 +22,11 @@ const pool = new Pool({
   }) */
 
 const getReadLists = (request, response) => {
-    ReadList.getAll()
+    const token=getTokenFrom(request)
+    const decodedToken=jwt.verify(token, process.env.SECRET)
+    console.log(process.env.SECRET)
+    console.log(decodedToken.id)
+    ReadList.getAll(decodedToken.id)
     .then(result=>{
         (console.log(result))
         response.status(200).json(result)

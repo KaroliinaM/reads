@@ -45,7 +45,7 @@ app.post('/user/register', (request, response) => {
         return queries.addUser(credentials.email, credentials.username, credentials.password)
     })
     .then(res => console.log('res', res))
-    .carch(e => console.log(e))
+    .catch(e => console.log(e))
 })
 
 app.post('/user/login', (request, response) => {
@@ -56,7 +56,7 @@ app.post('/user/login', (request, response) => {
     .then(data => {
         console.log(data[0].password)
         console.log(creds.password)
-        user = data
+        user = data[0]
         if(data.length>0) {
             return bcrypt.compare(creds.password, data[0].password)
         } else {

@@ -42,8 +42,8 @@ const getBookById = (id) => {
     })
 }
 
-const getReadLists = () => {
-    return pool.query('SELECT * FROM readlist')
+const getReadLists = (id) => {
+    return pool.query('SELECT * FROM readlist where user_id=$1', [id])
     .then(result=>{
         return result.rows
     })

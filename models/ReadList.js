@@ -2,8 +2,8 @@ const {pool}=require('../utils/Database')
 const db=require('./queries')
 const Book = require('./Book')
 
-const getAll=()=>{
-    return db.getReadLists()
+const getAll=(id)=>{
+    return db.getReadLists(id)
 }
 
 const addList=(name)=>{
