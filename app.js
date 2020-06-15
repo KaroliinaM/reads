@@ -10,14 +10,16 @@ const parseString = require('xml2js').parseString;
 const db =require('./controllers/operations')
 const Book = require('./models/Book')
 const queries=require('./models/queries')
+const readListRouter=require('./controllers/readListRouter')
 const app=express()
 app.use(cors())
 app.use(express.json())
 
 
 
-app.get('/readlists', db.getReadLists)
-app.post('/readlists', db.postReadList)
+//app.get('/readlists', db.getReadLists)
+//app.post('/readlists', db.postReadList)
+app.use('/readlists', readListRouter)
 app.get('/author', db.getAuthor)
 app.post('/books', db.postBook)
 app.get('/books/:id', db.getBookById)
