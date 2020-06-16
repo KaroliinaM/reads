@@ -14,7 +14,7 @@ readListRouter.get('/', (request, response) => {
 readListRouter.post('/', (request, response) => {
     const {name} = request.body
     console.log('name', name)
-    ReadList.addList(name)
+    ReadList.addList(name, request.decodedToken.id)
     .then(result=> {
         response.status(201).send(result)
     })

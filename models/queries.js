@@ -56,8 +56,8 @@ const getBookIdByReadlistId = (list) => {
     })
 }
 
-const addReadList = (name) => {
-    return pool.query('insert into readlist values(default, $1) returning id', [name])
+const addReadList = (name, user_id) => {
+    return pool.query('insert into readlist values(default, $1, $2) returning id', [name, user_id])
     .then(result =>{
         return result.rows
     })

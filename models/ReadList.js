@@ -6,12 +6,13 @@ const getAll=(id)=>{
     return db.getReadLists(id)
 }
 
-const addList=(name)=>{
-    return db.addReadList(name)
+const addList=(name, user_id)=>{
+    return db.addReadList(name, user_id)
         .then(result =>{
             const data={
                 id:result[0].id, 
-                name: name
+                name: name,
+                user_id: user_id
             }
             return data
     })
