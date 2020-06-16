@@ -12,6 +12,8 @@ const Book = require('./models/Book')
 const queries=require('./models/queries')
 const readListRouter=require('./controllers/readListRouter')
 const bookRouter=require('./controllers/bookRouter')
+const recommendationRouter=require('./controllers/recommendationRouter')
+const userRouter=require('./controllers/userRouter')
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -22,6 +24,8 @@ app.use(express.json())
 //app.post('/readlists', db.postReadList)
 app.use('/readlists', readListRouter)
 app.use('/books', bookRouter)
+app.use('/recommendations', recommendationRouter)
+app.use('/user', userRouter)
 //app.get('/author', db.getAuthor)
 //app.post('/books', db.postBook)
 //app.get('/books/:id', db.getBookById)
@@ -30,7 +34,7 @@ app.use('/books', bookRouter)
 
 KEY = process.env.GR_KEY
 
-app.post('/user/register', (request, response) => {
+/* app.post('/user/register', (request, response) => {
     console.log('polku on')
     const user= request.body
     console.log(user)
@@ -82,11 +86,11 @@ app.post('/user/login', (request, response) => {
         }
     })
     .catch(e => console.log(e))
-})
+}) */
 
 
 
-app.get('/recommendations/sample', (request, response) => {
+/* app.get('/recommendations/sample', (request, response) => {
     console.log('toimii')
     console.log(config.READGEEK_URL)
     fetch(`${config.READGEEK_URL}?taste_test=6`, {
@@ -167,7 +171,7 @@ app.get('/recommendations/list', (request, response) => {
         return response.status(200).json(books)
     })
     .catch(e => console.log(e))
-})
+}) */
 
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
