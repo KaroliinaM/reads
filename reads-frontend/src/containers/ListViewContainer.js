@@ -31,6 +31,7 @@ const ListViewContainer = () => {
 
     return(
         <>
+            {console.log(readLists)}
             {readLists.map(list=>{
                 return<ReadList key={list.id} list={list} />
             })}
