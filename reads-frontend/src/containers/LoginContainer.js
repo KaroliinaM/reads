@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import BookService from '../services/BookService'
 
 const LoginContainer = ({setUser}) => {
     const [username, setUsername]=useState("")
@@ -19,7 +20,10 @@ const LoginContainer = ({setUser}) => {
         })
         .then(response=> response.json())
         .then(data => {
+            console.log(data.token)
             setUser(data)
+            BookService.setToken(data.token)
+            window.localStorage.setItem('loggedUser', JSON.stringify(data))
         })
     }
 

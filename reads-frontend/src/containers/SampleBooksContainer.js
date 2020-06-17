@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import ReadListItem from '../components/ReadListItem'
 import Rating from 'react-rating'
+import BookService from '../services/BookService'
 
 const SampleBooksContainer = () => {
     const [books, setBooks] = useState([])
 
     useEffect(()=> {
-        fetch('http://localhost:3001/recommendations/sample')
-        .then(response => response.json())
+        BookService.getRatingSample()
+/*         fetch('http://localhost:3001/recommendations/sample')
+        .then(response => response.json()) */
         .then(data => setBooks(data))
     },[])
 
@@ -15,14 +17,16 @@ const SampleBooksContainer = () => {
         console.log('value', e, book)
         const data= {...book, rated: 3}
         console.log(data)
-        fetch('http://localhost:3001/recommendations/rate', {
+        BookService.postRating(data)
+
+/*         fetch('http://localhost:3001/recommendations/rate', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
-        .then(response=> response.json())
+        .then(response=> response.json()) */
         .then(result => console.log(result))
     }
 

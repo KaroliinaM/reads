@@ -35,17 +35,9 @@ const SearchBookContainer =()=> {
       authors: bookByIsbn.authors,
       readlist_id:listId
     }
-    fetch('http://localhost:3001/books', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(book)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('success', data)
-    })
+    BookService.addBookToList(book)
+    .then(response => console.log(response))
+
   }
 
 

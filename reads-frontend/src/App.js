@@ -7,6 +7,7 @@ import SampleBooksContainer from './containers/SampleBooksContainer'
 import RecommendContainer from './containers/RecommendContainer'
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
+//import BookService from './services/BookService'
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -21,6 +22,8 @@ return(
     <div>
       <Link to="/">Listat</Link>
       <Link to="/etsi">etsi</Link>
+      <Link to="/rate">rate</Link>
+      <Link to="/recommendations">suositukset</Link>
     </div>
     <Switch>
       <Route path="/list/:id">
@@ -42,7 +45,7 @@ return(
         <RegisterContainer />
       </Route>
       <Route path="/">
-        {user && <ListViewContainer />}
+        {user && <ListViewContainer  />}
         {!user && <LoginContainer setUser={setUser} />}
       </Route>
     </Switch>
