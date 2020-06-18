@@ -8,8 +8,9 @@ recommendationRouter.use(tokenHandler)
 
 recommendationRouter.get('/sample', (request, response) => {
     console.log('toimii')
+    const readgeek_id=request.decodedToken.readgeek_id
     console.log(config.READGEEK_URL)
-    fetch(`${config.READGEEK_URL}?taste_test=6`, {
+    fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=6`, {
         method: 'get',
         headers: {
             'Authorization': config.READGEEK_AUTH
@@ -17,6 +18,7 @@ recommendationRouter.get('/sample', (request, response) => {
     })
     .then(response => response.json())
     .then(data => {
+        
         console.log(data.user.taste_test)
         const books=data.user.taste_test.map(book=>{
             return {
@@ -36,6 +38,7 @@ recommendationRouter.get('/sample', (request, response) => {
 recommendationRouter.post('/rate', (request, response) => {
     const params=request.body
     console.log(params)
+    const readgeek_id=request.decodedToken.readgeek_id
     Book.addBook(params)
     .then(res => {
         const data={
@@ -47,7 +50,7 @@ recommendationRouter.post('/rate', (request, response) => {
             }
         }
         console.log(data)
-        return fetch(config.READGEEK_URL, {
+        return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
             method: 'patch',
             headers: {
                 'Authorization': config.READGEEK_AUTH
@@ -65,7 +68,8 @@ recommendationRouter.post('/rate', (request, response) => {
 
 recommendationRouter.get('/list', (request, response) => {
     console.log('täällä')
-    fetch(`${config.READGEEK_URL}?recommendations[books]=50`, {
+    const readgeek_id=request.decodedToken.readgeek_id
+    fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
         method: 'get',
         headers: {
             'Authorization': config.READGEEK_AUTH

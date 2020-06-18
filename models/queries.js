@@ -63,8 +63,8 @@ const addReadList = (name, user_id) => {
     })
 }
 
-const addUser = (email, username, password) => {
-    return pool.query('insert into userdata values(default, $1, $2, $3) returning id', [email, username, password])
+const addUser = (email, username, password, readgeek_id) => {
+    return pool.query('insert into userdata values(default, $1, $2, $3, $4) returning id', [email, username, password, readgeek_id])
     .then(result => {
         return result.rows
     })

@@ -2,7 +2,7 @@ require('dotenv').config()
 
 let KEY = process.env.GR_KEY
 
-let READGEEK_URL = 'https://www.readgeek.com/api/user/2'
+let READGEEK_URL = 'https://www.readgeek.com/api/user'
 let READGEEK_AUTH = process.env.READGEEK_AUTH
 let OPENLIBRARY_URL= 'https://openlibrary.org/api/books'
 

@@ -1,6 +1,8 @@
 const userRouter=require('express').Router()
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+const fetch=require('node-fetch')
+const config=require('../utils/config')
 const queries=require('../models/queries')
 
 userRouter.post('/register', (request, response) => {
@@ -19,7 +21,18 @@ userRouter.post('/register', (request, response) => {
     .then(data => {
         credentials.email=data
         console.log(credentials)
-        return queries.addUser(credentials.email, credentials.username, credentials.password)
+        return fetch(`${config.READGEEK_URL}`, {
+            method: 'post',
+            headers: {
+                'Authorization': config.READGEEK_AUTH
+            } 
+        })        
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('readgeek', data)
+        credentials.readgeek_id=data.user.id
+        return queries.addUser(credentials.email, credentials.username, credentials.password, credentials.readgeek_id)
     })
     .then(res => {
         return response.status(201).json(res)
@@ -48,7 +61,8 @@ userRouter.post('/login', (request, response) => {
         } else {
             const userForToken={
                 id: user.id,
-                username: user.username
+                username: user.username,
+                readgeek_id:user.readgeek_id
             }
             const token=jwt.sign(userForToken, process.env.SECRET)
             response.status(201)

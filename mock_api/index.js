@@ -69,8 +69,15 @@ const res2={
       "updated_books": 1
     }
   }
+const createdUser={
+  "source": "mock",
+  "result": "success",
+  "user": {
+    "id": 6
+  }
+}
 
-app.get('/readgeek', (request, response) => {
+app.get('/readgeek/:id', (request, response) => {
     console.log(request.query)
     if(!!request.query.taste_test) {
       return response.json(res)
@@ -85,6 +92,10 @@ app.patch('/readgeek', (request, response) => {
 
 app.get('/openlibrary', (request, response) => {
   response.status(200).json(books.twilight)
+})
+
+app.post('/readgeek', (request, response) => {
+  response.status(200).json(createdUser)
 })
 
 
