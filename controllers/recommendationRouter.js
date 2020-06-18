@@ -18,11 +18,11 @@ recommendationRouter.get('/sample', (request, response) => {
     })
     .then(response => response.json())
     .then(data => {
-        
+
         console.log(data.user.taste_test)
         const books=data.user.taste_test.map(book=>{
             return {
-                author: book.author,
+                authors: [book.author],
                 image_url: book.cover,
                 readgeekid: book.readgeekid,
                 title: book.title

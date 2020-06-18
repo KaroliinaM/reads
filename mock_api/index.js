@@ -86,7 +86,7 @@ app.get('/readgeek/:id', (request, response) => {
     
 })
 
-app.patch('/readgeek', (request, response) => {
+app.patch('/readgeek/:id', (request, response) => {
     response.status(201).json(res2)
 })
 

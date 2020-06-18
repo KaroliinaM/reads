@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import ReadListItem from '../components/ReadListItem'
+import BookService from '../services/BookService'
 
 const RecommendContainer = () => {
 
     const [recommendations, setRecommendations] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3001/recommendations/list')
-        .then(response => response.json())
+        BookService.getRecommendations()
         .then(data => setRecommendations(data))
     }, [])
 

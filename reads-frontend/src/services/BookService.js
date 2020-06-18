@@ -98,6 +98,16 @@ const getRatingSample=()=> {
     .then(response => response.json())
 }
 
+const getRecommendations= () => {
+    return fetch('http://localhost:3001/recommendations/list', {
+        method: 'get',
+        headers: {
+            Authorization: token
+        }
+    })
+    .then(response => response.json())
+}
+
 export default{
     getReadLists: getReadLists,
     postNewList: postNewList,
@@ -107,6 +117,7 @@ export default{
     getBookDetails: getBookDetails,
     postRating: postRating,
     getRatingSample: getRatingSample,
+    getRecommendations: getRecommendations,
     setToken,
     token 
 }
