@@ -66,7 +66,7 @@ userRouter.post('/login', (request, response) => {
             }
             const token=jwt.sign(userForToken, process.env.SECRET)
             response.status(201)
-            .send({username: user.username, id: user.id, token: token})
+            .send({username: user.username, id: user.id, taste_tested:user.taste_tested, token: token})
 
         }
     })

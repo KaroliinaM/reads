@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import BookService from '../services/BookService'
 
 const LoginContainer = ({setUser}) => {
     const [username, setUsername]=useState("")
     const [password, setPassword]=useState("")
+    const history=useHistory()
 
     const handleLogin=(event)=>{
         event.preventDefault()
@@ -24,6 +26,8 @@ const LoginContainer = ({setUser}) => {
             setUser(data)
             BookService.setToken(data.token)
             window.localStorage.setItem('loggedUser', JSON.stringify(data))
+            const path=data.taste_tested? '/':'/rate'
+            history.push(path)
         })
     }
 

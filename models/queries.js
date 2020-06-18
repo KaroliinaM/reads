@@ -77,6 +77,10 @@ const getUser = (username) => {
     })
 }
 
+const setTasteTested=(id)=> {
+    return pool.query('update userdata set taste_tested=true where id=$1', [id])
+}
+
 const emptyBookToAuthor = () => {
     return pool.query('delete from booktoauthor')
 }
@@ -108,5 +112,6 @@ module.exports = {
     emptyBook,
     emptyReadlist,
     addUser,
-    getUser
+    getUser,
+    setTasteTested
 }

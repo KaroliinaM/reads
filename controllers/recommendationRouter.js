@@ -3,6 +3,7 @@ const config=require('../utils/config')
 const fetch=require('node-fetch')
 const moment=require('moment')
 const Book = require('../models/Book')
+const User = require('../models/User')
 const {tokenHandler}=require('../utils/tokenHandler')
 recommendationRouter.use(tokenHandler)
 
@@ -39,7 +40,11 @@ recommendationRouter.post('/rate', (request, response) => {
     const params=request.body
     console.log(params)
     const readgeek_id=request.decodedToken.readgeek_id
-    Book.addBook(params)
+    console.log(request.decodedToken)
+    User.tasteTested(request.decodedToken.id)
+    .then(res=> {
+        return Book.addBook(params)
+    })
     .then(res => {
         const data={
             books: {
