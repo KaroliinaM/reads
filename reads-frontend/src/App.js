@@ -23,11 +23,15 @@ return(
       <Link to="/">Listat</Link>
       <Link to="/etsi">etsi</Link>
       <Link to="/rate">rate</Link>
+      <Link to="/list">listoja</Link>
       <Link to="/recommendations">suositukset</Link>
     </div>
     <Switch>
       <Route path="/list/:id">
         <ReadListContainer />
+      </Route>
+      <Route path='/list'>
+        <ListViewContainer  />
       </Route>
       <Route path="/etsi">
         <SearchBookContainer />
@@ -45,7 +49,13 @@ return(
         <RegisterContainer />
       </Route>
       <Route path="/">
-        {user && <ListViewContainer  />}
+        {user && (
+          <>
+            <SearchBookContainer />
+            <ListViewContainer  />
+            <RecommendContainer />
+          </>
+            )}
         {!user && <LoginContainer setUser={setUser} />}
       </Route>
     </Switch>

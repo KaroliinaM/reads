@@ -36,3 +36,10 @@ img {
     height: 10%;
     padding: 1%;
 }
+
+.frontpage-app {
+    background-color: 	#FFFFF0;
+    box-shadow: 10px 5px 5px #C0C0C0;
+    padding:1%;
+    margin: 1%;
+}

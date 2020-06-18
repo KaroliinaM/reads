@@ -11,10 +11,23 @@ const RecommendContainer = () => {
         .then(data => setRecommendations(data))
     }, [])
 
+    const listRecommendations = () => {
+        return recommendations.map(recommendation => {
+            return <ReadListItem item={recommendation} />
+        }) 
+    }
 
-    return recommendations.map(recommendation => {
+    return(
+        <>
+            Suositukset
+            {listRecommendations()}
+        </>
+    )
+
+
+/*     return recommendations.map(recommendation => {
         return <ReadListItem item={recommendation} />
-    })
+    }) */
 }
 
 export default RecommendContainer

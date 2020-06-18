@@ -42,7 +42,7 @@ const SearchBookContainer =()=> {
 
 
 return(
-  <div>
+  <div className='frontpage-app'>
     <form onSubmit={submitForm}>
       <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button type='submit'>lähetä</button>

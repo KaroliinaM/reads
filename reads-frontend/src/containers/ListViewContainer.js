@@ -38,7 +38,7 @@ const ListViewContainer = () => {
     } 
 
     return(
-        <>
+        <div className='frontpage-app'>
             {console.log(readLists)}
             {console.log(BookService.token)}
             {readLists.map(list=>{
@@ -50,7 +50,7 @@ const ListViewContainer = () => {
                 setListInput={setListInput}
                 submitForm={submitForm}
             />}
-        </>
+        </div>
 
     )
 }
