@@ -14,7 +14,7 @@ recommendationRouter.get('/sample', (request, response) => {
     fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=6`, {
         method: 'get',
         headers: {
-            'Authorization': config.READGEEK_AUTH
+            'Authorization': `Basic ${config.READGEEK_AUTH}`
         }
     })
     .then(response => response.json())
@@ -58,7 +58,7 @@ recommendationRouter.post('/rate', (request, response) => {
         return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
             method: 'patch',
             headers: {
-                'Authorization': config.READGEEK_AUTH
+                'Authorization': `Basic ${config.READGEEK_AUTH}`
             },
             body: JSON.stringify(data)
         })
@@ -77,7 +77,7 @@ recommendationRouter.get('/list', (request, response) => {
     fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
         method: 'get',
         headers: {
-            'Authorization': config.READGEEK_AUTH
+            'Authorization': `Basic ${config.READGEEK_AUTH}`
         }
     })
     .then(response=>response.json())

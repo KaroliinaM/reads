@@ -24,7 +24,7 @@ userRouter.post('/register', (request, response) => {
         return fetch(`${config.READGEEK_URL}`, {
             method: 'post',
             headers: {
-                'Authorization': config.READGEEK_AUTH
+                'Authorization': `Basic ${config.READGEEK_AUTH}`
             } 
         })        
     })
