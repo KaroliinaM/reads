@@ -15,8 +15,6 @@ const tokenHandler = (request, response, next) => {
     if(!token || !decodedToken.id) {
         return response.status(401).json({error: 'token missing or invalid'})
     }
-    console.log(process.env.SECRET)
-    console.log(decodedToken.id)
     request.decodedToken = decodedToken
     next();
 }
