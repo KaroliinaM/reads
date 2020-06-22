@@ -12,7 +12,7 @@ const RegisterContainer = () => {
             username,
             password
         }
-        fetch('http://localhost:3001/user/register', {
+        fetch('/user/register', {
             method: 'post',
             headers:{
                 'Content-Type': 'application/json'

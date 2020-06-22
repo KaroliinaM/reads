@@ -10,7 +10,7 @@ const setToken=(newToken)=> {
 
 const getReadLists = () => {
     console.log('haku', token)
-    return fetch('http://localhost:3001/readlists', {
+    return fetch('/readlists', {
         method: 'get',
         headers: {
             Authorization: token
@@ -20,7 +20,7 @@ const getReadLists = () => {
 }
 
 const postNewList = (newList) => {
-    return fetch('http://localhost:3001/readlists', {
+    return fetch('/readlists', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const postNewList = (newList) => {
 }
 
 const getReadList = (id) => {
-    return fetch(`http://localhost:3001/readlists/${id}`, {
+    return fetch(`/readlists/${id}`, {
         method: 'get',
         headers: {
             Authorization: token
@@ -42,7 +42,7 @@ const getReadList = (id) => {
 }
 
 const addBookToList = (book) => {
-    return fetch('http://localhost:3001/books', {
+    return fetch('/books', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -57,12 +57,12 @@ const addBookToList = (book) => {
 }
 
 const getBookByIsbn = (isbn) => {
-    return fetch(`http://localhost:3001/book/${isbn}`)
+    return fetch(`/book/${isbn}`)
     .then(response => response.json())
 }
 
 const getBookDetails = (id) => {
-    return fetch(`http://localhost:3001/books/${id}`, {
+    return fetch(`/books/${id}`, {
         method: 'get',
         headers: {
             Authorization: token
@@ -77,7 +77,7 @@ const getBookDetails = (id) => {
 }
 
 const postRating = (data) => {
-    return fetch('http://localhost:3001/recommendations/rate', {
+    return fetch('/recommendations/rate', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const postRating = (data) => {
 }
 
 const getRatingSample=()=> {
-    return fetch('http://localhost:3001/recommendations/sample', {
+    return fetch('/recommendations/sample', {
         method: 'get',
         headers: {
             Authorization: token
@@ -99,7 +99,7 @@ const getRatingSample=()=> {
 }
 
 const getRecommendations= () => {
-    return fetch('http://localhost:3001/recommendations/list', {
+    return fetch('/recommendations/list', {
         method: 'get',
         headers: {
             Authorization: token

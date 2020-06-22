@@ -13,7 +13,7 @@ const LoginContainer = ({setUser}) => {
             username,
             password
         }
-        fetch('http://localhost:3001/user/login', {
+        fetch('/user/login', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'

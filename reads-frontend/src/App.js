@@ -26,6 +26,7 @@ return(
       <Link to="/rate">rate</Link>
       <Link to="/list">listoja</Link>
       <Link to="/recommendations">suositukset</Link>
+      <Link to="/register">rekisteröidy</Link>
     </div>
     <Switch>
       <PrivateRoute component={ReadListContainer} path="/list/:id" isAuth={!!user} />
