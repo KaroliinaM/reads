@@ -7,10 +7,11 @@ import SampleBooksContainer from './containers/SampleBooksContainer'
 import RecommendContainer from './containers/RecommendContainer'
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
+import PrivateRoute from './components/PrivateRoute'
 //import BookService from './services/BookService'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Switch, Route, Link, Redirect
 } from "react-router-dom"
 
 const App =()=> {
@@ -27,36 +28,26 @@ return(
       <Link to="/recommendations">suositukset</Link>
     </div>
     <Switch>
-      <Route path="/list/:id">
-        <ReadListContainer />
-      </Route>
-      <Route path='/list'>
-        <ListViewContainer  />
-      </Route>
-      <Route path="/etsi">
-        <SearchBookContainer />
-      </Route>
-      <Route path ='/book/:id'>
-        <BookDetailsContainer />
-      </Route>
-      <Route path= '/rate'>
-        <SampleBooksContainer />
-      </Route>
-      <Route path='/recommendations'>
-        <RecommendContainer />
-      </Route>
+      <PrivateRoute component={ReadListContainer} path="/list/:id" isAuth={!!user} />
+      <PrivateRoute component={ListViewContainer} path='/list' isAuth={!!user} />
+      <PrivateRoute component={SearchBookContainer} path="/etsi" isAuth={!!user} />
+      <PrivateRoute component={BookDetailsContainer} path ='/book/:id' isAuth={!!user} />
+      <PrivateRoute component={SampleBooksContainer} path= '/rate' isAuth={!!user} />
+      <PrivateRoute component={RecommendContainer} path='/recommendations' isAuth={!!user} />
       <Route path='/register'>
         <RegisterContainer />
       </Route>
+      <Route path='/login'>
+        <LoginContainer setUser={setUser} />
+      </Route>
       <Route path="/">
-        {user && (
-          <>
+        {user ? 
+          (<>
             <SearchBookContainer />
             <ListViewContainer  />
             <RecommendContainer />
           </>
-            )}
-        {!user && <LoginContainer setUser={setUser} />}
+          ): <Redirect to='/login' />}
       </Route>
     </Switch>
   </Router>
