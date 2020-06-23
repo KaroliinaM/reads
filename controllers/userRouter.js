@@ -4,6 +4,7 @@ const jwt=require('jsonwebtoken')
 const fetch=require('node-fetch')
 const config=require('../utils/config')
 const queries=require('../models/queries')
+const ReadList=require('../models/ReadList')
 
 userRouter.post('/register', (request, response) => {
     console.log('polku on')
@@ -35,7 +36,12 @@ userRouter.post('/register', (request, response) => {
         return queries.addUser(credentials.email, credentials.username, credentials.password, credentials.readgeek_id)
     })
     .then(res => {
-        return response.status(201).json(res)
+        console.log('res', res)
+        credentials.id=res[0].id
+        return ReadList.addList('rated', res[0].id)
+    })
+    .then(res => {
+        return response.status(201).json(credentials)
     })
     .catch(e => console.log(e))
 })
