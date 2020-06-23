@@ -63,6 +63,13 @@ const addReadList = (name, user_id) => {
     })
 }
 
+const getListId=(name, user_id)=> {
+    return pool.query('select id from readlist where name=$1 and user_id=$2', [name, user_id])
+    .then(result => {
+        return result.rows
+    })
+}
+
 const addUser = (email, username, password, readgeek_id) => {
     return pool.query('insert into userdata values(default, $1, $2, $3, $4) returning id', [email, username, password, readgeek_id])
     .then(result => {
@@ -106,6 +113,7 @@ module.exports = {
     getBookById,
     getReadLists,
     addReadList,
+    getListId,
     getBookIdByReadlistId,
     emptyBookToAuthor,
     emptyAuthor,

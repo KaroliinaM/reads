@@ -6,6 +6,10 @@ const getAll=(id)=>{
     return db.getReadLists(id)
 }
 
+const getListId=(name, user_id)=> {
+    return db.getListId(name, user_id)
+}
+
 const addList=(name, user_id)=>{
     return db.addReadList(name, user_id)
         .then(result =>{
@@ -42,6 +46,7 @@ const getBooks=(list)=> {
 
 module.exports={
     getAll,
+    getListId,
     addList,
     getBooks
 }

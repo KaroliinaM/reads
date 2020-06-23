@@ -4,6 +4,7 @@ const fetch=require('node-fetch')
 const moment=require('moment')
 const Book = require('../models/Book')
 const User = require('../models/User')
+const ReadList=require('../models/ReadList')
 const {tokenHandler}=require('../utils/tokenHandler')
 recommendationRouter.use(tokenHandler)
 
@@ -42,7 +43,12 @@ recommendationRouter.post('/rate', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(request.decodedToken)
     User.tasteTested(request.decodedToken.id)
+    .then(res => {
+        return ReadList.getListId('rated', request.decodedToken.id)
+    })
     .then(res=> {
+        console.log('readlist', res[0].id)
+        params.readlist_id=res[0].id
         return Book.addBook(params)
     })
     .then(res => {
