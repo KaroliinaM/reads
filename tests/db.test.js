@@ -17,147 +17,302 @@ beforeAll( async ()=> {
     await db.emptyBook()
     await db.emptyAuthor()
     await db.emptyReadlist()
+    await db.emptyUserdata()
 })
 
-test('database calls respond', async ()=> {
-    await api
+describe('user management', () => {
+    test('user register success', async () => {
+        const user={
+            username: 'username',
+            password: 'password',
+            email: 'email'
+        }
+        const response=await api
+            .post('/user/register')
+            .send(user)
+            .expect(201)
+        
+        const inDb=await db.getUser(user.username)
+        expect(inDb.length).toBe(1)
+        const data=inDb[0]
+        expect(data.id).not.toBe(undefined)
+        expect(data.password).not.toBe(undefined)
+        expect(data.readgeek_id).not.toBe(undefined)
+        expect(data.taste_tested).toBe(false)
+
+        const readlist=await db.getReadLists(data.id)
+        console.log('rated', readlist)
+        expect(readlist.length).toBe(1)
+        expect(readlist[0].name).toBe('rated')
+    })
+    test('user can log in', async () => {
+        const user={
+            username:'username',
+            password:'password'
+        }
+        const response=await api
+            .post('/user/login')
+            .send(user)
+            .expect(201)
+        console.log('response', response.body)
+        expect(response.body.token).not.toBe(undefined)
+    })
+})
+
+describe('readlist handling', () => {
+    let login
+    
+    beforeAll(async()=> {
+        const user={
+            username:'username',
+            password:'password'
+        }
+    
+        login=await api
+        .post('/user/login')
+        .send(user)
+    })
+
+
+    test('add readlists', async () => {
+        console.log('token', login.body)
+        const data={
+            name: 'lukulista1'
+        }
+        const response = await api
+            .post('/readlists')
+            .send(data)
+            .set('Authorization', `Bearer ${login.body.token}`)
+        readlist1=response.body
+        console.log('readlist', readlist1)
+        const dbData=await db.getReadLists(login.body.id)
+        expect(dbData.length).toBe(2)
+    })
+
+    test('get readlists', async() => {
+        const response=await api
         .get('/readlists')
-        .expect(200)
-        .expect('Content-Type',/application\/json/)
+        .set('Authorization', `Bearer ${login.body.token}`)
+
+        const lists=response.body
+        expect(lists.length).toBe(2)
+    })    
+
 })
-test('add readlists', async () => {
-    const data={
-        name: 'lukulista1'
-    }
-    const data2={
-        name: 'lukulista2'
-    }
-    const response = await api
-        .post('/readlists')
-        .send(data)
-    readlist1=response.body
-    readlist1.user_id=null
 
-    const response2 = await api
-        .post('/readlists')
-        .send(data2)
-    readlist2=response2.body
-    readlist2.user_id=null
-    console.log(readlist1, readlist2)
+describe('bookdata', () => {
+    
+    let login
 
+    beforeAll(async()=> {
+        const user={
+            username:'username',
+            password:'password'
+        }
+    
+        login=await api
+        .post('/user/login')
+        .send(user)
+    })
 
-    const response3=await api
-    .get('/readlists')
-    expect(response3.body).toContainEqual(readlist1)
-    expect(response3.body).toContainEqual(readlist2)
-})
-test('add books', async () => {
-    const bookdata1={
-        "title": "title1",
-        "isbn": "isbn",
-        "image_url": "imageurl",
-        "authors": ["Author1"],
-        "readlist_id": readlist1.id
-    }
-    const bookdata2={
-        "title": "title2",
-        "isbn": "isbn",
-        "image_url": "imageurl",
-        "authors": ["Author2"],
-        "readlist_id": readlist1.id
-    }
-    const bookdata3={
-        "title": "title3",
-        "isbn": "isbn",
-        "image_url": "imageurl",
-        "authors": ["Author1"],
-        "readlist_id": readlist2.id
-    }
-    const bookdata4={
-        "title": "title4",
-        "isbn": "isbn",
-        "image_url": "imageurl",
-        "authors": ["Author2"],
-        "readlist_id": readlist2.id
-    }
+    test('add books', async() => {
+        const listRated=await db.getListId('rated', login.body.id)
+        const list1=await db.getListId('lukulista1', login.body.id)
 
-    const authordata1={
-        name: "Author1"
-    }
+        console.log(listRated, list1)
 
-    const authordata2={
-        name: "Author2"
-    }
-
-    const response1=await api
+        const bookdata1={
+            "title": "title1",
+            "isbn": "isbn",
+            "image_url": "imageurl",
+            "authors": ["Author1"],
+            "readlist_id": listRated[0].id
+        }
+        const bookdata2={
+            "title": "title2",
+            "isbn": "isbn",
+            "image_url": "imageurl",
+            "authors": ["Author2"],
+            "readlist_id": listRated[0].id
+        }
+        const bookdata3={
+            "title": "title3",
+            "isbn": "isbn",
+            "image_url": "imageurl",
+            "authors": ["Author1"],
+            "readlist_id": list1[0].id
+        }
+        const bookdata4={
+            "title": "title4",
+            "isbn": "isbn",
+            "image_url": "imageurl",
+            "authors": ["Author2"],
+            "readlist_id": list1[0].id
+        }
+    
+        const response1=await api
         .post('/books')
         .send(bookdata1)
-    book1=response1.body
+        .set('Authorization', `Bearer ${login.body.token}`)
+    
+        const response2=await api
+        .post('/books')
+        .send(bookdata2)
+        .set('Authorization', `Bearer ${login.body.token}`)
+    
+        const response3=await api
+        .post('/books')
+        .send(bookdata3)
+        .set('Authorization', `Bearer ${login.body.token}`)
+    
+        const response4=await api
+        .post('/books')
+        .send(bookdata4)
+        .set('Authorization', `Bearer ${login.body.token}`)
 
-    const response2=await api
-    .post('/books')
-    .send(bookdata2)
-    book2=response2.body
+        console.log('res1',response1.body)
 
-    const response3=await api
-    .post('/books')
-    .send(bookdata3)
-    book3=response3.body
+        const author1=await db.getAuthorByName('Author1')
+        const author2=await db.getAuthorByName('Author2')
+        
+        expect(author1.length).toBe(1)
+        expect(author2.length).toBe(1)
 
-    const response4=await api
-    .post('/books')
-    .send(bookdata4)
-    book4=response4.body
+        const book1authors=await db.getAuthorsByBookId(response1.body.id)
+        const book2authors=await db.getAuthorsByBookId(response2.body.id)
+        const book3authors=await db.getAuthorsByBookId(response3.body.id)
+        const book4authors=await db.getAuthorsByBookId(response4.body.id)
 
-    const response5=await api
-        .get('/author')
-        .send(authordata1)
+        expect(book1authors[0].name).toBe('Author1')
+        expect(book2authors[0].name).toBe('Author2')
+        expect(book3authors[0].name).toBe('Author1')
+        expect(book4authors[0].name).toBe('Author2')
+    })
+    test('getBooksOnList', async() => {
 
-    const response6=await api
-        .get('/author')
-        .send(authordata1)
-    expect(response5.body.length).toBe(1)
-    expect(response6.body.length).toBe(1)
+        const listRated=await db.getListId('rated', login.body.id)
+        const list1=await db.getListId('lukulista1', login.body.id)
 
-    const response7= await api
-        .get(`/readlists/${readlist2.id}`)
+        const data1= await api
+        .get(`/readlists/${listRated[0].id}`)
+        .set('Authorization', `Bearer ${login.body.token}`)
 
-    expect(response7.body.length).toBe(2)
+        expect(data1.body.length).toBe(2)
+        console.log(data1.body)
 
-    expect(response7.body.map(o => o.id)).toContainEqual(book3.id)
-    expect(response7.body.map(o => o.id)).toContainEqual(book4.id)
+        expect(data1.body.map(o => o.title)).toContainEqual('title1')
+        expect(data1.body.map(o => o.title)).toContainEqual('title2')
 
-    console.log(book1, book2, book3, book4)
+        const data2= await api
+        .get(`/readlists/${list1[0].id}`)
+        .set('Authorization', `Bearer ${login.body.token}`)
 
-    const response8 = await api
-        .get(`/books/${book1.id}`)
+        expect(data2.body.length).toBe(2)
+        console.log(data2.body)
 
-    console.log('res8',response8)
-    console.log('bookdata8', bookdata1)
-
-    expect(response8.body.title).toEqual(bookdata1.title)
-    expect(bookdata1.authors).toEqual(response8.body.authors)
-
-    const response9 = await api
-    .get(`/books/${book2.id}`)
-
-    expect(response9.body.title).toEqual(bookdata2.title)
-    expect(bookdata2.authors).toEqual(response9.body.authors)
-
-    const response10 = await api
-    .get(`/books/${book3.id}`)
-
-    expect(response10.body.title).toEqual(bookdata3.title)
-    expect(bookdata3.authors).toEqual(response10.body.authors)
-
-    const response11 = await api
-    .get(`/books/${book4.id}`)
-
-    expect(response11.body.title).toEqual(bookdata4.title)
-    expect(bookdata4.authors).toEqual(response11.body.authors)
+        expect(data2.body.map(o => o.title)).toContainEqual('title3')
+        expect(data2.body.map(o => o.title)).toContainEqual('title4')
+    })
 })
 
+describe('another user', ()=>{
+    let login1
+    let login2
 
+    beforeAll(async() => {
+        const user={
+            email:'mail',
+            username: 'user2',
+            password:'password',
+            readgeek_id:7
+        }
+        await api
+        .post('/user/register')
+        .send(user)
+
+        const user2={
+            username:'username',
+            password:'password'
+        }
+    
+        login1=await api
+        .post('/user/login')
+        .send(user)
+
+        login2=await api
+        .post('/user/login')
+        .send(user2)
+    })
+    test('token extracted correctly', async() => {
+        console.log('token', login1.body)
+        const data1={
+            name: 'list1'
+        }
+        await api
+            .post('/readlists')
+            .send(data1)
+            .set('Authorization', `Bearer ${login1.body.token}`)
+
+        const data2={
+            name: 'list2'
+        }
+        await api
+            .post('/readlists')
+            .send(data2)
+            .set('Authorization', `Bearer ${login2.body.token}`)
+        const dbData1=await db.getReadLists(login1.body.id)
+        expect(dbData1.map(l=>l.name)).toContainEqual('list1')
+
+        const dbData2=await db.getReadLists(login2.body.id)
+        expect(dbData2.map(l=>l.name)).toContainEqual('list2')
+    })
+} )
+describe('recommendations', ()=> {
+    let login
+
+    beforeAll(async()=> {
+        const user={
+            username:'username',
+            password:'password'
+        }
+    
+        login=await api
+        .post('/user/login')
+        .send(user)
+    })
+    test('get books for rating', async() => {
+        const response=await api
+            .get('/recommendations/sample')
+            .set('Authorization', `Bearer ${login.body.token}`)
+
+        expect(response.body.length).toBe(6)
+
+    })
+
+    test('rate books', async() => {
+        const book= { 
+            authors: ['Stephenie Meyer'],
+            author_language: 'en',
+            cover: 'image',
+            readgeekid: 494579,
+            title: 'Twilight',
+            title_language: 'en',
+            rated:6
+        }
+
+        const response= await api
+        .post('/recommendations/rate')
+        .send(book)
+        .set('Authorization', `Bearer ${login.body.token}`)
+
+        console.log(response.body)
+
+    })
+
+
+
+
+})
 
 afterAll(() => {
     pool.end()

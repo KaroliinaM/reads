@@ -104,6 +104,14 @@ const emptyReadlist = () => {
     return pool.query('delete from readlist')
 }
 
+const emptyUserdata = () => {
+    return pool.query('delete from userdata')
+}
+
+const getBookToAuthorCount = (book_id, author_id) =>{
+    return pool.query('select count(*) from booktoauthor where book_id = $1 and author_id = $2', [book_id, author_id])
+}
+
 module.exports = {
     getAuthorByName,
     insertAuthor,
@@ -119,7 +127,9 @@ module.exports = {
     emptyAuthor,
     emptyBook,
     emptyReadlist,
+    emptyUserdata,
     addUser,
     getUser,
-    setTasteTested
+    setTasteTested,
+    getBookToAuthorCount
 }

@@ -12,7 +12,7 @@ recommendationRouter.get('/sample', (request, response) => {
     console.log('toimii')
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(config.READGEEK_URL)
-    fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=6`, {
+    fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=20`, {
         method: 'get',
         headers: {
             'Authorization': `Basic ${config.READGEEK_AUTH}`
