@@ -8,6 +8,7 @@ const ReadList=require('../models/ReadList')
 const {tokenHandler}=require('../utils/tokenHandler')
 recommendationRouter.use(tokenHandler)
 
+//content type for mock platform
 recommendationRouter.get('/sample', (request, response) => {
     console.log('toimii')
     const readgeek_id=request.decodedToken.readgeek_id
@@ -64,6 +65,7 @@ recommendationRouter.post('/rate', (request, response) => {
         return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
             method: 'patch',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Basic ${config.READGEEK_AUTH}`
             },
             body: JSON.stringify(data)

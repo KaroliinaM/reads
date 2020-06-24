@@ -1,9 +1,12 @@
 const express=require('express')
+const {checkHeaders} =require('./middleware')
 
 const app=express()
 const port=3002
 const books=require('./books')
 const {recommendations}=require('./recommendations')
+app.use(express.json())
+
 
 
 const res={
@@ -77,7 +80,7 @@ const createdUser={
   }
 }
 
-app.get('/readgeek/:id', (request, response) => {
+app.get('/readgeek/:id', checkHeaders, (request, response) => {
     console.log(request.query)
     if(!!request.query.taste_test) {
       return response.json(res)
@@ -86,7 +89,12 @@ app.get('/readgeek/:id', (request, response) => {
     
 })
 
-app.patch('/readgeek/:id', (request, response) => {
+app.patch('/readgeek/:id', checkHeaders, (request, response) => {
+    console.log(request.body)
+    if(!request.body.books) {
+      return response.status(401).json({error: 'incorrect input'})
+    }
+
     response.status(201).json(res2)
 })
 
@@ -94,7 +102,7 @@ app.get('/openlibrary', (request, response) => {
   response.status(200).json(books.twilight)
 })
 
-app.post('/readgeek', (request, response) => {
+app.post('/readgeek', checkHeaders, (request, response) => {
   response.status(200).json(createdUser)
 })
 
