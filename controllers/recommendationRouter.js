@@ -8,7 +8,7 @@ const ReadList=require('../models/ReadList')
 const {tokenHandler}=require('../utils/tokenHandler')
 recommendationRouter.use(tokenHandler)
 
-//content type for mock platform
+
 recommendationRouter.get('/sample', (request, response) => {
     console.log('toimii')
     const readgeek_id=request.decodedToken.readgeek_id
@@ -37,7 +37,7 @@ recommendationRouter.get('/sample', (request, response) => {
 })
 
 
-
+//content type for mock platform
 recommendationRouter.post('/rate', (request, response) => {
     const params=request.body
     console.log(params)
@@ -53,9 +53,10 @@ recommendationRouter.post('/rate', (request, response) => {
         return Book.addBook(params)
     })
     .then(res => {
+        const bookid=params.readgeekid? `readgeekid:${params.readgeekid}`:`isbn:${params.isbn}`
         const data={
             books: {
-                [`readgeekid:${params.readgeekid}`]:{
+                [bookid]:{
                     rated: params.rated,
                     date_rated: moment(new Date()).format('YYYY-MM-DD')
                 }

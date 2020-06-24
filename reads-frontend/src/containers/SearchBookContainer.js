@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Book from '../components/Book'
 import ListPicker from '../components/ListPicker'
 import BookService from '../services/BookService'
+import Rating from 'react-rating'
 
 
 const SearchBookContainer =()=> {
@@ -40,6 +41,21 @@ const SearchBookContainer =()=> {
 
   }
 
+  const handleChange=(e)=>{
+    console.log(e)
+    const book = {
+      title: bookByIsbn.title,
+      isbn: bookByIsbn.isbn,
+      isbn13: bookByIsbn.isbn13,
+      image_url: bookByIsbn.image_url,
+      description: bookByIsbn.description,
+      authors: bookByIsbn.authors,
+      rated: e
+    }
+    BookService.postRating(book)
+    .then(response => console.log(response))
+  }
+
 
 return(
   <div className='frontpage-app'>
@@ -50,6 +66,13 @@ return(
     {bookByIsbn && 
       <>
         <Book book={bookByIsbn} />
+        <div>
+        <Rating
+          stop={10}
+          fractions={2}
+          onChange={handleChange}
+        />
+        </div>
         <ListPicker readLists={readLists} addBookToList={addBookToList} />
       </>
     }

@@ -15,7 +15,8 @@ const SampleBooksContainer = () => {
 
     const handleChange= (book, e) =>{
         console.log('value', e, book)
-        const data= {...book, rated: 3}
+        console.log('type', typeof e)
+        const data= {...book, rated: e}
         console.log(data)
         BookService.postRating(data)
 
