@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 
 const RegisterContainer = () => {
     const [email, setEmail] = useState("")
     const [username, setUsername] =useState("")
     const [password, setPassword] = useState("")
+
+    const history=useHistory()
 
     const handleRegister = (event) => {
         event.preventDefault()
@@ -19,14 +22,15 @@ const RegisterContainer = () => {
             },
             body: JSON.stringify(user)
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            setEmail("")
-            setUsername("")
-            setPassword("")
+        .then(response => {
+            if(response.ok) {
+                history.push('/login')
+               
+            }
+            else {
+                console.log('error')
+            }
         })
-        console.log(user)
     }
 
     return(
