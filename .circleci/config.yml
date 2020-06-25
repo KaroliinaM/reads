@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run: | 
-        echo "$DOCKER_PASS"
+        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
   build:
     executor: node
