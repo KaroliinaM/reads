@@ -7,9 +7,17 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - db
       - build
       - test
 jobs:
+  db:
+    machine: true
+    steps:
+      - checkout
+      - run: | 
+        echo "$DOCKER_PASS"
+
   build:
     executor: node
     steps:
