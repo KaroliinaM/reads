@@ -8,6 +8,8 @@ import RecommendContainer from './containers/RecommendContainer'
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
 import PrivateRoute from './components/PrivateRoute'
+import Notification from './components/Notification'
+import './form.css'
 //import BookService from './services/BookService'
 import {
   BrowserRouter as Router,
@@ -16,9 +18,19 @@ import {
 
 const App =()=> {
   const [user, setUser]=useState(null)
+  const [message, setMessage]=useState(null)
+
+  const setNotification = (notification) => {
+    setMessage(notification)
+    setTimeout(()=> {
+      setMessage(null)
+    }, 5000)
+  }
 
 
 return(
+  <div>
+  <Notification message={message} />
   <Router>
     <div>
       <Link to="/">Listat</Link>
@@ -36,10 +48,10 @@ return(
       <PrivateRoute component={SampleBooksContainer} path= '/rate' isAuth={!!user} />
       <PrivateRoute component={RecommendContainer} path='/recommendations' isAuth={!!user} />
       <Route path='/register'>
-        <RegisterContainer />
+        <RegisterContainer notifyUser={setNotification} />
       </Route>
       <Route path='/login'>
-        <LoginContainer setUser={setUser} />
+        <LoginContainer setUser={setUser} notifyUser={setNotification} />
       </Route>
       <Route path="/">
         {user ? 
@@ -52,6 +64,7 @@ return(
       </Route>
     </Switch>
   </Router>
+  </div>
 )}
 
 export default App;

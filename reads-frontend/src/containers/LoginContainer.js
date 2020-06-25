@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import BookService from '../services/BookService'
+import Input from '../components/Input'
+import { Link } from 'react-router-dom'
 
 const LoginContainer = ({setUser}) => {
     const [username, setUsername]=useState("")
@@ -29,14 +31,21 @@ const LoginContainer = ({setUser}) => {
             const path=data.taste_tested? '/':'/rate'
             history.push(path)
         })
+
+       /*  <div>username<input value={username} onChange={(e)=>setUsername(e.target.value)} /></div>
+        <div>password<input value={password} onChange={(e)=> setPassword(e.target.value)} /></div>
+        <button type='submit'>kirjaudu</button> */
     }
 
     return(
-        <form onSubmit={handleLogin} >
-            <div>username<input value={username} onChange={(e)=>setUsername(e.target.value)} /></div>
-            <div>password<input value={password} onChange={(e)=> setPassword(e.target.value)} /></div>
-            <button type='submit'>kirjaudu</button>
-        </form>
+        <div className='form-container'>
+            <form className='form-element' onSubmit={handleLogin} >
+                <Input label='username' type='text' value={username} onChange={(e)=>setUsername(e.target.value)} />
+                <Input label='password' type='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                <button className='form-button' type='submit'>kirjaudu</button>
+            </form>
+            <Link to='/register'>register</Link>
+        </div>
     )
 }
 

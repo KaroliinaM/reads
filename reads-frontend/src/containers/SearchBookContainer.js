@@ -3,12 +3,20 @@ import Book from '../components/Book'
 import ListPicker from '../components/ListPicker'
 import BookService from '../services/BookService'
 import Rating from 'react-rating'
+import { useHistory, useLocation } from 'react-router-dom'
 
 
 const SearchBookContainer =()=> {
+
+  const history=useHistory()
+  const location=useLocation()
+
   const [isbn, setIsbn]=useState('')
-  const [bookByIsbn, setBookByIsbn]=useState(null)
+  const [bookByIsbn, setBookByIsbn]=useState(location.state? location.state.book: undefined)
   const [readLists, setReadLists] = useState([])
+
+  
+  const primary=!!location.state
 
   useEffect(() => {
     BookService.getReadLists()
@@ -23,7 +31,16 @@ const SearchBookContainer =()=> {
     .then(data => {
         console.log(data)
         console.log(data.authors[0])
-        setBookByIsbn(data)
+        if(!primary) {
+          history.push({
+            pathname: '/etsi',
+            state: { book: data }
+          })
+        }else {
+          setBookByIsbn(data)
+        }
+
+
     })
   }
   const addBookToList = (listId) => {
@@ -58,11 +75,12 @@ const SearchBookContainer =()=> {
 
 
 return(
-  <div className='frontpage-app'>
+  <div>
     <form onSubmit={submitForm}>
-      <input value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
-      <button type='submit'>lähetä</button>
+      <input className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
+      <button className = 'button' type='submit'>lähetä</button>
     </form>
+    {console.log('history', location.state)}
     {bookByIsbn && 
       <>
         <Book book={bookByIsbn} />

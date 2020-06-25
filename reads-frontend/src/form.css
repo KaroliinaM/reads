@@ -1,0 +1,29 @@
+.form-container {
+    width:80%;
+    background-color: 	#FFFFF0;
+    box-shadow: 10px 5px 5px #C0C0C0;
+    padding: 1%;
+    margin: 0 auto;
+}
+
+.form-element {
+    padding:1% 0;
+}
+
+.form-input {
+    padding: 5px;
+    margin: 10px 0;
+    width:98%;
+}
+
+.form-label {
+    color: #2F4F4F;
+}
+
+.form-button {
+    border-radius: 5px;
+    padding: 5px;
+    margin:5px 0;
+    background-color: #DEB887;
+    font-size: inherit;
+}

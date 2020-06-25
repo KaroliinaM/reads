@@ -43,3 +43,10 @@ img {
     padding:1%;
     margin: 1%;
 }
+.input {
+    box-shadow: 6px 3px 3px #C0C0C0; 
+    margin:1%;
+}
+.button {
+    box-shadow: 6px 3px 3px #C0C0C0;
+}
