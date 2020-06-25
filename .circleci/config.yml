@@ -7,21 +7,18 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - db
       - build
       - test
 jobs:
-  db:
-    machine: true
-    steps:
-      - checkout
-      - run: | 
-        echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
   build:
     executor: node
     steps:
       - checkout
+      - run: cd mock_api
+      - run: npm install
+      - run: nnpm start
+      - run: cd..  
       - run: npm install
       - run: npm run build
   test:
