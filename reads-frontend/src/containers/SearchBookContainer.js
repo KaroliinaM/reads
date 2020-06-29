@@ -76,9 +76,10 @@ const SearchBookContainer =()=> {
 
 return(
   <div>
+    <h1 className='listTitle'>Find books</h1>
     <form onSubmit={submitForm}>
       <input className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
-      <button className = 'button' type='submit'>lähetä</button>
+      <button className = 'button' type='submit'>search</button>
     </form>
     {console.log('history', location.state)}
     {bookByIsbn && 

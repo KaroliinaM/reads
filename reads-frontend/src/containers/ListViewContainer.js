@@ -38,19 +38,22 @@ const ListViewContainer = () => {
     } 
 
     return(
+        <>
+        <h1 className='listTitle'>Booklists</h1>
         <div className='frontpage-app'>
             {console.log(readLists)}
             {console.log(BookService.token)}
             {readLists.map(list=>{
                 return<ReadList key={list.id} list={list} />
             })}
-            <button onClick={toggleVisibility}>toggle</button>
+            <button className='readlist-add-button' onClick={toggleVisibility}>Add a list</button>
             {inputVisible && <AddReadListForm
                 listInput={listInput}
                 setListInput={setListInput}
                 submitForm={submitForm}
             />}
         </div>
+        </>
 
     )
 }

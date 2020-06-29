@@ -25,6 +25,12 @@
     margin: 0.5%;
 }
 
+.listTitle {
+    margin: 2%;
+    color:  #A9A9A9;
+    -webkit-text-stroke: 0.5px darkslategray;
+}
+
 .author {
     color: #708090;
     margin: 0.5%;
@@ -35,6 +41,26 @@ img {
     width: 10%;
     height: 10%;
     padding: 1%;
+}
+
+.readlist-link-box {
+    color:#2F4F4F;
+    text-decoration: none;
+    margin: 1%;
+}
+.readlist-link {
+    color: #708090;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.readlist-add-button {
+    border: none;
+    background-color: inherit;
+    color: #6A5ACD;
+    text-decoration: underline;
 }
 
 .frontpage-app {

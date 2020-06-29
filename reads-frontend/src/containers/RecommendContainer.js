@@ -19,7 +19,7 @@ const RecommendContainer = () => {
 
     return(
         <>
-            Suositukset
+            <h1 className='listTitle'>Recommendations</h1>
             {listRecommendations()}
         </>
     )
