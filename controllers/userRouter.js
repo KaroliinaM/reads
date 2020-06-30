@@ -52,10 +52,11 @@ userRouter.post('/login', (request, response) => {
     let user = {}
     queries.getUser(creds.username)
     .then(data => {
-        console.log(data[0].password)
-        console.log(creds.password)
-        user = data[0]
+        //console.log(data[0].password)
+        //console.log(creds.password)
         if(data.length>0) {
+            user = data[0]
+            console.log('user', user)
             return bcrypt.compare(creds.password, data[0].password)
         } else {
             return false
@@ -63,7 +64,7 @@ userRouter.post('/login', (request, response) => {
     })
     .then(result => {
         if(!result) {
-            return response.status(401).json('invalid credentials')
+            return response.status(401).json({error: 'invalid credentials'})
         } else {
             const userForToken={
                 id: user.id,

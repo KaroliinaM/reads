@@ -22,14 +22,30 @@ const LoginContainer = ({setUser}) => {
             },
             body: JSON.stringify(user)
         })
-        .then(response=> response.json())
+        .then(response=> {
+            console.log(response)
+            if(!response.ok) {
+                throw response
+            }
+            return response.json()
+        })
         .then(data => {
+            console.log('data', data)
             console.log(data.token)
             setUser(data)
             BookService.setToken(data.token)
             window.localStorage.setItem('loggedUser', JSON.stringify(data))
             const path=data.taste_tested? '/':'/rate'
             history.push(path)
+        })
+        .catch(error => {
+            if(error.status===401) {
+                notifyUser('login failed')
+                setUsername('')
+                setPassword('')
+            } else {
+                notifyUser('system error')
+            }
         })
 
        /*  <div>username<input value={username} onChange={(e)=>setUsername(e.target.value)} /></div>
