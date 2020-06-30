@@ -4,7 +4,7 @@ import BookService from '../services/BookService'
 import Input from '../components/Input'
 import { Link } from 'react-router-dom'
 
-const LoginContainer = ({setUser}) => {
+const LoginContainer = ({setUser, notifyUser}) => {
     const [username, setUsername]=useState("")
     const [password, setPassword]=useState("")
     const history=useHistory()
@@ -40,11 +40,11 @@ const LoginContainer = ({setUser}) => {
         })
         .catch(error => {
             if(error.status===401) {
-                notifyUser('login failed')
+                notifyUser({style: 'notification-error', text:'login failed'})
                 setUsername('')
                 setPassword('')
             } else {
-                notifyUser('system error')
+                notifyUser({style: 'notification-error', text:'system error'})
             }
         })
 

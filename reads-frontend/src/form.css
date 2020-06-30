@@ -27,3 +27,14 @@
     font-size: inherit;
     border-color:#C0C0C0;
 }
+.notification-container {
+    text-align: center
+}
+
+.notification-error {
+    color:red;
+}
+
+.notification-success {
+    color: green;
+}

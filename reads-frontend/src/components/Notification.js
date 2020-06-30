@@ -3,8 +3,8 @@ import React from 'react'
 
 const Notification = ({message}) => {
     return (
-    <div>
-        <p>{message}</p>
+    <div className='notification-container'>
+        {message && <p className={message.style}>{message.text}</p>}
     </div>
     )
 }

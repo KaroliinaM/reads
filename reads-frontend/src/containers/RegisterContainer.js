@@ -25,11 +25,11 @@ const RegisterContainer = ({notifyUser}) => {
         })
         .then(response => {
             if(response.ok) {
-                notifyUser('user created')
+                notifyUser({style: 'notification-success',text:'user created'})
                 history.push('/login')
             }
             else {
-                notifyUser('error during registration')
+                notifyUser({style: 'notification-error', text:'error during registration'})
                 console.log('error')
             }
         })
