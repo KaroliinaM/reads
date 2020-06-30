@@ -43,10 +43,7 @@ recommendationRouter.post('/rate', (request, response) => {
     console.log(params)
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(request.decodedToken)
-    User.tasteTested(request.decodedToken.id)
-    .then(res => {
-        return ReadList.getListId('rated', request.decodedToken.id)
-    })
+    ReadList.getListId('rated', request.decodedToken.id)
     .then(res=> {
         console.log('readlist', res[0].id)
         params.readlist_id=res[0].id
@@ -105,6 +102,13 @@ recommendationRouter.get('/list', (request, response) => {
         return response.status(200).json(books)
     })
     .catch(e => console.log(e))
+})
+
+recommendationRouter.put('/rated', (request, response) => {
+    User.tasteTested(request.decodedToken.id)
+    .then(res=> {
+        return response.status(200).json({status: 'Success'})
+    })
 })
 
 module.exports=recommendationRouter

@@ -64,7 +64,7 @@ userRouter.post('/login', (request, response) => {
     })
     .then(result => {
         if(!result) {
-            return response.status(401).json({error: 'invalid credentials'})
+            return response.status(401).json({error:'invalid credentials'})
         } else {
             const userForToken={
                 id: user.id,
