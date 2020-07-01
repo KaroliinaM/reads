@@ -16,6 +16,7 @@ const RegisterContainer = ({notifyUser}) => {
             username,
             password
         }
+        let res;
         fetch('/user/register', {
             method: 'post',
             headers:{
@@ -24,14 +25,20 @@ const RegisterContainer = ({notifyUser}) => {
             body: JSON.stringify(user)
         })
         .then(response => {
-            if(response.ok) {
+            console.log(response)
+            res=response
+            return response.json()
+        })
+        .then(result => {
+            console.log('result', result)
+            if(res.ok) {
                 notifyUser({style: 'notification-success',text:'user created'})
                 history.push('/login')
+            } else {
+                console.log(result)
+                notifyUser({style: 'notification-error', text: result})
             }
-            else {
-                notifyUser({style: 'notification-error', text:'error during registration'})
-                console.log('error')
-            }
+
         })
     }
 

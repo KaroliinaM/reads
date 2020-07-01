@@ -108,6 +108,15 @@ const getRecommendations= () => {
     .then(response => response.json())
 }
 
+const setRatingDone = () => {
+    return fetch('/recommendations/rated', {
+        method: 'put',
+        headers: {
+            'Authorization': token
+        }
+    })
+}
+
 export default{
     getReadLists: getReadLists,
     postNewList: postNewList,
@@ -118,6 +127,7 @@ export default{
     postRating: postRating,
     getRatingSample: getRatingSample,
     getRecommendations: getRecommendations,
+    setRatingDone: setRatingDone,
     setToken,
     token 
 }

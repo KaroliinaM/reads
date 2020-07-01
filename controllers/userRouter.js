@@ -10,11 +10,20 @@ userRouter.post('/register', (request, response) => {
     console.log('polku on')
     const user= request.body
     console.log(user)
+    if(user.username.length===0 || user.password.length===0) {
+        return response.status(400).json({error: 'credential fields cannot be empty'})
+    }
     let credentials={
         username: user.username
     }
     const saltRounds=10
-    bcrypt.hash(user.password, saltRounds)
+    queries.getUser(user.username)
+    .then(result => {
+        if(result.length>0) {
+            throw({status: 400, text:'username is already in use'})
+        }
+        return bcrypt.hash(user.password, saltRounds)
+    })
     .then(data => {
         credentials.password=data
         return bcrypt.hash(user.email, saltRounds)
@@ -41,9 +50,15 @@ userRouter.post('/register', (request, response) => {
         return ReadList.addList('rated', res[0].id)
     })
     .then(res => {
-        return response.status(201).json(credentials)
+        response.status(201).json(credentials)
     })
-    .catch(e => console.log(e))
+    .catch(e => {
+        console.log(e)
+        if(e.status===400) {
+            return response.status(400).json('username is already in use')
+        }
+        return response.status(500).json('internal error')
+    })
 })
 
 userRouter.post('/login', (request, response) => {
@@ -77,7 +92,10 @@ userRouter.post('/login', (request, response) => {
 
         }
     })
-    .catch(e => console.log(e))
+    .catch(e => {
+        console.log(e)
+        return response.status(500).json({error: 'internal error'})
+    })
 })
 
 module.exports= userRouter

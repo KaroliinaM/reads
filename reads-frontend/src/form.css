@@ -26,7 +26,15 @@
     margin:5px 0;
     font-size: inherit;
     border-color:#C0C0C0;
+    background-color: #006400;
+    color: white;
+    text-shadow: 1px 1px black;
 }
+
+.form-button[disabled] {
+    opacity: 0.5;
+}
+
 .notification-container {
     text-align: center
 }
