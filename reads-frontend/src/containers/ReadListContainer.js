@@ -18,7 +18,7 @@ const ReadListContainer = () => {
     return (
         <>
             {readList.map(book => {
-                return(<Link key={book.id} to={{pathname: `/book/${book.id}`, state:{book}}}><ReadListItem key={book.id} item={book} /></Link>)
+                return(<Link className='readlist-link-box' key={book.id} to={{pathname: `/book/details`, state:{book}}}><ReadListItem key={book.id} item={book} /></Link>)
             })}
         </>
     )

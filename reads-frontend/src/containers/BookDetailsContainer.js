@@ -5,8 +5,7 @@ import BookService from '../services/BookService'
 
 const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
-    const id=useParams().id
-    console.log(id)
+    console.log('book', props.location.state)
     console.log('book', props.location.state.book)
 /*     useEffect(() => {
         BookService.getBookDetails(id)

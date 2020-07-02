@@ -44,7 +44,7 @@ return(
       <PrivateRoute component={ReadListContainer} path="/list/:id" isAuth={!!user} />
       <PrivateRoute component={ListViewContainer} path='/list' isAuth={!!user} />
       <PrivateRoute component={SearchBookContainer} path="/etsi" isAuth={!!user} />
-      <PrivateRoute component={BookDetailsContainer} path ='/book/:id' isAuth={!!user} />
+      <PrivateRoute component={BookDetailsContainer} path ='/book/details' isAuth={!!user} />
       <PrivateRoute component={SampleBooksContainer} path= '/rate' isAuth={!!user} />
       <PrivateRoute component={RecommendContainer} path='/recommendations' isAuth={!!user} />
       <Route path='/register'>
