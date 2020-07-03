@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import Rating from 'react-rating'
 import Book from '../components/Book'
 import BookService from '../services/BookService'
 
@@ -7,19 +7,35 @@ const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
     console.log('book', props.location.state)
     console.log('book', props.location.state.book)
-/*     useEffect(() => {
-        BookService.getBookDetails(id)
-        .then(data => setBook(data))
-        fetch(`http://localhost:3001/books/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            setBook(data)
-        }) 
-    }, [id]) */
+
+    const handleChange=(e)=>{
+        console.log(e)
+        const ratedBook = {...book, rated:e}
+/*         const ratedBook = {
+          title: bookByIsbn.title,
+          isbn: bookByIsbn.isbn,
+          isbn13: bookByIsbn.isbn13,
+          image_url: bookByIsbn.image_url,
+          description: bookByIsbn.description,
+          authors: bookByIsbn.authors,
+          rated: e
+        } */
+        BookService.postRating(ratedBook)
+        .then(response => console.log(response))
+      }
+
     return (
         <>
-            {book && <Book book={book} />}
+            {book && (
+                <>
+                    <Book book={book} />
+                    <Rating
+                        stop={10}
+                        fractions={2}
+                        onChange={handleChange} 
+                    />
+                </>
+            )}
         </>
     )
 }
