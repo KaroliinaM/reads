@@ -112,6 +112,10 @@ const getBookToAuthorCount = (book_id, author_id) =>{
     return pool.query('select count(*) from booktoauthor where book_id = $1 and author_id = $2', [book_id, author_id])
 }
 
+const updateReadlistOnBook = (readlist_id, id) =>{
+    return pool.query('update book set readlist_id=$1 where id=$2', [readlist_id, id])
+}
+
 module.exports = {
     getAuthorByName,
     insertAuthor,
@@ -131,5 +135,6 @@ module.exports = {
     addUser,
     getUser,
     setTasteTested,
-    getBookToAuthorCount
+    getBookToAuthorCount,
+    updateReadlistOnBook
 }

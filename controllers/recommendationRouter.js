@@ -47,7 +47,12 @@ recommendationRouter.post('/rate', (request, response) => {
     .then(res=> {
         console.log('readlist', res[0].id)
         params.readlist_id=res[0].id
-        return Book.addBook(params)
+        if(!params.id) {
+            return Book.addBook(params)
+        } else {
+            return Book.setReadlist(params)
+        }
+        
     })
     .then(res => {
         const bookid=params.readgeekid? `readgeekid:${params.readgeekid}`:`isbn:${params.isbn}`

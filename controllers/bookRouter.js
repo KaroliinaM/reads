@@ -14,7 +14,13 @@ bookRouter.get('/author', (request, response) => {
 
 bookRouter.post('/', (request, response) => {
     const book=request.body
-    Book.addBook(book)
+    let addToList
+    if(!book.id) {
+        addToList=Book.addBook(book)
+    } else {
+        addToList=Book.setReadlist(book)
+    }
+    addToList
     .then(result=>{
         return response.status(201).json(result)
     })
