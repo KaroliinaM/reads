@@ -51,16 +51,17 @@ const BookDetailsContainer = (props) => {
     return (
         <>
             {readLists.length>0 && (
-                <>
+                <div className='book-card-container'>
                     <Book book={book} />
-                    <Rating
-                        stop={10}
-                        fractions={2}
-                        onChange={handleChange} 
-                    />
-                    {console.log('readlists', readLists)}
+                    <div>
+                        <Rating
+                            stop={10}
+                            fractions={2}
+                            onChange={handleChange} 
+                        />
+                    </div>
                     <ListPicker readLists={readLists} addBookToList={addBookToList} />
-                </>
+                </div>
             )}
         </>
     )

@@ -2,16 +2,19 @@
     font-size: 80%;
     display: flex;
     justify-content: flex-start;
-    background-color: 	#FFFFF0;
-    box-shadow: 10px 5px 5px #C0C0C0;
-    padding: 1%;
-    margin: 1%;
 }
 
 .book-info-container {
     display: flex;
     flex-direction: column;
     flex: auto;
+}
+
+.book-card-container {
+    background-color: 	#FFFFF0;
+    box-shadow: 10px 5px 5px #C0C0C0;
+    padding: 1%;
+    margin: 1%;
 }
 
 .booklist-item-container {
@@ -41,6 +44,7 @@ img {
     width: 10%;
     height: 10%;
     padding: 1%;
+    flex: 0 0 10%;
 }
 
 .readlist-link-box {

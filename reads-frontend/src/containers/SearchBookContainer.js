@@ -36,7 +36,7 @@ const SearchBookContainer =()=> {
             pathname: '/etsi',
             state: { book: data }
           })
-        }else {
+        } else {
           setBookByIsbn(data)
         }
 
@@ -83,7 +83,7 @@ return(
     </form>
     {console.log('history', location.state)}
     {bookByIsbn && 
-      <>
+      <div className='book-card-container'>
         <Book book={bookByIsbn} />
         <div>
         <Rating
@@ -93,7 +93,7 @@ return(
         />
         </div>
         <ListPicker readLists={readLists} addBookToList={addBookToList} />
-      </>
+      </div>
     }
   </div>
 )}
