@@ -57,6 +57,7 @@ const BookDetailsContainer = (props) => {
                         <Rating
                             stop={10}
                             fractions={2}
+                            initialRating={book.rated}
                             onChange={handleChange} 
                         />
                     </div>

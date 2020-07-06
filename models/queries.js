@@ -36,7 +36,7 @@ const getAuthorsByBookId = (id) => {
 }
 
 const getBookById = (id) => {
-    return pool.query('select book.id as id, title, image_url from book where book.id=$1',[id])
+    return pool.query('select book.id as id, title, image_url, description, rated from book where book.id=$1',[id])
     .then(result => {
         return result.rows
     })
