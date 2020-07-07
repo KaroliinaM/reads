@@ -50,7 +50,7 @@ recommendationRouter.post('/rate', (request, response) => {
         if(!params.id) {
             return Book.addBook(params)
         } else {
-            return Book.setReadlist(params)
+            return Book.setRating(params)
         }
         
     })

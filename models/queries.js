@@ -116,6 +116,10 @@ const updateReadlistOnBook = (readlist_id, id) =>{
     return pool.query('update book set readlist_id=$1 where id=$2', [readlist_id, id])
 }
 
+const updateBookRating = (readlist_id, rated, id) => {
+    return pool.query('update book set readlist_id=$1, rated=$2 where id=$3', [readlist_id, rated, id])
+}
+
 module.exports = {
     getAuthorByName,
     insertAuthor,
@@ -136,5 +140,6 @@ module.exports = {
     getUser,
     setTasteTested,
     getBookToAuthorCount,
-    updateReadlistOnBook
+    updateReadlistOnBook,
+    updateBookRating
 }

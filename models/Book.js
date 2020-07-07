@@ -49,6 +49,15 @@ const setReadlist = (data) => {
     return db.updateReadlistOnBook(values.readlist_id, values.id)
 }
 
+const setRating= (data) => {
+    const values = {
+        id: data.id,
+        rated: data.rated,
+        readlist_id: data.readlist_id
+    }
+    return db.updateBookRating(values.readlist_id, values.rated, values.id)
+} 
+
 const getById =(id)=>{
     let book={}
     return db.getAuthorsByBookId(id)
@@ -73,5 +82,6 @@ module.exports={
     getAuthor,
     addBook,
     getById,
-    setReadlist
+    setReadlist,
+    setRating
 }
