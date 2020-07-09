@@ -80,3 +80,20 @@ img {
 .button {
     box-shadow: 6px 3px 3px #C0C0C0;
 }
+
+.btn-listpicker {
+    background-color: inherit;
+    border: solid;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 28px;
+}
+
+.btn-listpicker-selected {
+    background-color: black;
+    color: white;
+    border: solid black;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 28px;
+}

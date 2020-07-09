@@ -43,7 +43,10 @@ const BookDetailsContainer = (props) => {
           readlist_id:listId
         } */
         BookService.addBookToList(bookOnList)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+            setBook(bookOnList)
+        })
     }
 
 
@@ -61,7 +64,7 @@ const BookDetailsContainer = (props) => {
                             onChange={handleChange} 
                         />
                     </div>
-                    <ListPicker readLists={readLists} addBookToList={addBookToList} />
+                    <ListPicker readLists={readLists} selected={book.readlist_id} addBookToList={addBookToList} />
                 </div>
             )}
         </>

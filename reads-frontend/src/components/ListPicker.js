@@ -1,8 +1,10 @@
 import React from 'react'
 
-const ListPicker = ({readLists, addBookToList}) => {
+const ListPicker = ({readLists, selected, addBookToList}) => {
+    console.log('lista', selected)
+    const style = (id) => selected===id ? 'btn-listpicker-selected':'btn-listpicker'
     return readLists.map(list => {
-        return <button key={list.id} onClick={()=>addBookToList(list.id)} >{list.name}</button>
+        return <button className={style(list.id)} key={list.id} onClick={()=>addBookToList(list.id)} >{list.name}</button>
     })
 }
 

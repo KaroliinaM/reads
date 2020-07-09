@@ -72,6 +72,7 @@ const getById =(id)=>{
         book.title=result[0].title
         book.image_url=result[0].image_url
         book.description=result[0].description
+        book.readlist_id=result[0].readlist_id
         book.rated=result[0].rated
         return book
     })
