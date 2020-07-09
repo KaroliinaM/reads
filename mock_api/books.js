@@ -128,4 +128,58 @@ const twilight = {
     }
 }
 
-module.exports= {twilight}
+const eclipse = {
+  "ISBN:9780316087360": {
+    "publishers": [
+      {
+        "name": "Little, Brown Books for Young Readers"
+      }
+    ],
+    "identifiers": {
+      "isbn_13": [
+        "9780316087360"
+      ],
+      "openlibrary": [
+        "OL24085247M"
+      ],
+      "isbn_10": [
+        "031608736X"
+      ],
+      "oclc": [
+        "623610065"
+      ]
+    },
+    "title": "Eclipse (The Twilight Saga)",
+    "url": "https://openlibrary.org/books/OL24085247M/Eclipse_(The_Twilight_Saga)",
+    "number_of_pages": 640,
+    "cover": {
+      "small": "https://covers.openlibrary.org/b/id/6389445-S.jpg",
+      "large": "https://covers.openlibrary.org/b/id/6389445-L.jpg",
+      "medium": "https://covers.openlibrary.org/b/id/6389445-M.jpg"
+    },
+    "subjects": [
+      {
+        "url": "https://openlibrary.org/subjects/new_york_times_bestseller",
+        "name": "New York Times bestseller"
+      },
+      {
+        "url": "https://openlibrary.org/subjects/nyt:series_books=2008-03-15",
+        "name": "nyt:series_books=2008-03-15"
+      },
+      {
+        "url": "https://openlibrary.org/subjects/vampire",
+        "name": "vampire"
+      }
+    ],
+    "publish_date": "May 18, 2010",
+    "key": "/books/OL24085247M",
+    "authors": [
+      {
+        "url": "https://openlibrary.org/authors/OL1391085A/Stephenie_Meyer",
+        "name": "Stephenie Meyer"
+      }
+    ]
+  }
+}
+
+module.exports= {twilight, eclipse}

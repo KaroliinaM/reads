@@ -99,7 +99,11 @@ app.patch('/readgeek/:id', checkHeaders, (request, response) => {
 })
 
 app.get('/openlibrary', (request, response) => {
-  response.status(200).json(books.twilight)
+  console.log(request.query)
+  let book=[]
+  if(request.query.bibkeys==='ISBN:9780316015844') book=books.twilight
+  if(request.query.bibkeys==='ISBN:9780316087360') book=books.eclipse
+  response.status(200).json(book)
 })
 
 app.post('/readgeek', checkHeaders, (request, response) => {
