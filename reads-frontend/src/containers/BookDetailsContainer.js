@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Rating from 'react-rating'
+import {useHistory} from 'react-router-dom'
 import Book from '../components/Book'
 import BookService from '../services/BookService'
 import ListPicker from '../components/ListPicker'
@@ -7,6 +8,7 @@ import ListPicker from '../components/ListPicker'
 const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
     const [readLists, setReadLists] = useState([])
+    const history=useHistory()
     console.log('book', props.location.state)
     console.log('book', props.location.state.book)
 
@@ -48,11 +50,19 @@ const BookDetailsContainer = (props) => {
             setBook(bookOnList)
         })
     }
+    const label='<'
+
+    const handleBack=(e)=> {
+        e.preventDefault()
+        console.log('click')
+        history.goBack()
+    }
 
 
 
     return (
         <>
+            <button onClick={handleBack}>{label}</button>
             {readLists.length>0 && (
                 <div className='book-card-container'>
                     <Book book={book} />
