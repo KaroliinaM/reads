@@ -1,0 +1,28 @@
+[
+    {
+        "name":"home",
+        "location":"/",
+        "parent": null
+    },
+    {
+        "name":"search",
+        "location": "/etsi",
+        "parent":"home"
+    },
+    {
+        "name": "readlists",
+        "location": "/list",
+        "parent": "home"
+    },
+    {
+        "name": "list details",
+        "location": "/list/:id",
+        "parent": "readlists"
+    },
+    {
+        "name":"recommendations",
+        "location": "/recommendations",
+        "parent": "home"
+    }
+
+]

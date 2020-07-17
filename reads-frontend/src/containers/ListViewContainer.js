@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import AddReadListForm from '../components/AddReadListForm'
 import ReadList from '../components/ReadList'
+import Breadcrumbs from '../components/Breadcrumbs'
 import BookService from '../services/BookService'
 
 const ListViewContainer = () => {
@@ -39,6 +40,7 @@ const ListViewContainer = () => {
 
     return(
         <>
+        <Breadcrumbs site='readlists' />
         <h1 className='listTitle'>Booklists</h1>
         <div className='frontpage-app'>
             {console.log(readLists)}
