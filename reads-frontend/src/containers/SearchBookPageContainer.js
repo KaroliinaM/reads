@@ -4,10 +4,10 @@ import SearchBookContainer from './SearchBookContainer'
 
 const SearchBookPageContainer = () => {
     return (
-        <>
+        <div className='page-container'>
             <Breadcrumbs site='search' />
             <SearchBookContainer />
-        </>
+        </div>
     )
 }
 

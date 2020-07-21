@@ -103,3 +103,14 @@ img {
     text-decoration: none;
     color: #696969;
 }
+
+.page-container {
+    margin: 1%;
+}
+
+.loggedin-user{
+    border: solid;
+    color: #2F4F4F;
+    position: absolute;
+    right: 0;
+}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import SearchBookContainer from './containers/SearchBookContainer'
 import SearchBookPageContainer from './containers/SearchBookPageContainer'
 import ListViewContainer from './containers/ListViewContainer'
@@ -13,7 +13,7 @@ import LoginContainer from './containers/LoginContainer'
 import PrivateRoute from './components/PrivateRoute'
 import Notification from './components/Notification'
 import './form.css'
-//import BookService from './services/BookService'
+import BookService from './services/BookService'
 import {
   BrowserRouter as Router,
   Switch, Route, Link, Redirect
@@ -30,9 +30,25 @@ const App =()=> {
     }, 5000)
   }
 
+  useEffect(() => {
+    const loggedUser=window.localStorage.getItem('loggedUser')
+    if(loggedUser) {
+      const user=JSON.parse(loggedUser)
+      setUser(user)
+      BookService.setToken(user.token)
+    }
+  }, [])
+
+  const logoutClick = () => {
+    window.localStorage.removeItem('loggedUser')
+    setUser(null)
+    BookService.setToken(null)
+  }
 
 return(
   <div>
+    {user && 
+    <p className='loggedin-user'>{`${user.username} logged in`}<button className='button' onClick={logoutClick}>logout</button></p>}
   <Notification message={message} />
   <Router>
     <Switch>
@@ -45,9 +61,6 @@ return(
       <Route path='/register'>
         <RegisterContainer notifyUser={setNotification} />
       </Route>
-      <Route path='/login'>
-        <LoginContainer setUser={setUser} notifyUser={setNotification} />
-      </Route>
       <Route path="/">
         {user ? 
           (<>
@@ -55,7 +68,9 @@ return(
             <ListViewContainer  />
             <RecommendContainer />
           </>
-          ): <Redirect to='/login' />}
+          ): 
+          <LoginContainer setUser={setUser} notifyUser={setNotification} />
+        }
       </Route>
     </Switch>
   </Router>
