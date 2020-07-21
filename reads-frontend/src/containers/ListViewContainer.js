@@ -40,7 +40,6 @@ const ListViewContainer = () => {
 
     return(
         <>
-        <Breadcrumbs site='readlists' />
         <h1 className='listTitle'>Booklists</h1>
         <div className='frontpage-app'>
             {console.log(readLists)}

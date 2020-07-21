@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import SearchBookContainer from './containers/SearchBookContainer'
+import SearchBookPageContainer from './containers/SearchBookPageContainer'
 import ListViewContainer from './containers/ListViewContainer'
+import ListViewPageContainer from './containers/ListviewPageContainer'
 import ReadListContainer from './containers/ReadListContainer'
 import BookDetailsContainer from './containers/BookDetailsContainer'
 import SampleBooksContainer from './containers/SampleBooksContainer'
 import RecommendContainer from './containers/RecommendContainer'
+import RecommendPageContainer from './containers/RecommendPageContainer' 
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
 import PrivateRoute from './components/PrivateRoute'
@@ -32,21 +35,13 @@ return(
   <div>
   <Notification message={message} />
   <Router>
-    <div>
-      <Link to="/">Listat</Link>
-      <Link to="/etsi">etsi</Link>
-      <Link to="/rate">rate</Link>
-      <Link to="/list">listoja</Link>
-      <Link to="/recommendations">suositukset</Link>
-      <Link to="/register">rekisteröidy</Link>
-    </div>
     <Switch>
       <PrivateRoute component={ReadListContainer} path="/list/:id" isAuth={!!user} />
-      <PrivateRoute component={ListViewContainer} path='/list' isAuth={!!user} />
-      <PrivateRoute component={SearchBookContainer} path="/etsi" isAuth={!!user} />
+      <PrivateRoute component={ListViewPageContainer} path='/list' isAuth={!!user} />
+      <PrivateRoute component={SearchBookPageContainer} path="/etsi" isAuth={!!user} />
       <PrivateRoute component={BookDetailsContainer} path ='/book/details' isAuth={!!user} />
       <PrivateRoute component={SampleBooksContainer} path= '/rate' isAuth={!!user} />
-      <PrivateRoute component={RecommendContainer} path='/recommendations' isAuth={!!user} />
+      <PrivateRoute component={RecommendPageContainer} path='/recommendations' isAuth={!!user} />
       <Route path='/register'>
         <RegisterContainer notifyUser={setNotification} />
       </Route>

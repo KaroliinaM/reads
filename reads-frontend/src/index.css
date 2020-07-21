@@ -97,3 +97,9 @@ img {
     padding: 5px;
     border-radius: 28px;
 }
+
+.breadcrumb-link {
+    margin: 5px;
+    text-decoration: none;
+    color: #696969;
+}

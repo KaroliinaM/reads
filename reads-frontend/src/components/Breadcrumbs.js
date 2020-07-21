@@ -19,12 +19,12 @@ const Breadcrumbs = ({site}) => {
         console.log('links', links)
         return links.reverse().map(l => {
             console.log('l', l)
-            return <Link to={l.location}>{`${l.name} >>`}</Link>
+            return <Link className='breadcrumb-link' to={l.location}>{`${l.name} >>`}</Link>
         })
     }
 
     return(
-        <div>Leivät
+        <div>
             {createLinks()} {site}
         </div>
     )
