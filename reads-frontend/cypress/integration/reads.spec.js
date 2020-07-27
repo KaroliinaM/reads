@@ -18,5 +18,8 @@ describe('app opens', function() {
         cy.get('#login-button').click()
 
         cy.contains('testuser logged in')
+        cy.get('#rate-book').children().last().children().first().click()
+        cy.get('#sample-ready-button').click()
+        cy.get('a').eq('rated').first().click()
     })
 })

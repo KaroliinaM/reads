@@ -42,7 +42,7 @@ const SampleBooksContainer = () => {
     const bookList = () => {
         if(books.length>0) {
             return books.map(book => {
-                return (<div key={book.title}>
+                return (<div id='rate-book' key={book.title}>
                             <ReadListItem item={book} />
                             <Rating 
                                 stop={10} 
@@ -64,6 +64,7 @@ const SampleBooksContainer = () => {
         {bookList()}
         <Link to='/'>
             <button 
+                id='sample-ready-button'
                 className='form-button'
                 disabled={!done}
             >
