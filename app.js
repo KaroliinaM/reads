@@ -174,6 +174,11 @@ app.get('/recommendations/list', (request, response) => {
     .catch(e => console.log(e))
 }) */
 
+if(process.env.NODE_ENV !== 'production') {
+    const cypressRouter=require('./controllers/cypressRouter')
+    app.use('/api/testing', cypressRouter)
+}
+
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
     fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
