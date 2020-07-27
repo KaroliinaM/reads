@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({label, type, value, onChange}) => {
+const Input = ({id, label, type, value, onChange}) => {
     return(
         <div>
             <div className='form-label'>
@@ -8,6 +8,7 @@ const Input = ({label, type, value, onChange}) => {
             </div>
             <input
                 className='form-input'
+                id={id}
                 type={type}
                 value={value}
                 onChange={onChange}

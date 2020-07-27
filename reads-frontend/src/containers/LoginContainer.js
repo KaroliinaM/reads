@@ -56,9 +56,9 @@ const LoginContainer = ({setUser, notifyUser}) => {
     return(
         <div className='form-container'>
             <form className='form-element' onSubmit={handleLogin} >
-                <Input label='username' type='text' value={username} onChange={(e)=>setUsername(e.target.value)} />
-                <Input label='password' type='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
-                <button className='form-button' type='submit'>kirjaudu</button>
+                <Input id='login-username' label='username' type='text' value={username} onChange={(e)=>setUsername(e.target.value)} />
+                <Input id='login-password' label='password' type='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                <button id='login-button' className='form-button' type='submit'>kirjaudu</button>
             </form>
             <Link to='/register'>register</Link>
         </div>
