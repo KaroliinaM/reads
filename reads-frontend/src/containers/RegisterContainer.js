@@ -45,10 +45,10 @@ const RegisterContainer = ({notifyUser}) => {
     return(
         <div className='form-container'>
             <form onSubmit={handleRegister} >
-                <Input label='e-mail' type='text' value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <Input label='username' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-                <Input label='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button className='form-button' type='submit'>register</button>
+                <Input id='register-email' label='e-mail' type='text' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <Input id='register-username' label='username' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Input id='register-password' label='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button id='register-button' className='form-button' type='submit'>register</button>
             </form>
         </div>
     )

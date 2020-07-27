@@ -60,7 +60,7 @@ const LoginContainer = ({setUser, notifyUser}) => {
                 <Input id='login-password' label='password' type='password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
                 <button id='login-button' className='form-button' type='submit'>kirjaudu</button>
             </form>
-            <Link to='/register'>register</Link>
+            <Link id='link-to-register' to='/register'>register</Link>
         </div>
     )
 }
