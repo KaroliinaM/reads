@@ -47,7 +47,7 @@ const ListViewContainer = () => {
             {readLists.map(list=>{
                 return<ReadList key={list.id} list={list} />
             })}
-            <button className='readlist-add-button' onClick={toggleVisibility}>Add a list</button>
+            <button id='add-list-form-btn' className='readlist-add-button' onClick={toggleVisibility}>Add a list</button>
             {inputVisible && <AddReadListForm
                 listInput={listInput}
                 setListInput={setListInput}

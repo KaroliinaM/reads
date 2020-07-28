@@ -66,7 +66,7 @@ const BookDetailsContainer = (props) => {
             {readLists.length>0 && (
                 <div className='book-card-container'>
                     <Book book={book} />
-                    <div>
+                    <div id='rating-part'> 
                         <Rating
                             stop={10}
                             fractions={2}

@@ -54,7 +54,11 @@ const SearchBookContainer =()=> {
       readlist_id:listId
     }
     BookService.addBookToList(book)
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response)
+      const newBookByIsbn={...bookByIsbn, readlist_id:listId}
+      setBookByIsbn(newBookByIsbn)
+    })
 
   }
 
@@ -78,21 +82,21 @@ return(
   <div>
     <h1 className='listTitle'>Find books</h1>
     <form onSubmit={submitForm}>
-      <input className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
-      <button className = 'button' type='submit'>search</button>
+      <input id='search-input' className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
+      <button id='search-btn' className = 'button' type='submit'>search</button>
     </form>
     {console.log('history', location.state)}
     {bookByIsbn && 
       <div className='book-card-container'>
         <Book book={bookByIsbn} />
-        <div>
+        <div id='rating-part'>
         <Rating
           stop={10}
           fractions={2}
           onChange={handleChange}
         />
         </div>
-        <ListPicker readLists={readLists} addBookToList={addBookToList} />
+        <ListPicker readLists={readLists} selected={bookByIsbn.readlist_id} addBookToList={addBookToList} />
       </div>
     }
   </div>
