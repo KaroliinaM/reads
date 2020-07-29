@@ -1,7 +1,37 @@
 const bookRouter = require('express').Router()
 const Book=require('../models/Book')
+const config=require('../utils/config')
+const fetch=require('node-fetch')
 const {tokenHandler}=require('../utils/tokenHandler')
 bookRouter.use(tokenHandler)
+
+const addToList = (book, readgeek_id) => {
+    if(!book.id) {
+        const data={
+            books: {
+            [`isbn:${book.isbn}`]:{
+                    rated: 'NULL'
+                }
+            }
+        }
+        console.log(data)
+        return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
+            method: 'patch',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${config.READGEEK_AUTH}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            console.log('response', response)
+            return Book.addBook(book)
+        })
+    } else {
+        return Book.setReadlist(book)
+    }
+}
+
 
 bookRouter.get('/author', (request, response) => {
     const {name}=request.body
@@ -14,13 +44,9 @@ bookRouter.get('/author', (request, response) => {
 
 bookRouter.post('/', (request, response) => {
     const book=request.body
-    let addToList
-    if(!book.id) {
-        addToList=Book.addBook(book)
-    } else {
-        addToList=Book.setReadlist(book)
-    }
-    addToList
+    const readgeek_id=request.decodedToken.readgeek_id
+    console.log('book', book)
+    addToList(book, readgeek_id)
     .then(result=>{
         return response.status(201).json(result)
     })
