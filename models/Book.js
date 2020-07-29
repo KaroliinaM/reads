@@ -70,9 +70,11 @@ const getById =(id)=>{
         console.log(result)
         book.id=result[0].id
         book.title=result[0].title
+        book.isbn=result[0].isbn
         book.image_url=result[0].image_url
         book.description=result[0].description
         book.readlist_id=result[0].readlist_id
+        book.readgeekid=result[0].readgeekid
         book.rated=result[0].rated
         return book
     })

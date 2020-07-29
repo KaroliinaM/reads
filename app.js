@@ -181,17 +181,19 @@ if(process.env.NODE_ENV !== 'production') {
 
 app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn
-    fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&c&format=json`)
+    const url=`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`
+    console.log('url', url)
+    fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`)
     .then(response=> response.json())
     .then(data => {
-        console.log(data)
+        console.log('data', data)
         const bookData=data[`ISBN:${isbn}`]
         console.log(bookData.authors)
         //const isbn: bookData.identifiers.isbn_10[0
         const book = {
             title:bookData.title,
             isbn: isbn,
-            image_url:bookData.cover.medium,
+            image_url: (bookData.cover? bookData.cover.medium : null),
             authors: bookData.authors.map(a => a.name) 
         }
         console.log(book)
