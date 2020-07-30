@@ -40,12 +40,9 @@ recommendationRouter.get('/sample', (request, response) => {
 //content type for mock platform
 recommendationRouter.post('/rate', (request, response) => {
     const params=request.body
-    console.log(params)
     const readgeek_id=request.decodedToken.readgeek_id
-    console.log(request.decodedToken)
     ReadList.getListId('rated', request.decodedToken.id)
     .then(res=> {
-        console.log('readlist', res[0].id)
         params.readlist_id=res[0].id
         if(!params.id) {
             return Book.addBook(params)
@@ -64,7 +61,6 @@ recommendationRouter.post('/rate', (request, response) => {
                 }
             }
         }
-        console.log(data)
         return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
             method: 'patch',
             headers: {
@@ -83,7 +79,6 @@ recommendationRouter.post('/rate', (request, response) => {
 })
 
 recommendationRouter.get('/list', (request, response) => {
-    console.log('täällä')
     const readgeek_id=request.decodedToken.readgeek_id
     fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
         method: 'get',
