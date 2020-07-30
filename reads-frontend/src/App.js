@@ -46,7 +46,7 @@ const App =()=> {
   }
 
 return(
-  <div>
+  <div className='page-container'>
     {user && 
     <p className='loggedin-user'>{`${user.username} logged in`}<button className='button' onClick={logoutClick}>logout</button></p>}
   <Notification message={message} />

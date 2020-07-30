@@ -14,14 +14,14 @@
     background-color: 	#FFFFF0;
     box-shadow: 10px 5px 5px #C0C0C0;
     padding: 1%;
-    margin: 1%;
+    margin: 1% 0;
 }
 
 .booklist-item-container {
     background-color: 	#FFFFF0;
     box-shadow: 10px 5px 5px #C0C0C0;
     padding: 1%;
-    margin: 1%;
+    margin: 1% 0;
 }
 
 .title {
@@ -29,7 +29,7 @@
 }
 
 .listTitle {
-    margin: 2%;
+    margin: 2% 1%;
     color:  #A9A9A9;
     -webkit-text-stroke: 0.5px darkslategray;
 }
@@ -50,7 +50,7 @@ img {
 .readlist-link-box {
     color:#2F4F4F;
     text-decoration: none;
-    margin: 1%;
+    margin: 1% 0;
 }
 .readlist-link {
     color: #708090;
@@ -71,7 +71,7 @@ img {
     background-color: 	#FFFFF0;
     box-shadow: 10px 5px 5px #C0C0C0;
     padding:1%;
-    margin: 1%;
+    margin: 1% 0;
 }
 .input {
     box-shadow: 6px 3px 3px #C0C0C0; 
@@ -111,5 +111,6 @@ img {
 .loggedin-user{
     color: #2F4F4F;
     position: absolute;
-    right: 0;
+    top: 0;
+    right: 2%;
 }

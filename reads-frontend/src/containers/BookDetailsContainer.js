@@ -62,7 +62,7 @@ const BookDetailsContainer = (props) => {
 
     return (
         <>
-            <button onClick={handleBack}>{label}</button>
+            <button className='button' onClick={handleBack}>{label}</button>
             {readLists.length>0 && (
                 <div className='book-card-container'>
                     <Book book={book} />
