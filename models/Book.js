@@ -28,7 +28,6 @@ const addBook = (data) => {
     })
     .then(result=> {
         join.author_id=result[0].id
-        console.log("authorid", join.author_id)
         return db.insertBook(book.title, book.isbn, book.image_url, book.description, book.readlist_id, book.readgeekid, book.rated)
     })
     .then(result => {
@@ -63,7 +62,6 @@ const getById =(id)=>{
     return db.getAuthorsByBookId(id)
     .then(result => {
         book.authors=result.map(a => a.name)
-        console.log(book.authors)
         return db.getBookById(id)
     })
     .then(result => {
