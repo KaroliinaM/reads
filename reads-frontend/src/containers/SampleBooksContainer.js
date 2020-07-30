@@ -10,27 +10,13 @@ const SampleBooksContainer = () => {
 
     useEffect(()=> {
         BookService.getRatingSample()
-/*         fetch('http://localhost:3001/recommendations/sample')
-        .then(response => response.json()) */
         .then(data => setBooks(data))
     },[])
 
     const handleChange= (book, e) =>{
-        console.log('value', e, book)
-        console.log('type', typeof e)
         const data= {...book, rated: e}
-        console.log(data)
         BookService.postRating(data)
-/*         fetch('http://localhost:3001/recommendations/rate', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response=> response.json()) */
         .then(result => {
-            console.log(result)
             setBooks(books.map(book=> book.readgeekid === data.readgeekid? data : book))
             if(!done) {
                 setDone(true)

@@ -24,11 +24,6 @@ const RecommendContainer = () => {
             {listRecommendations()}
         </>
     )
-
-
-/*     return recommendations.map(recommendation => {
-        return <ReadListItem item={recommendation} />
-    }) */
 }
 
 export default RecommendContainer

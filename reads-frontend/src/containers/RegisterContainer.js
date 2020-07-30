@@ -25,7 +25,6 @@ const RegisterContainer = ({notifyUser}) => {
             body: JSON.stringify(user)
         })
         .then(response => {
-            console.log(response)
             res=response
             return response.json()
         })
@@ -35,7 +34,6 @@ const RegisterContainer = ({notifyUser}) => {
                 notifyUser({style: 'notification-success',text:'user created'})
                 history.push('/login')
             } else {
-                console.log(result)
                 notifyUser({style: 'notification-error', text: result})
             }
 

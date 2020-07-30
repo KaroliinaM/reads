@@ -11,10 +11,8 @@ const ReadListContainer = () => {
     const nrId=Number(id)
 
     useEffect(() => {
-        console.log('haku')
         BookService.getReadLists()
         .then(data => {
-            console.log('listat', data)
             setReadLists(data)
         })
     }, [id])
@@ -22,7 +20,6 @@ const ReadListContainer = () => {
     useEffect(() => {
         BookService.getReadList(id)
         .then(data => {
-            console.log('lista', data)
             setReadList(data)
         })
     }, [id])
@@ -31,7 +28,6 @@ const ReadListContainer = () => {
 
     return (
         <>
-            {console.log('listName',listName)}
             <Breadcrumbs site='list details' />
             {listName && <h1 className='listTitle'>{listName.name}</h1>}
             {readList.map(book => {

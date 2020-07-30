@@ -9,8 +9,6 @@ const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
     const [readLists, setReadLists] = useState([])
     const history=useHistory()
-    console.log('book', props.location.state)
-    console.log('book', props.location.state.book)
 
     useEffect(() => {
         BookService.getReadLists()
@@ -20,33 +18,14 @@ const BookDetailsContainer = (props) => {
     const handleChange=(e)=>{
         console.log(e)
         const ratedBook = {...book, rated:e}
-/*         const ratedBook = {
-          title: bookByIsbn.title,
-          isbn: bookByIsbn.isbn,
-          isbn13: bookByIsbn.isbn13,
-          image_url: bookByIsbn.image_url,
-          description: bookByIsbn.description,
-          authors: bookByIsbn.authors,
-          rated: e
-        } */
         BookService.postRating(ratedBook)
         .then(response => console.log(response))
     }
 
     const addBookToList = (listId) => {
         const bookOnList={...book, readlist_id: listId}
-/*         const book = {
-          title: bookByIsbn.title,
-          isbn: bookByIsbn.isbn,
-          isbn13: bookByIsbn.isbn13,
-          image_url: bookByIsbn.image_url,
-          description: bookByIsbn.description,
-          authors: bookByIsbn.authors,
-          readlist_id:listId
-        } */
         BookService.addBookToList(bookOnList)
         .then(response => {
-            console.log(response)
             setBook(bookOnList)
         })
     }
@@ -54,7 +33,6 @@ const BookDetailsContainer = (props) => {
 
     const handleBack=(e)=> {
         e.preventDefault()
-        console.log('click')
         history.goBack()
     }
 

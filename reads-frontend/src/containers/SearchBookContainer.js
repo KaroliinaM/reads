@@ -23,14 +23,10 @@ const SearchBookContainer =()=> {
     .then(data => setReadLists(data))
   },[])
 
-  //const bookByIsbn=books.find(b=>  b.isbn===isbn)
   const submitForm = (event) => {
     event.preventDefault()
-    console.log(isbn)
     BookService.getBookByIsbn(isbn)
     .then(data => {
-        console.log(data)
-        console.log(data.authors[0])
         if(!primary) {
           history.push({
             pathname: '/etsi',
@@ -39,8 +35,6 @@ const SearchBookContainer =()=> {
         } else {
           setBookByIsbn(data)
         }
-
-
     })
   }
   const addBookToList = (listId) => {
@@ -55,7 +49,6 @@ const SearchBookContainer =()=> {
     }
     BookService.addBookToList(book)
     .then(response => {
-      console.log(response)
       const newBookByIsbn={...bookByIsbn, readlist_id:listId}
       setBookByIsbn(newBookByIsbn)
     })
@@ -63,7 +56,6 @@ const SearchBookContainer =()=> {
   }
 
   const handleChange=(e)=>{
-    console.log(e)
     const book = {
       title: bookByIsbn.title,
       isbn: bookByIsbn.isbn,
@@ -85,7 +77,6 @@ return(
       <input id='search-input' className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button id='search-btn' className = 'button' type='submit'>search</button>
     </form>
-    {console.log('history', location.state)}
     {bookByIsbn && 
       <div className='book-card-container'>
         <Book book={bookByIsbn} />

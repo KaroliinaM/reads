@@ -23,15 +23,12 @@ const LoginContainer = ({setUser, notifyUser}) => {
             body: JSON.stringify(user)
         })
         .then(response=> {
-            console.log(response)
             if(!response.ok) {
                 throw response
             }
             return response.json()
         })
         .then(data => {
-            console.log('data', data)
-            console.log(data.token)
             setUser(data)
             BookService.setToken(data.token)
             window.localStorage.setItem('loggedUser', JSON.stringify(data))
@@ -47,10 +44,6 @@ const LoginContainer = ({setUser, notifyUser}) => {
                 notifyUser({style: 'notification-error', text:'system error'})
             }
         })
-
-       /*  <div>username<input value={username} onChange={(e)=>setUsername(e.target.value)} /></div>
-        <div>password<input value={password} onChange={(e)=> setPassword(e.target.value)} /></div>
-        <button type='submit'>kirjaudu</button> */
     }
 
     return(

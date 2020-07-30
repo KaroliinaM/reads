@@ -10,14 +10,6 @@ const ListViewContainer = () => {
     const [inputVisible, setInputVisible] = useState(false)
 
     useEffect(() => {
-/*         const loggedUser=window.localStorage.getItem('loggedUser')
-        if(loggedUser) {
-            const user=JSON.parse(loggedUser)
-            console.log(user)
-            BookService.setToken(user.token)
-            console.log(BookService.token)
-        } */
-        console.log('haku')
        BookService.getReadLists()
         .then(data => setReadLists(data))
     }, [])
@@ -26,7 +18,6 @@ const ListViewContainer = () => {
 
     const submitForm = (event) => {
         event.preventDefault()
-        console.log(listInput)
         const newList = {
             name: listInput
         }
@@ -42,8 +33,6 @@ const ListViewContainer = () => {
         <>
         <h1 className='listTitle'>Booklists</h1>
         <div className='frontpage-app'>
-            {console.log(readLists)}
-            {console.log(BookService.token)}
             {readLists.map(list=>{
                 return<ReadList key={list.id} list={list} />
             })}
