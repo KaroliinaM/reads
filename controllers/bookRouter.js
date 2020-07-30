@@ -14,7 +14,6 @@ const addToList = (book, readgeek_id) => {
                 }
             }
         }
-        console.log(data)
         return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
             method: 'patch',
             headers: {
@@ -24,7 +23,6 @@ const addToList = (book, readgeek_id) => {
             body: JSON.stringify(data)
         })
         .then(response => {
-            console.log('response', response)
             return Book.addBook(book)
         })
     } else {
@@ -45,7 +43,6 @@ bookRouter.get('/author', (request, response) => {
 bookRouter.post('/', (request, response) => {
     const book=request.body
     const readgeek_id=request.decodedToken.readgeek_id
-    console.log('book', book)
     addToList(book, readgeek_id)
     .then(result=>{
         return response.status(201).json(result)
@@ -56,7 +53,6 @@ bookRouter.post('/', (request, response) => {
 
 bookRouter.get('/:id', (request, response) => {
     const id=request.params.id
-    console.log(id)
     Book.getById(id)
     .then(result => {
         return response.status(200).json(result)
