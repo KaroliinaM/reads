@@ -17,7 +17,6 @@ const SearchBookContainer =()=> {
 
   
   const primary=!!location.state
-  console.log('location', location.state)
 
   useEffect(() => {
     BookService.getReadLists()
@@ -31,7 +30,6 @@ const SearchBookContainer =()=> {
         state: { book: data }
       })
     } else {
-      console.log('täällä')
       setBookByIsbn(data)
     }
   }
@@ -40,12 +38,7 @@ const SearchBookContainer =()=> {
     event.preventDefault()
     BookService.getBookByIsbn(isbn)
     .then(data => {
-      console.log('data', data)
-      if(data) {
-        resultOnSearchPage(data)
-      } else {
-        console.log('ei löydy')
-      }      
+        resultOnSearchPage(data)     
     })
   }
 
@@ -53,7 +46,6 @@ const SearchBookContainer =()=> {
     const book = {
       title: bookByIsbn.title,
       isbn: bookByIsbn.isbn,
-      isbn13: bookByIsbn.isbn13,
       image_url: bookByIsbn.image_url,
       description: bookByIsbn.description,
       authors: bookByIsbn.authors,
@@ -71,7 +63,6 @@ const SearchBookContainer =()=> {
     const book = {
       title: bookByIsbn.title,
       isbn: bookByIsbn.isbn,
-      isbn13: bookByIsbn.isbn13,
       image_url: bookByIsbn.image_url,
       description: bookByIsbn.description,
       authors: bookByIsbn.authors,
