@@ -17,26 +17,38 @@ const SearchBookContainer =()=> {
 
   
   const primary=!!location.state
+  console.log('location', location.state)
 
   useEffect(() => {
     BookService.getReadLists()
     .then(data => setReadLists(data))
   },[])
 
+  const resultOnSearchPage= (data) => {
+    if(!primary) {
+      history.push({
+        pathname: '/etsi',
+        state: { book: data }
+      })
+    } else {
+      console.log('täällä')
+      setBookByIsbn(data)
+    }
+  }
+
   const submitForm = (event) => {
     event.preventDefault()
     BookService.getBookByIsbn(isbn)
     .then(data => {
-        if(!primary) {
-          history.push({
-            pathname: '/etsi',
-            state: { book: data }
-          })
-        } else {
-          setBookByIsbn(data)
-        }
+      console.log('data', data)
+      if(data) {
+        resultOnSearchPage(data)
+      } else {
+        console.log('ei löydy')
+      }      
     })
   }
+
   const addBookToList = (listId) => {
     const book = {
       title: bookByIsbn.title,
@@ -69,6 +81,28 @@ const SearchBookContainer =()=> {
     .then(response => console.log(response))
   }
 
+  const searchResult = ()=> {
+    if(bookByIsbn) {
+      return (
+        <>
+          {bookByIsbn.title? (
+            <div className='book-card-container'>
+              <Book book={bookByIsbn} />
+              <div id='rating-part'>
+                <Rating
+                stop={10}
+                fractions={2}
+                onChange={handleChange}
+                />
+              </div>
+            <ListPicker readLists={readLists} selected={bookByIsbn.readlist_id} addBookToList={addBookToList} />
+            </div>)
+            : <p>No results found</p>
+          }
+      </>
+    )}
+  }
+
 
 return(
   <div>
@@ -77,19 +111,8 @@ return(
       <input id='search-input' className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button id='search-btn' className = 'button' type='submit'>search</button>
     </form>
-    {bookByIsbn && 
-      <div className='book-card-container'>
-        <Book book={bookByIsbn} />
-        <div id='rating-part'>
-        <Rating
-          stop={10}
-          fractions={2}
-          onChange={handleChange}
-        />
-        </div>
-        <ListPicker readLists={readLists} selected={bookByIsbn.readlist_id} addBookToList={addBookToList} />
-      </div>
-    }
+    {console.log('bookbyisbn', bookByIsbn)}
+    {searchResult()}
   </div>
 )}
 

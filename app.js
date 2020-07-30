@@ -43,11 +43,17 @@ app.get('/book/:isbn', (req, res) => {
     .then(response=> response.json())
     .then(data => {
         const bookData=data[`ISBN:${isbn}`]
+        console.log('bookdata', bookData)
+        if(!bookData) {
+            console.log('eka')
+            return res.send({})
+        }
+        console.log('toka')
         const book = {
-            title:bookData.title,
+            title:(bookData.title? bookData.title : null),
             isbn: isbn,
             image_url: (bookData.cover? bookData.cover.medium : null),
-            authors: bookData.authors.map(a => a.name) 
+            authors: (bookData.authors? bookData.authors.map(a => a.name) : null) 
         }
         return res.json(book)
     })

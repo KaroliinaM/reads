@@ -3,13 +3,10 @@ import React from 'react'
 let token=null
 
 const setToken=(newToken)=> {
-    console.log('täälä')
     token=`Bearer ${newToken}`
-    console.log('token', token)
 }
 
 const getReadLists = () => {
-    console.log('haku', token)
     return fetch('/readlists', {
         method: 'get',
         headers: {
@@ -70,9 +67,7 @@ const getBookDetails = (id) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         return data
-        //setBook(data)
     })
 }
 
