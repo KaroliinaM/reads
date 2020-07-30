@@ -65,7 +65,6 @@ const getById =(id)=>{
         return db.getBookById(id)
     })
     .then(result => {
-        console.log(result)
         book.id=result[0].id
         book.title=result[0].title
         book.isbn=result[0].isbn
