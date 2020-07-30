@@ -7,9 +7,7 @@ const queries=require('../models/queries')
 const ReadList=require('../models/ReadList')
 
 userRouter.post('/register', (request, response) => {
-    console.log('polku on')
     const user= request.body
-    console.log(user)
     if(user.username.length===0 || user.password.length===0) {
         return response.status(400).json({error: 'credential fields cannot be empty'})
     }
@@ -30,7 +28,6 @@ userRouter.post('/register', (request, response) => {
     })
     .then(data => {
         credentials.email=data
-        console.log(credentials)
         return fetch(`${config.READGEEK_URL}`, {
             method: 'post',
             headers: {
@@ -40,12 +37,10 @@ userRouter.post('/register', (request, response) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('readgeek', data)
         credentials.readgeek_id=data.user.id
         return queries.addUser(credentials.email, credentials.username, credentials.password, credentials.readgeek_id)
     })
     .then(res => {
-        console.log('res', res)
         credentials.id=res[0].id
         return ReadList.addList('rated', res[0].id)
     })
@@ -63,15 +58,11 @@ userRouter.post('/register', (request, response) => {
 
 userRouter.post('/login', (request, response) => {
     const creds=request.body
-    console.log(creds)
     let user = {}
     queries.getUser(creds.username)
     .then(data => {
-        //console.log(data[0].password)
-        //console.log(creds.password)
         if(data.length>0) {
             user = data[0]
-            console.log('user', user)
             return bcrypt.compare(creds.password, data[0].password)
         } else {
             return false
