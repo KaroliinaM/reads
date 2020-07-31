@@ -16,6 +16,7 @@ readListRouter.post('/', (request, response) => {
     .then(result=> {
         response.status(201).send(result)
     })
+    .catch(e => console.log(e))
 })
 
 readListRouter.get('/:id', (request, response) => {
