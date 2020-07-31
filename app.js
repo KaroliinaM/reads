@@ -45,10 +45,8 @@ app.get('/book/:isbn', (req, res) => {
         const bookData=data[`ISBN:${isbn}`]
         console.log('bookdata', bookData)
         if(!bookData) {
-            console.log('eka')
             return res.send({})
         }
-        console.log('toka')
         const book = {
             title:(bookData.title? bookData.title : null),
             isbn: isbn,
