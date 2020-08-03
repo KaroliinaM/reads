@@ -14,7 +14,8 @@ const addBook = (data) => {
         readlist_id:data.readlist_id,
         readgeekid:data.readgeekid,
         authors: data.authors,
-        rated: data.rated
+        rated: data.rated,
+        genre: data.genre
 
     }
     let join={}
@@ -28,7 +29,7 @@ const addBook = (data) => {
     })
     .then(result=> {
         join.author_id=result[0].id
-        return db.insertBook(book.title, book.isbn, book.image_url, book.description, book.readlist_id, book.readgeekid, book.rated)
+        return db.insertBook(book.title, book.isbn, book.image_url, book.description, book.readlist_id, book.readgeekid, book.rated, book.genre)
     })
     .then(result => {
         join.book_id=result[0].id
@@ -73,6 +74,7 @@ const getById =(id)=>{
         book.readlist_id=result[0].readlist_id
         book.readgeekid=result[0].readgeekid
         book.rated=result[0].rated
+        book.genre=result[0].genre
         return book
     })
     

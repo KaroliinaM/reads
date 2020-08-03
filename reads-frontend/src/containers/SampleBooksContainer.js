@@ -40,9 +40,7 @@ const SampleBooksContainer = () => {
             })
         }
         return <></>
-    }
-
-    
+    }    
     return (
     <>
         <h1 className='listTitle'>Rate books</h1>
@@ -58,9 +56,6 @@ const SampleBooksContainer = () => {
             </button>
         </Link>
     </>)
-
-
-    
 }
 
 export default SampleBooksContainer

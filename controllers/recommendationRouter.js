@@ -95,7 +95,7 @@ recommendationRouter.get('/list', (request, response) => {
                 isbn: book.isbn13,
                 prediction: book.prediction,
                 image_url: book.cover,
-                genres: book.genres,
+                genre: book.genres,
                 description: book.blurb
             }     
         })
