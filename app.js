@@ -14,6 +14,7 @@ const readListRouter=require('./controllers/readListRouter')
 const bookRouter=require('./controllers/bookRouter')
 const recommendationRouter=require('./controllers/recommendationRouter')
 const userRouter=require('./controllers/userRouter')
+const libraryRouter=require('./controllers/libraryRouter')
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -24,6 +25,7 @@ app.use('/readlists', readListRouter)
 app.use('/books', bookRouter)
 app.use('/recommendations', recommendationRouter)
 app.use('/user', userRouter)
+app.use('/library', libraryRouter)
 
 
 KEY = process.env.GR_KEY

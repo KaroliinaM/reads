@@ -114,3 +114,9 @@ img {
     top: 0;
     right: 2%;
 }
+.in-library {
+    color:green;
+}
+.not-in-library {
+    color:red;
+}
