@@ -9,7 +9,7 @@ const FilterBooks = ({genres, genre, setGenre}) => {
     }
 
     return genres.map(g => {
-        return <button className={g===genre? 'btn-listpicker-selected':'btn-listpicker'}  onClick={setFilter(g)}>{g}</button>
+        return <button key={g} className={g===genre? 'btn-listpicker-selected':'btn-listpicker'}  onClick={setFilter(g)}>{g}</button>
     })
 }
 

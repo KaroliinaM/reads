@@ -23,7 +23,7 @@ const RecommendContainer = () => {
 
     const listRecommendations = () => {
         return filteredRecommendations.map(book => {
-            return <Link className='readlist-link-box' key={book.readgeekid} to={{pathname: `/book/details`, state:{book}}}><ReadListItem item={book} /></Link>
+            return <Link className='readlist-link-box' key={book.isbn} to={{pathname: `/book/details`, state:{book}}}><ReadListItem item={book} /></Link>
         }) 
     }
 
