@@ -2,6 +2,7 @@ const bookRouter = require('express').Router()
 const Book=require('../models/Book')
 const config=require('../utils/config')
 const fetch=require('node-fetch')
+const moment=require('moment')
 const {tokenHandler}=require('../utils/tokenHandler')
 bookRouter.use(tokenHandler)
 
@@ -10,7 +11,7 @@ const addToList = (book, readgeek_id) => {
         const data={
             books: {
             [`isbn:${book.isbn}`]:{
-                    rated: 'NULL'
+                    date_bookmarked: moment(new Date()).format('YYYY-MM-DD')
                 }
             }
         }
