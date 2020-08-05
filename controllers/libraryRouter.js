@@ -7,13 +7,12 @@ const fetch=require('node-fetch')
 libraryRouter.get('/', (request, response) => {
     const {author}=request.query
     const helper=author.split(' ')
-    const searchString=helper.join('+')
+    const searchString=encodeURIComponent(helper.join('+'))
     const last=[helper.pop()]
     console.log(searchString)
     console.log(helper, last)
-    const authorString=last.concat(helper).join('+')
+    const authorString=encodeURIComponent(last.concat(helper).join('+'))
     console.log(authorString)
-
    fetch(`https://api.finna.fi/v1/search?lookfor=${searchString}&filter[]=~building:0/Helmet/&filter[]=~format:0/Book/&filter[]=~author:${authorString}&limit=100`)
    .then(res=>res.json())
    .then(result => {
