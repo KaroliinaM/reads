@@ -10,7 +10,7 @@ const Library = ({library, book}) => {
 
     const booksFromAuthor=()=> {
         return library.map(libraryBook=>{
-            return <p>{libraryBook}</p>
+            return <p key={libraryBook}>{libraryBook}</p>
         })
     }
 
@@ -19,7 +19,6 @@ const Library = ({library, book}) => {
     return (
         <>
             {checkLibrary()}
-            {console.log('vis', visible)}
             <button onClick={()=>setVisible(!visible)}>{buttonText}</button>
             {visible && booksFromAuthor()}
         </>)

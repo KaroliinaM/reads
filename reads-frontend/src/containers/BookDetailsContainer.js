@@ -20,12 +20,11 @@ const BookDetailsContainer = (props) => {
     useEffect(()=> {
         const author=book.authors[0]
         const authorString=author.split(' ').join('+')
-        console.log(authorString)
         fetch(`/library?author=${authorString}`)
         .then(response=> response.json())
         .then(result=> {
-            console.log(result)
-            setLibrary(result)
+            const books=Array.from(new Set(result))
+            setLibrary(books)
         })
     }, [book])
 
