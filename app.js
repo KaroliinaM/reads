@@ -38,7 +38,7 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/book/:isbn', (req, res) => {
-    const isbn=req.params.isbn
+    const isbn=req.params.isbn.trim()
     const url=`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`
     console.log('url', url)
     fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`)
