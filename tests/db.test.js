@@ -89,6 +89,20 @@ describe('readlist handling', () => {
         expect(dbData.length).toBe(2)
     })
 
+    test('readlist with empty name is not added',async ()=> {
+        const data={
+            name: ''
+        }
+        const response = await api
+            .post('/readlists')
+            .send(data)
+            .set('Authorization', `Bearer ${login.body.token}`)
+        res=response.body
+        console.log('readlistempty', res)
+        const dbData=await db.getReadLists(login.body.id)
+        expect(dbData.length).toBe(2)
+    })
+
     test('get readlists', async() => {
         const response=await api
         .get('/readlists')

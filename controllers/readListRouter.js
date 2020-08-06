@@ -12,6 +12,9 @@ readListRouter.get('/', (request, response) => {
 
 readListRouter.post('/', (request, response) => {
     const {name} = request.body
+    if(!name || name.length==0) {
+        return response.status(400).json({error: 'name missing'})
+    }
     ReadList.addList(name, request.decodedToken.id)
     .then(result=> {
         response.status(201).send(result)

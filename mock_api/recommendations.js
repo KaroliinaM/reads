@@ -12,6 +12,15 @@ const recommendations = {
           "blurb": "Debt of Honor is a thriller novel by Tom Clancy. It is a continuation of the series featuring his character Jack Ryan. In this installment, Ryan has become the National Security Advisor when the Japanese government goes to war with the United States. One of the sub-plots in this novel would later form part of the main plot of Clancy's later novel The Bear and the Dragon."
         },
         {
+          "isbn13": "978-0-06-082497-6",
+          "title": "Queen's: The King of Attolia",
+          "author": "Megan Whalen Turner",
+          "prediction": "10.0",
+          "cover": "https:\/\/www.readgeek.com\/images\/cover\/.tmb\/thumb_006083577X-L_175_300.jpg",
+          "genres": "Young-adult fiction",
+          "blurb": "<i><\/i><p>\"I can steal anything.\"<\/p><p>After Gen's bragging lands him in the king's prison, the chances of escape look slim. Then the king's scholar, the magus, needs the thief's skill for a seemingly impossible task -- to steal a hidden treasure from another land.<\/p><p>To the magus, Gen is just a tool. But Gen is a trickster and a survivor with a plan of his own.<\/p><br \/><br \/>Book Details:<ul><li>Format: Paperback<\/li><li>Publication Date: 12\/27\/2005<\/li><li>Pages: 304<\/li><li>Reading Level: Age 10 and Up<\/li><\/ul>"
+        },
+        {
           "isbn13": "978-1-57322-225-9",
           "title": "Across the Nightingale Floor",
           "author": "Gillian Rubinstein",
