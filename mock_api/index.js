@@ -5,6 +5,7 @@ const app=express()
 const port=3002
 const books=require('./books')
 const {recommendations}=require('./recommendations')
+const helmetBooks=require('./library')
 app.use(express.json())
 
 
@@ -104,6 +105,11 @@ app.get('/openlibrary', (request, response) => {
   if(request.query.bibkeys==='ISBN:9780316015844') book=books.twilight
   if(request.query.bibkeys==='ISBN:9780316087360') book=books.eclipse
   response.status(200).json(book)
+})
+
+app.get('/helmet', (request, response) => {
+  console.log(request.query)
+  response.status(200).json(helmetBooks.condie)
 })
 
 app.post('/readgeek', checkHeaders, (request, response) => {

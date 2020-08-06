@@ -1,7 +1,9 @@
 const libraryRouter=require('express').Router()
-const tokenHandler=require('../utils/tokenHandler')
+const {tokenHandler}=require('../utils/tokenHandler')
 const fetch=require('node-fetch')
+const config=require('../utils/config')
 
+//todo:set under token auth(changes to frontend)
 //libraryRouter.use(tokenHandler)
 
 libraryRouter.get('/', (request, response) => {
@@ -13,7 +15,7 @@ libraryRouter.get('/', (request, response) => {
     console.log(helper, last)
     const authorString=encodeURIComponent(last.concat(helper).join('+'))
     console.log(authorString)
-   fetch(`https://api.finna.fi/v1/search?lookfor=${searchString}&filter[]=~building:0/Helmet/&filter[]=~format:0/Book/&filter[]=~author:${authorString}&limit=100`)
+   fetch(`${config.HELMET_URL}?lookfor=${searchString}&filter[]=~building:0/Helmet/&filter[]=~format:0/Book/&filter[]=~author:${authorString}&limit=100`)
    .then(res=>res.json())
    .then(result => {
        console.log(result.resultCount, 'pituus', result.records.length)
