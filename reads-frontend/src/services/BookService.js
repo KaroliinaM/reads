@@ -50,6 +50,7 @@ const addBookToList = (book) => {
     .then(response => response.json())
     .then(data => {
         console.log('success', data)
+        return data
     })
 }
 

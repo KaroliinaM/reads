@@ -47,6 +47,9 @@ const setReadlist = (data) => {
         readlist_id:data.readlist_id
     }
     return db.updateReadlistOnBook(values.readlist_id, values.id)
+    .then(result => {
+        return data
+    })
 }
 
 const setRating= (data) => {

@@ -94,7 +94,8 @@ describe('app opens', function() {
             cy.contains('Executive Orders')
             cy.contains('home').click()
             cy.contains('unread').click()
-            cy.get('.page-container').contains('Executive Orders').should('not.exist')
+            cy.get('.page-container').should('contain', 'Red Dragon')
+            cy.get('.page-container').should('not.contain', 'Executive Orders')
         })
     })
 

@@ -36,10 +36,12 @@ const BookDetailsContainer = (props) => {
     }
 
     const addBookToList = (listId) => {
+        console.log('readlist', listId)
         const bookOnList={...book, readlist_id: listId}
         BookService.addBookToList(bookOnList)
         .then(response => {
-            setBook(bookOnList)
+            console.log('addedBook', response.result)
+            setBook(response.result)
         })
     }
 
