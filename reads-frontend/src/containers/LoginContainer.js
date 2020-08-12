@@ -25,13 +25,11 @@ const LoginContainer = ({setUser, notifyUser}) => {
             history.push(path)
         })
         .catch(error => {
-            if(error.status===401) {
-                notifyUser({style: 'notification-error', text:'login failed'})
-                setUsername('')
-                setPassword('')
-            } else {
-                notifyUser({style: 'notification-error', text:'system error'})
-            }
+            error.json()
+            .then(data => {
+                console.log(data)
+                notifyUser({style: 'notification-error', text: data.error})
+            })
         })
     }
 

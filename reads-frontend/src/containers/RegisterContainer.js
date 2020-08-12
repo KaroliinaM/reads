@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import Input from '../components/Input' 
+import UserService from '../services/UserService'
 
 const RegisterContainer = ({notifyUser}) => {
     const [email, setEmail] = useState("")
@@ -16,27 +17,18 @@ const RegisterContainer = ({notifyUser}) => {
             username,
             password
         }
-        let res;
-        fetch('/user/register', {
-            method: 'post',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        .then(response => {
-            res=response
-            return response.json()
-        })
+
+        UserService.register(user)
         .then(result => {
             console.log('result', result)
-            if(res.ok) {
-                notifyUser({style: 'notification-success',text:'user created'})
-                history.push('/login')
-            } else {
-                notifyUser({style: 'notification-error', text: result})
-            }
-
+            notifyUser({style: 'notification-success',text:'user created'})
+            history.push('/login')
+        })
+        .catch(e => {
+            e.json()
+            .then(data => {
+                notifyUser({style: 'notification-error', text: data})
+            })
         })
     }
 
