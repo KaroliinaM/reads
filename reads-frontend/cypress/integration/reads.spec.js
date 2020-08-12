@@ -11,6 +11,27 @@ describe('app opens', function() {
             cy.get('#register-button').click()
             cy.contains('user created')
         })
+        it('registration does not ccept double usernames', ()=> {
+            cy.visit('http://localhost:3000')
+            cy.get('#link-to-register').click()
+            cy.get('#register-username').type('testuser')
+            cy.get('#register-password').type('password')
+            cy.get('#register-button').click()
+            cy.contains('username is already in use')
+        })
+
+    })
+    describe('login', function() {
+        it('can login succesfully', function() {
+            cy.visit('http://localhost:3000')
+            cy.contains('username')
+            cy.get('#login-username').type('testuser')
+            cy.get('#login-password').type('password')
+            cy.get('#login-button').click()
+        })
+    })
+
+    describe('Book rating', function() {
         it('front page opens', function() {
             cy.visit('http://localhost:3000')
             cy.contains('username')

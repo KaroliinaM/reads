@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom'
 import BookService from '../services/BookService'
 import Input from '../components/Input'
 import { Link } from 'react-router-dom'
+import UserService from '../services/UserService'
 
 const LoginContainer = ({setUser, notifyUser}) => {
     const [username, setUsername]=useState("")
@@ -15,19 +16,7 @@ const LoginContainer = ({setUser, notifyUser}) => {
             username,
             password
         }
-        fetch('/user/login', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        .then(response=> {
-            if(!response.ok) {
-                throw response
-            }
-            return response.json()
-        })
+        UserService.login(user)
         .then(data => {
             setUser(data)
             BookService.setToken(data.token)
