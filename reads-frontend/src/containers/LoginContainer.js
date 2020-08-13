@@ -4,6 +4,7 @@ import BookService from '../services/BookService'
 import Input from '../components/Input'
 import { Link } from 'react-router-dom'
 import UserService from '../services/UserService'
+import {handleError} from '../helpers/helpers'
 
 const LoginContainer = ({setUser, notifyUser}) => {
     const [username, setUsername]=useState("")
@@ -25,11 +26,7 @@ const LoginContainer = ({setUser, notifyUser}) => {
             history.push(path)
         })
         .catch(error => {
-            error.json()
-            .then(data => {
-                console.log(data)
-                notifyUser({style: 'notification-error', text: data.error})
-            })
+            handleError(notifyUser, error)
         })
     }
 

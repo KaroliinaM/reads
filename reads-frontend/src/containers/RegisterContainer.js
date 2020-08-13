@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import Input from '../components/Input' 
 import UserService from '../services/UserService'
+import {handleError} from '../helpers/helpers'
 
 const RegisterContainer = ({notifyUser}) => {
     const [email, setEmail] = useState("")
@@ -17,7 +18,6 @@ const RegisterContainer = ({notifyUser}) => {
             username,
             password
         }
-
         UserService.register(user)
         .then(result => {
             console.log('result', result)
@@ -25,10 +25,7 @@ const RegisterContainer = ({notifyUser}) => {
             history.push('/login')
         })
         .catch(e => {
-            e.json()
-            .then(data => {
-                notifyUser({style: 'notification-error', text: data})
-            })
+            handleError(notifyUser, e)
         })
     }
 

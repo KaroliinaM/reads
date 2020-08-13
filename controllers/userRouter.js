@@ -50,9 +50,9 @@ userRouter.post('/register', (request, response) => {
     .catch(e => {
         console.log(e)
         if(e.status===400) {
-            return response.status(400).json('username is already in use')
+            return response.status(400).json({error: 'username is already in use'})
         }
-        return response.status(500).json('internal error')
+        return response.status(500).json({error: 'internal error'})
     })
 })
 
