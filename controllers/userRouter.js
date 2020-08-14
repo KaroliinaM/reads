@@ -5,6 +5,7 @@ const fetch=require('node-fetch')
 const config=require('../utils/config')
 const queries=require('../models/queries')
 const ReadList=require('../models/ReadList')
+const recommendAPI= require('../api/recommend')
 
 userRouter.post('/register', (request, response) => {
     const user= request.body
@@ -28,14 +29,15 @@ userRouter.post('/register', (request, response) => {
     })
     .then(data => {
         credentials.email=data
-        return fetch(`${config.READGEEK_URL}`, {
+        return recommendAPI.register()
+/*         return fetch(`${config.READGEEK_URL}`, {
             method: 'post',
             headers: {
                 'Authorization': `Basic ${config.READGEEK_AUTH}`
             } 
-        })        
+        })  */       
     })
-    .then(response => response.json())
+   /*  .then(response => response.json()) */
     .then(data => {
         credentials.readgeek_id=data.user.id
         return queries.addUser(credentials.email, credentials.username, credentials.password, credentials.readgeek_id)

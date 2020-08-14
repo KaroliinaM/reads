@@ -41,7 +41,6 @@ describe('user management', () => {
         expect(data.taste_tested).toBe(false)
 
         const readlist=await db.getReadLists(data.id)
-        console.log('rated', readlist)
         expect(readlist.length).toBe(1)
         expect(readlist[0].name).toBe('rated')
     })
@@ -54,7 +53,6 @@ describe('user management', () => {
             .post('/user/login')
             .send(user)
             .expect(201)
-        console.log('response', response.body)
         expect(response.body.token).not.toBe(undefined)
     })
 })
@@ -75,7 +73,6 @@ describe('readlist handling', () => {
 
 
     test('add readlists', async () => {
-        console.log('token', login.body)
         const data={
             name: 'lukulista1'
         }
@@ -84,7 +81,6 @@ describe('readlist handling', () => {
             .send(data)
             .set('Authorization', `Bearer ${login.body.token}`)
         readlist1=response.body
-        console.log('readlist', readlist1)
         const dbData=await db.getReadLists(login.body.id)
         expect(dbData.length).toBe(2)
     })
@@ -98,7 +94,6 @@ describe('readlist handling', () => {
             .send(data)
             .set('Authorization', `Bearer ${login.body.token}`)
         res=response.body
-        console.log('readlistempty', res)
         const dbData=await db.getReadLists(login.body.id)
         expect(dbData.length).toBe(2)
     })
@@ -132,8 +127,6 @@ describe('bookdata', () => {
     test('add books', async() => {
         const listRated=await db.getListId('rated', login.body.id)
         const list1=await db.getListId('lukulista1', login.body.id)
-
-        console.log(listRated, list1)
 
         const bookdata1={
             "title": "title1",
@@ -184,19 +177,18 @@ describe('bookdata', () => {
         .send(bookdata4)
         .set('Authorization', `Bearer ${login.body.token}`)
 
-        console.log('res1',response1.body)
-
         const author1=await db.getAuthorByName('Author1')
         const author2=await db.getAuthorByName('Author2')
         
         expect(author1.length).toBe(1)
         expect(author2.length).toBe(1)
-
-        const book1authors=await db.getAuthorsByBookId(response1.body.id)
-        const book2authors=await db.getAuthorsByBookId(response2.body.id)
-        const book3authors=await db.getAuthorsByBookId(response3.body.id)
-        const book4authors=await db.getAuthorsByBookId(response4.body.id)
-
+        
+        const book1authors=await db.getAuthorsByBookId(response1.body.result.id)
+        const book2authors=await db.getAuthorsByBookId(response2.body.result.id)
+        const book3authors=await db.getAuthorsByBookId(response3.body.result.id)
+        const book4authors=await db.getAuthorsByBookId(response4.body.result.id)
+        console.log('authors', book1authors)
+        console.log('response1', response1.body.result.id)
         expect(book1authors[0].name).toBe('Author1')
         expect(book2authors[0].name).toBe('Author2')
         expect(book3authors[0].name).toBe('Author1')
@@ -212,7 +204,6 @@ describe('bookdata', () => {
         .set('Authorization', `Bearer ${login.body.token}`)
 
         expect(data1.body.length).toBe(2)
-        console.log(data1.body)
 
         expect(data1.body.map(o => o.title)).toContainEqual('title1')
         expect(data1.body.map(o => o.title)).toContainEqual('title2')
@@ -222,7 +213,6 @@ describe('bookdata', () => {
         .set('Authorization', `Bearer ${login.body.token}`)
 
         expect(data2.body.length).toBe(2)
-        console.log(data2.body)
 
         expect(data2.body.map(o => o.title)).toContainEqual('title3')
         expect(data2.body.map(o => o.title)).toContainEqual('title4')
@@ -258,7 +248,6 @@ describe('another user', ()=>{
         .send(user2)
     })
     test('token extracted correctly', async() => {
-        console.log('token', login1.body)
         const data1={
             name: 'list1'
         }
@@ -318,14 +307,7 @@ describe('recommendations', ()=> {
         .post('/recommendations/rate')
         .send(book)
         .set('Authorization', `Bearer ${login.body.token}`)
-
-        console.log(response.body)
-
     })
-
-
-
-
 })
 
 afterAll(() => {
