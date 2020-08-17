@@ -307,6 +307,7 @@ describe('recommendations', ()=> {
         .post('/recommendations/rate')
         .send(book)
         .set('Authorization', `Bearer ${login.body.token}`)
+        expect(response.body).not.toBe(undefined)
     })
 })
 

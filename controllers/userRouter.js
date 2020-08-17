@@ -29,15 +29,8 @@ userRouter.post('/register', (request, response) => {
     })
     .then(data => {
         credentials.email=data
-        return recommendAPI.register()
-/*         return fetch(`${config.READGEEK_URL}`, {
-            method: 'post',
-            headers: {
-                'Authorization': `Basic ${config.READGEEK_AUTH}`
-            } 
-        })  */       
+        return recommendAPI.register()       
     })
-   /*  .then(response => response.json()) */
     .then(data => {
         credentials.readgeek_id=data.user.id
         return queries.addUser(credentials.email, credentials.username, credentials.password, credentials.readgeek_id)
