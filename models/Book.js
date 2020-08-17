@@ -59,6 +59,9 @@ const setRating= (data) => {
         readlist_id: data.readlist_id
     }
     return db.updateBookRating(values.readlist_id, values.rated, values.id)
+    .then(result=> {
+        return data
+    })
 } 
 
 const getById =(id)=>{

@@ -5,6 +5,7 @@ const moment=require('moment')
 const Book = require('../models/Book')
 const User = require('../models/User')
 const ReadList=require('../models/ReadList')
+const recommendAPI= require('../api/recommend')
 const {tokenHandler}=require('../utils/tokenHandler')
 recommendationRouter.use(tokenHandler)
 
@@ -13,13 +14,14 @@ recommendationRouter.get('/sample', (request, response) => {
     console.log('toimii')
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(config.READGEEK_URL)
-    fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=20`, {
+    recommendAPI.sample(readgeek_id)
+/*     fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=20`, {
         method: 'get',
         headers: {
             'Authorization': `Basic ${config.READGEEK_AUTH}`
-        }
-    })
-    .then(response => response.json())
+        } */
+    /* }) */
+  /*   .then(response => response.json()) */
     .then(data => {
 
         console.log(data.user.taste_test)
@@ -41,6 +43,7 @@ recommendationRouter.get('/sample', (request, response) => {
 recommendationRouter.post('/rate', (request, response) => {
     const params=request.body
     const readgeek_id=request.decodedToken.readgeek_id
+    let ratedBook
     ReadList.getListId('rated', request.decodedToken.id)
     .then(res=> {
         params.readlist_id=res[0].id
@@ -52,6 +55,8 @@ recommendationRouter.post('/rate', (request, response) => {
         
     })
     .then(res => {
+        console.log('res',res)
+        ratedBook=res
         const bookid=params.readgeekid? `readgeekid:${params.readgeekid}`:`isbn:${params.isbn}`
         const data={
             books: {
@@ -72,7 +77,7 @@ recommendationRouter.post('/rate', (request, response) => {
     })
     .then(response => response.json())
     .then(data => {
-        return response.status(201).json(data)
+        return response.status(201).json(ratedBook)
         
     })
     .catch(e => console.log(e)) 

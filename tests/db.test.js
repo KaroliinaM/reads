@@ -307,7 +307,23 @@ describe('recommendations', ()=> {
         .post('/recommendations/rate')
         .send(book)
         .set('Authorization', `Bearer ${login.body.token}`)
+        .expect(201)
         expect(response.body).not.toBe(undefined)
+        expect(response.body.id).not.toBe(undefined)
+        const rating=response.body.rated
+
+        const bookMod=response.body
+        bookMod.rated=8
+
+        const response2= await api
+        .post('/recommendations/rate')
+        .send(bookMod)
+        .set('Authorization', `Bearer ${login.body.token}`)
+        .expect(201)
+        expect(response2.body.id).toBe(response.body.id)
+        expect(response2.body.rated).not.toBe(rating)
+
+
     })
 })
 
