@@ -325,6 +325,14 @@ describe('recommendations', ()=> {
 
 
     })
+    test('get recommendations', async() => {
+        const response=await api
+        .get('/recommendations/list')
+        .set('Authorization', `Bearer ${login.body.token}`)
+        .expect(200)
+
+        expect(response.body.length).toBe(51)
+    })
 })
 
 afterAll(() => {

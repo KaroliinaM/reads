@@ -15,13 +15,6 @@ recommendationRouter.get('/sample', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(config.READGEEK_URL)
     recommendAPI.sample(readgeek_id)
-/*     fetch(`${config.READGEEK_URL}/${readgeek_id}?taste_test=20`, {
-        method: 'get',
-        headers: {
-            'Authorization': `Basic ${config.READGEEK_AUTH}`
-        } */
-    /* }) */
-  /*   .then(response => response.json()) */
     .then(data => {
 
         console.log(data.user.taste_test)
@@ -57,25 +50,8 @@ recommendationRouter.post('/rate', (request, response) => {
     .then(res => {
         console.log('res',res)
         ratedBook=res
-        const bookid=params.readgeekid? `readgeekid:${params.readgeekid}`:`isbn:${params.isbn}`
-        const data={
-            books: {
-                [bookid]:{
-                    rated: params.rated,
-                    date_rated: moment(new Date()).format('YYYY-MM-DD')
-                }
-            }
-        }
-        return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
-            method: 'patch',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Basic ${config.READGEEK_AUTH}`
-            },
-            body: JSON.stringify(data)
-        })
+        recommendAPI.rate(params, readgeek_id)
     })
-    .then(response => response.json())
     .then(data => {
         return response.status(201).json(ratedBook)
         
@@ -85,13 +61,14 @@ recommendationRouter.post('/rate', (request, response) => {
 
 recommendationRouter.get('/list', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
-    fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
+    recommendAPI.listRecommendations(readgeek_id)
+/*     fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
         method: 'get',
         headers: {
             'Authorization': `Basic ${config.READGEEK_AUTH}`
         }
     })
-    .then(response=>response.json())
+    .then(response=>response.json()) */
     .then(data => {
         const books=data.user.recommendations.map(book=> {
             return {
