@@ -25,6 +25,7 @@ const SearchBookContainer =()=> {
 
   const resultOnSearchPage= (data) => {
     if(!primary) {
+      console.log('hep')
       history.push({
         pathname: '/etsi',
         state: { book: data }
@@ -60,16 +61,12 @@ const SearchBookContainer =()=> {
   }
 
   const handleChange=(e)=>{
-    const book = {
-      title: bookByIsbn.title,
-      isbn: bookByIsbn.isbn,
-      image_url: bookByIsbn.image_url,
-      description: bookByIsbn.description,
-      authors: bookByIsbn.authors,
-      rated: e
-    }
+    const book = {...bookByIsbn, rated: e}
     BookService.postRating(book)
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response)
+      setBookByIsbn(response)
+    })
   }
 
   const searchResult = ()=> {
@@ -83,6 +80,7 @@ const SearchBookContainer =()=> {
                 <Rating
                 stop={10}
                 fractions={2}
+                initialRating={bookByIsbn.rated}
                 onChange={handleChange}
                 />
               </div>

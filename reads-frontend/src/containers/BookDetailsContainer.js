@@ -32,7 +32,10 @@ const BookDetailsContainer = (props) => {
         console.log(e)
         const ratedBook = {...book, rated:e}
         BookService.postRating(ratedBook)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+            setBook(response)
+        })
     }
 
     const addBookToList = (listId) => {

@@ -17,7 +17,8 @@ const SampleBooksContainer = () => {
         const data= {...book, rated: e}
         BookService.postRating(data)
         .then(result => {
-            setBooks(books.map(book=> book.readgeekid === data.readgeekid? data : book))
+            console.log('result', result)
+            setBooks(books.map(book=> book.readgeekid === data.readgeekid? result : book))
             if(!done) {
                 setDone(true)
                 BookService.setRatingDone()
