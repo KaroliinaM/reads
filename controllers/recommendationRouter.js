@@ -16,7 +16,6 @@ recommendationRouter.get('/sample', (request, response) => {
     console.log(config.READGEEK_URL)
     recommendAPI.sample(readgeek_id)
     .then(data => {
-
         console.log(data.user.taste_test)
         const books=data.user.taste_test.map(book=>{
             return {
@@ -53,8 +52,7 @@ recommendationRouter.post('/rate', (request, response) => {
         recommendAPI.rate(params, readgeek_id)
     })
     .then(data => {
-        return response.status(201).json(ratedBook)
-        
+        return response.status(201).json(ratedBook)        
     })
     .catch(e => console.log(e)) 
 })
@@ -62,13 +60,6 @@ recommendationRouter.post('/rate', (request, response) => {
 recommendationRouter.get('/list', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     recommendAPI.listRecommendations(readgeek_id)
-/*     fetch(`${config.READGEEK_URL}/${readgeek_id}?recommendations[books]=50`, {
-        method: 'get',
-        headers: {
-            'Authorization': `Basic ${config.READGEEK_AUTH}`
-        }
-    })
-    .then(response=>response.json()) */
     .then(data => {
         const books=data.user.recommendations.map(book=> {
             return {

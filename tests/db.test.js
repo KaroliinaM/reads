@@ -130,28 +130,28 @@ describe('bookdata', () => {
 
         const bookdata1={
             "title": "title1",
-            "isbn": "isbn",
+            "isbn": "isbn1",
             "image_url": "imageurl",
             "authors": ["Author1"],
             "readlist_id": listRated[0].id
         }
         const bookdata2={
             "title": "title2",
-            "isbn": "isbn",
+            "isbn": "isbn2",
             "image_url": "imageurl",
             "authors": ["Author2"],
             "readlist_id": listRated[0].id
         }
         const bookdata3={
             "title": "title3",
-            "isbn": "isbn",
+            "isbn": "isbn3",
             "image_url": "imageurl",
             "authors": ["Author1"],
             "readlist_id": list1[0].id
         }
         const bookdata4={
             "title": "title4",
-            "isbn": "isbn",
+            "isbn": "isbn4",
             "image_url": "imageurl",
             "authors": ["Author2"],
             "readlist_id": list1[0].id

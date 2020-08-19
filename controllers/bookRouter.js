@@ -1,28 +1,12 @@
 const bookRouter = require('express').Router()
 const Book=require('../models/Book')
-const config=require('../utils/config')
-const fetch=require('node-fetch')
-const moment=require('moment')
+const recommendAPI=require('../api/recommend')
 const {tokenHandler}=require('../utils/tokenHandler')
 bookRouter.use(tokenHandler)
 
 const addToList = (book, readgeek_id) => {
     if(!book.id) {
-        const data={
-            books: {
-            [`isbn:${book.isbn}`]:{
-                    date_bookmarked: moment(new Date()).format('YYYY-MM-DD')
-                }
-            }
-        }
-        return fetch(`${config.READGEEK_URL}/${readgeek_id}`, {
-            method: 'patch',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Basic ${config.READGEEK_AUTH}`
-            },
-            body: JSON.stringify(data)
-        })
+        return recommendAPI.bookmark(book, readgeek_id)
         .then(response => {
             return Book.addBook(book)
         })
@@ -49,7 +33,7 @@ bookRouter.post('/', (request, response) => {
         console.log('lisäys', result)
         return response.status(201).json({result})
     })
-    .catch(e=> console.log(e))
+    .catch(error=> console.log(error))
 })
 
 
@@ -59,7 +43,7 @@ bookRouter.get('/:id', (request, response) => {
     .then(result => {
         return response.status(200).json(result)
     })
-    .catch(e => console.log(e))
+    .catch(error => console.log(error))
 })
 
 module.exports = bookRouter
