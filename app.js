@@ -15,6 +15,7 @@ const bookRouter=require('./controllers/bookRouter')
 const recommendationRouter=require('./controllers/recommendationRouter')
 const userRouter=require('./controllers/userRouter')
 const libraryRouter=require('./controllers/libraryRouter')
+const searchRouter=require('./controllers/searchRouter')
 const app=express()
 app.use(cors())
 app.use(express.json())
@@ -34,6 +35,7 @@ app.use('/books', bookRouter)
 app.use('/recommendations', recommendationRouter)
 app.use('/user', userRouter)
 app.use('/library', libraryRouter)
+app.use('/book', searchRouter)
 
 
 KEY = process.env.GR_KEY
@@ -45,7 +47,7 @@ if(process.env.NODE_ENV !== 'production') {
     app.use('/api/testing', cypressRouter)
 }
 
-app.get('/book/:isbn', (req, res) => {
+/* app.get('/book/:isbn', (req, res) => {
     const isbn=req.params.isbn.trim()
     const url=`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`
     console.log('url', url)
@@ -66,6 +68,6 @@ app.get('/book/:isbn', (req, res) => {
         return res.json(book)
     })
     .catch(e => console.log(e));
-})
+}) */
  
 module.exports = app

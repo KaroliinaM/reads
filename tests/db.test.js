@@ -334,6 +334,51 @@ describe('recommendations', ()=> {
         expect(response.body.length).toBe(51)
     })
 })
+describe('search books', () => {
+    let login
+
+    beforeAll(async()=> {
+        const user={
+            username:'username',
+            password:'password'
+        }
+    
+        login=await api
+        .post('/user/login')
+        .send(user)
+    })
+    test('find a book', async() => {
+        const response=await api
+        .get('/book/9780316087360')
+        expect(response.body.title).toBe('Eclipse (The Twilight Saga)')
+    })
+    test('get null result', async() => {
+        const response=await api
+        .get('/book/1234567')
+        expect(response.body.title).toBe(undefined)
+    })
+})
+
+describe('library accessibility', () => {
+    let login
+
+    beforeAll(async()=> {
+        const user={
+            username:'username',
+            password:'password'
+        }
+    
+        login=await api
+        .post('/user/login')
+        .send(user)
+    })
+
+    test('found from library', async() => {
+        const response=await api
+        .get('/library?author=ally+condie')
+        expect(response.body).toContain('MATCHED')
+    })
+})
 
 afterAll(() => {
     pool.end()
