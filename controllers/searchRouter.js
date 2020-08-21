@@ -17,7 +17,7 @@ searchRouter.get('/:isbn', (req, res) => {
             }
             return res.json(book)
         })
-        .catch(e => console.log(e));
+        .catch(e => console.log(e))
 })
 
 module.exports=searchRouter
