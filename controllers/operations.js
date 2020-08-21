@@ -27,10 +27,10 @@ const getReadLists = (request, response) => {
     console.log(process.env.SECRET)
     console.log(decodedToken.id)
     ReadList.getAll(decodedToken.id)
-    .then(result=>{
-        (console.log(result))
-        response.status(200).json(result)
-    })
+        .then(result=>{
+            (console.log(result))
+            response.status(200).json(result)
+        })
 
 /*     pool.query('SELECT * FROM readlist', (error, results) => {
         if(error) {
@@ -44,9 +44,9 @@ const postReadList = (request, response) => {
     const {name} = request.body
     console.log('name', name)
     ReadList.addList(name)
-    .then(result=> {
-        response.status(201).send(result)
-    })
+        .then(result=> {
+            response.status(201).send(result)
+        })
 /*      pool.query('insert into readlist values(default, $1) returning id', [name], (error, result) => {
         if(error) {
             throw error
@@ -60,11 +60,11 @@ const postReadList = (request, response) => {
 const getAuthor= (request, response) => {
     const {name}=request.body
     Book.getAuthor(name)
-    .then(result=>{
-        response.status(200).json(result)
-    })
-    .catch(error => console.log(error))
-/*     pool.query('select * from author where name=$1', [name])
+        .then(result=>{
+            response.status(200).json(result)
+        })
+        .catch(error => console.log(error))
+    /*     pool.query('select * from author where name=$1', [name])
     .then(result => response.status(200).json(result.rows) )
     .catch(error => console.log(error)) */
     
@@ -73,10 +73,10 @@ const getAuthor= (request, response) => {
 const postBook = ( request, response) => {
     const book=request.body
     Book.addBook(book)
-    .then(result=>{
-        return response.status(201).json(result)
-    })
-    .catch(e=> console.log(e))
+        .then(result=>{
+            return response.status(201).json(result)
+        })
+        .catch(e=> console.log(e))
 /*    let join={}
      pool.query('select * from author where name=$1', [book.authors[0]])
     .then(result => {
@@ -108,11 +108,11 @@ const getBooksByList = (request, response) => {
     const list = request.params.id
     console.log('list',list)
     ReadList.getBooks(list)
-    .then(result=> {
-        return response.status(200).json(result)
-    })
-    .catch(e => console.log(e))
-/*     pool.query('select book.id as id, title, author.name as author, description from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and readlist_id=$1',
+        .then(result=> {
+            return response.status(200).json(result)
+        })
+        .catch(e => console.log(e))
+    /*     pool.query('select book.id as id, title, author.name as author, description from book, booktoauthor, author where book.id=booktoauthor.book_id and author.id=booktoauthor.author_id and readlist_id=$1',
     [list])
     .then(result =>  {
         result.rows.forEach(book => {
@@ -127,11 +127,11 @@ const getBookById = (request, response) => {
     const id=request.params.id
     console.log(id)
     Book.getById(id)
-    .then(result => {
-        return response.status(200).json(result)
-    })
-    .catch(e => console.log(e))
-/*     let book={}
+        .then(result => {
+            return response.status(200).json(result)
+        })
+        .catch(e => console.log(e))
+    /*     let book={}
     pool.query('select author.name from booktoauthor, author where booktoauthor.author_id=author.id and booktoauthor.book_id=$1', [id])
     .then(result => {
         book.authors=result.rows.map(a => a.name)

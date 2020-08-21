@@ -8,17 +8,17 @@ const libraryAPI=require('../api/library')
 libraryRouter.get('/', (request, response) => {
     const {author}=request.query
     libraryAPI.getBooks(author)
-   .then(result => {
-       if(result.resultCount===0) {
-           response.status(200).send([])
-       }
-       console.log(result.resultCount, 'pituus', result.records.length)
-       const data=result.records.map(r=> {
-           return r.title.toUpperCase()
-       })
-       response.status(200).json(data)
-   })
-   .catch(e=> console.log(e))
+        .then(result => {
+            if(result.resultCount===0) {
+                response.status(200).send([])
+            }
+            console.log(result.resultCount, 'pituus', result.records.length)
+            const data=result.records.map(r=> {
+                return r.title.toUpperCase()
+            })
+            response.status(200).json(data)
+        })
+        .catch(e=> console.log(e))
 })
 
 

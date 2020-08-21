@@ -67,8 +67,8 @@ describe('readlist handling', () => {
         }
     
         login=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
     })
 
 
@@ -100,8 +100,8 @@ describe('readlist handling', () => {
 
     test('get readlists', async() => {
         const response=await api
-        .get('/readlists')
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .get('/readlists')
+            .set('Authorization', `Bearer ${login.body.token}`)
 
         const lists=response.body
         expect(lists.length).toBe(2)
@@ -120,8 +120,8 @@ describe('bookdata', () => {
         }
     
         login=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
     })
 
     test('add books', async() => {
@@ -158,24 +158,24 @@ describe('bookdata', () => {
         }
     
         const response1=await api
-        .post('/books')
-        .send(bookdata1)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .post('/books')
+            .send(bookdata1)
+            .set('Authorization', `Bearer ${login.body.token}`)
     
         const response2=await api
-        .post('/books')
-        .send(bookdata2)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .post('/books')
+            .send(bookdata2)
+            .set('Authorization', `Bearer ${login.body.token}`)
     
         const response3=await api
-        .post('/books')
-        .send(bookdata3)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .post('/books')
+            .send(bookdata3)
+            .set('Authorization', `Bearer ${login.body.token}`)
     
         const response4=await api
-        .post('/books')
-        .send(bookdata4)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .post('/books')
+            .send(bookdata4)
+            .set('Authorization', `Bearer ${login.body.token}`)
 
         const author1=await db.getAuthorByName('Author1')
         const author2=await db.getAuthorByName('Author2')
@@ -200,8 +200,8 @@ describe('bookdata', () => {
         const list1=await db.getListId('lukulista1', login.body.id)
 
         const data1= await api
-        .get(`/readlists/${listRated[0].id}`)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .get(`/readlists/${listRated[0].id}`)
+            .set('Authorization', `Bearer ${login.body.token}`)
 
         expect(data1.body.length).toBe(2)
 
@@ -209,8 +209,8 @@ describe('bookdata', () => {
         expect(data1.body.map(o => o.title)).toContainEqual('title2')
 
         const data2= await api
-        .get(`/readlists/${list1[0].id}`)
-        .set('Authorization', `Bearer ${login.body.token}`)
+            .get(`/readlists/${list1[0].id}`)
+            .set('Authorization', `Bearer ${login.body.token}`)
 
         expect(data2.body.length).toBe(2)
 
@@ -231,8 +231,8 @@ describe('another user', ()=>{
             readgeek_id:7
         }
         await api
-        .post('/user/register')
-        .send(user)
+            .post('/user/register')
+            .send(user)
 
         const user2={
             username:'username',
@@ -240,12 +240,12 @@ describe('another user', ()=>{
         }
     
         login1=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
 
         login2=await api
-        .post('/user/login')
-        .send(user2)
+            .post('/user/login')
+            .send(user2)
     })
     test('token extracted correctly', async() => {
         const data1={
@@ -280,8 +280,8 @@ describe('recommendations', ()=> {
         }
     
         login=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
     })
     test('get books for rating', async() => {
         const response=await api
@@ -304,10 +304,10 @@ describe('recommendations', ()=> {
         }
 
         const response= await api
-        .post('/recommendations/rate')
-        .send(book)
-        .set('Authorization', `Bearer ${login.body.token}`)
-        .expect(201)
+            .post('/recommendations/rate')
+            .send(book)
+            .set('Authorization', `Bearer ${login.body.token}`)
+            .expect(201)
         expect(response.body).not.toBe(undefined)
         expect(response.body.id).not.toBe(undefined)
         const rating=response.body.rated
@@ -316,10 +316,10 @@ describe('recommendations', ()=> {
         bookMod.rated=8
 
         const response2= await api
-        .post('/recommendations/rate')
-        .send(bookMod)
-        .set('Authorization', `Bearer ${login.body.token}`)
-        .expect(201)
+            .post('/recommendations/rate')
+            .send(bookMod)
+            .set('Authorization', `Bearer ${login.body.token}`)
+            .expect(201)
         expect(response2.body.id).toBe(response.body.id)
         expect(response2.body.rated).not.toBe(rating)
 
@@ -327,9 +327,9 @@ describe('recommendations', ()=> {
     })
     test('get recommendations', async() => {
         const response=await api
-        .get('/recommendations/list')
-        .set('Authorization', `Bearer ${login.body.token}`)
-        .expect(200)
+            .get('/recommendations/list')
+            .set('Authorization', `Bearer ${login.body.token}`)
+            .expect(200)
 
         expect(response.body.length).toBe(51)
     })
@@ -344,17 +344,17 @@ describe('search books', () => {
         }
     
         login=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
     })
     test('find a book', async() => {
         const response=await api
-        .get('/book/9780316087360')
+            .get('/book/9780316087360')
         expect(response.body.title).toBe('Eclipse (The Twilight Saga)')
     })
     test('get null result', async() => {
         const response=await api
-        .get('/book/1234567')
+            .get('/book/1234567')
         expect(response.body.title).toBe(undefined)
     })
 })
@@ -369,17 +369,17 @@ describe('library accessibility', () => {
         }
     
         login=await api
-        .post('/user/login')
-        .send(user)
+            .post('/user/login')
+            .send(user)
     })
 
     test('found from library', async() => {
         const response=await api
-        .get('/library?author=ally+condie')
+            .get('/library?author=ally+condie')
         expect(response.body).toContain('MATCHED')
     })
 })
 
 afterAll(() => {
     pool.end()
-  })
+})

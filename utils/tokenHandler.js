@@ -16,7 +16,7 @@ const tokenHandler = (request, response, next) => {
         return response.status(401).json({error: 'token missing or invalid'})
     }
     request.decodedToken = decodedToken
-    next();
+    next()
 }
 
 module.exports={

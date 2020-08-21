@@ -15,19 +15,19 @@ recommendationRouter.get('/sample', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     console.log(config.READGEEK_URL)
     recommendAPI.sample(readgeek_id)
-    .then(data => {
-        console.log(data.user.taste_test)
-        const books=data.user.taste_test.map(book=>{
-            return {
-                authors: [book.author],
-                image_url: book.cover,
-                readgeekid: book.readgeekid,
-                title: book.title
-            }
+        .then(data => {
+            console.log(data.user.taste_test)
+            const books=data.user.taste_test.map(book=>{
+                return {
+                    authors: [book.author],
+                    image_url: book.cover,
+                    readgeekid: book.readgeekid,
+                    title: book.title
+                }
+            })
+            return response.status(200).json(books)
         })
-        return response.status(200).json(books)
-    })
-    .catch(e => console.log(e))
+        .catch(e => console.log(e))
 })
 
 
@@ -37,51 +37,51 @@ recommendationRouter.post('/rate', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     let ratedBook
     ReadList.getListId('rated', request.decodedToken.id)
-    .then(res=> {
-        params.readlist_id=res[0].id
-        if(!params.id) {
-            return Book.addBook(params)
-        } else {
-            return Book.setRating(params)
-        }
+        .then(res=> {
+            params.readlist_id=res[0].id
+            if(!params.id) {
+                return Book.addBook(params)
+            } else {
+                return Book.setRating(params)
+            }
         
-    })
-    .then(res => {
-        console.log('res',res)
-        ratedBook=res
-        recommendAPI.rate(params, readgeek_id)
-    })
-    .then(data => {
-        return response.status(201).json(ratedBook)        
-    })
-    .catch(e => console.log(e)) 
+        })
+        .then(res => {
+            console.log('res',res)
+            ratedBook=res
+            recommendAPI.rate(params, readgeek_id)
+        })
+        .then(data => {
+            return response.status(201).json(ratedBook)        
+        })
+        .catch(e => console.log(e)) 
 })
 
 recommendationRouter.get('/list', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     recommendAPI.listRecommendations(readgeek_id)
-    .then(data => {
-        const books=data.user.recommendations.map(book=> {
-            return {
-                title: book.title,
-                authors: [book.author],
-                isbn: book.isbn13,
-                prediction: book.prediction,
-                image_url: book.cover,
-                genre: book.genres,
-                description: book.blurb
-            }     
+        .then(data => {
+            const books=data.user.recommendations.map(book=> {
+                return {
+                    title: book.title,
+                    authors: [book.author],
+                    isbn: book.isbn13,
+                    prediction: book.prediction,
+                    image_url: book.cover,
+                    genre: book.genres,
+                    description: book.blurb
+                }     
+            })
+            return response.status(200).json(books)
         })
-        return response.status(200).json(books)
-    })
-    .catch(e => console.log(e))
+        .catch(e => console.log(e))
 })
 
 recommendationRouter.put('/rated', (request, response) => {
     User.tasteTested(request.decodedToken.id)
-    .then(res=> {
-        return response.status(200).json({status: 'Success'})
-    })
+        .then(res=> {
+            return response.status(200).json({status: 'Success'})
+        })
 })
 
 module.exports=recommendationRouter

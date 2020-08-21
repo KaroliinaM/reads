@@ -5,9 +5,9 @@ readListRouter.use(tokenHandler)
 
 readListRouter.get('/', (request, response) => {
     ReadList.getAll(request.decodedToken.id)
-    .then(result=>{
-        response.status(200).json(result)
-    })
+        .then(result=>{
+            response.status(200).json(result)
+        })
 })
 
 readListRouter.post('/', (request, response) => {
@@ -16,19 +16,19 @@ readListRouter.post('/', (request, response) => {
         return response.status(400).json({error: 'name missing'})
     }
     ReadList.addList(name, request.decodedToken.id)
-    .then(result=> {
-        response.status(201).send(result)
-    })
-    .catch(e => console.log(e))
+        .then(result=> {
+            response.status(201).send(result)
+        })
+        .catch(e => console.log(e))
 })
 
 readListRouter.get('/:id', (request, response) => {
     const list = request.params.id
     ReadList.getBooks(list)
-    .then(result=> {
-        return response.status(200).json(result)
-    })
-    .catch(e => console.log(e))        
+        .then(result=> {
+            return response.status(200).json(result)
+        })
+        .catch(e => console.log(e))        
 })
 
 

@@ -18,7 +18,7 @@ const handlePatch = (data, readgeek_id) => {
         },
         body: JSON.stringify(data)
     })
-    .then(response => handleResponse(response))
+        .then(response => handleResponse(response))
 }
 
 const handleGet = (url) => {
@@ -28,7 +28,7 @@ const handleGet = (url) => {
             'Authorization': `Basic ${config.READGEEK_AUTH}`
         }
     })
-    .then(response => handleResponse(response))
+        .then(response => handleResponse(response))
 }
 
 const register = () => {
@@ -38,7 +38,7 @@ const register = () => {
             'Authorization': `Basic ${config.READGEEK_AUTH}`
         } 
     })
-    .then(response => handleResponse(response)) 
+        .then(response => handleResponse(response)) 
 }
 
 const sample = (readgeek_id) => {
@@ -62,7 +62,7 @@ const rate = (params, readgeek_id) => {
 const bookmark = (book, readgeek_id) => {
     const data={
         books: {
-        [`isbn:${book.isbn}`]:{
+            [`isbn:${book.isbn}`]:{
                 date_bookmarked: moment(new Date()).format('YYYY-MM-DD')
             }
         }

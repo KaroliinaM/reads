@@ -10,7 +10,7 @@ const getBooks = (author) => {
     const authorString=encodeURIComponent(last.concat(helper).join('+'))
     console.log(authorString)
     return fetch(`${config.HELMET_URL}?lookfor=${searchString}&filter[]=~building:0/Helmet/&filter[]=~format:0/Book/&filter[]=~author:${authorString}&limit=100`)
-    .then(res=>res.json())
+        .then(res=>res.json())
 }
 
 module.exports={
