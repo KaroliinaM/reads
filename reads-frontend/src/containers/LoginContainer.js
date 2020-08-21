@@ -26,6 +26,7 @@ const LoginContainer = ({setUser, notifyUser}) => {
             history.push(path)
         })
         .catch(error => {
+            console.log('error', error)
             handleError(notifyUser, error)
         })
     }

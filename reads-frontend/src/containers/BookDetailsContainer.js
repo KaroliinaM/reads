@@ -5,6 +5,7 @@ import Book from '../components/Book'
 import BookService from '../services/BookService'
 import ListPicker from '../components/ListPicker'
 import Library from '../components/Library'
+import BookDetails from '../components/BookDetails'
 
 const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
@@ -28,26 +29,6 @@ const BookDetailsContainer = (props) => {
         })
     }, [book])
 
-    const handleChange=(e)=>{
-        console.log(e)
-        const ratedBook = {...book, rated:e}
-        BookService.postRating(ratedBook)
-        .then(response => {
-            console.log(response)
-            setBook(response)
-        })
-    }
-
-    const addBookToList = (listId) => {
-        console.log('readlist', listId)
-        const bookOnList={...book, readlist_id: listId}
-        BookService.addBookToList(bookOnList)
-        .then(response => {
-            console.log('addedBook', response.result)
-            setBook(response.result)
-        })
-    }
-
     const label='<'
 
     const handleBack=(e)=> {
@@ -60,21 +41,7 @@ const BookDetailsContainer = (props) => {
     return (
         <>
             <button className='button' onClick={handleBack}>{label}</button>
-            {readLists.length>0 && (
-                <div className='book-card-container'>
-                    <Book book={book} />
-                    <div id='rating-part'> 
-                        <Rating
-                            stop={10}
-                            fractions={2}
-                            initialRating={book.rated}
-                            onChange={handleChange} 
-                        />
-                    </div>
-                    <ListPicker readLists={readLists} selected={book.readlist_id} addBookToList={addBookToList} />
-                    <Library library={library} book={book} />
-                </div>
-            )}
+            <BookDetails book={book} setBook={setBook} readLists={readLists} library={library} />
         </>
     )
 }

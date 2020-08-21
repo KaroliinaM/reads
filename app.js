@@ -46,28 +46,5 @@ if(process.env.NODE_ENV !== 'production') {
     const cypressRouter=require('./controllers/cypressRouter')
     app.use('/api/testing', cypressRouter)
 }
-
-/* app.get('/book/:isbn', (req, res) => {
-    const isbn=req.params.isbn.trim()
-    const url=`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`
-    console.log('url', url)
-    fetch(`${config.OPENLIBRARY_URL}?bibkeys=ISBN:${isbn}&jscmd=data&format=json`)
-    .then(response=> response.json())
-    .then(data => {
-        const bookData=data[`ISBN:${isbn}`]
-        console.log('bookdata', bookData)
-        if(!bookData) {
-            return res.send({})
-        }
-        const book = {
-            title:(bookData.title? bookData.title : null),
-            isbn: isbn,
-            image_url: (bookData.cover? bookData.cover.medium : null),
-            authors: (bookData.authors? bookData.authors.map(a => a.name) : null) 
-        }
-        return res.json(book)
-    })
-    .catch(e => console.log(e));
-}) */
  
 module.exports = app
