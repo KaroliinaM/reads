@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Book from '../components/Book'
 import ListPicker from '../components/ListPicker'
 import BookService from '../services/BookService'
+import LibraryService from '../services/LibraryService'
 import Rating from 'react-rating'
 import BookDetails from '../components/BookDetails'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -27,9 +28,7 @@ const SearchBookContainer =()=> {
   useEffect(()=> {
     if(bookByIsbn) {
       const author=bookByIsbn.authors[0]
-      const authorString=author.split(' ').join('+')
-      fetch(`/library?author=${authorString}`)
-      .then(response=> response.json())
+      LibraryService.getBooks(author)
       .then(result=> {
         const books=Array.from(new Set(result))
         setLibrary(books)

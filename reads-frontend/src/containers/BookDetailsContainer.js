@@ -6,6 +6,7 @@ import BookService from '../services/BookService'
 import ListPicker from '../components/ListPicker'
 import Library from '../components/Library'
 import BookDetails from '../components/BookDetails'
+import LibraryService from '../services/LibraryService'
 
 const BookDetailsContainer = (props) => {
     const [book, setBook] = useState(props.location.state.book)
@@ -20,9 +21,7 @@ const BookDetailsContainer = (props) => {
 
     useEffect(()=> {
         const author=book.authors[0]
-        const authorString=author.split(' ').join('+')
-        fetch(`/library?author=${authorString}`)
-        .then(response=> response.json())
+        LibraryService.getBooks(author)
         .then(result=> {
             const books=Array.from(new Set(result))
             setLibrary(books)
