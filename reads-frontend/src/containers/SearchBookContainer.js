@@ -72,7 +72,7 @@ return(
   <div>
     <h1 className='listTitle'>Find books</h1>
     <form onSubmit={submitForm}>
-      <input id='search-input' className = 'input' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
+      <input id='search-input' className = 'input' placeholder='search books by isbn' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button id='search-btn' className = 'button' type='submit'>search</button>
     </form>
     {console.log('bookbyisbn', bookByIsbn)}

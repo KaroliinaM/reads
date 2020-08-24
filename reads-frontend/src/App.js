@@ -12,6 +12,7 @@ import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
 import PrivateRoute from './components/PrivateRoute'
 import Notification from './components/Notification'
+import Footer from './components/Footer'
 import './form.css'
 import BookService from './services/BookService'
 import {
@@ -74,6 +75,7 @@ return(
       </Route>
     </Switch>
   </Router>
+  <Footer />
   </div>
 )}
 
