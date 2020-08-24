@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Book from '../components/Book'
-import ListPicker from '../components/ListPicker'
 import BookService from '../services/BookService'
 import LibraryService from '../services/LibraryService'
-import Rating from 'react-rating'
 import BookDetails from '../components/BookDetails'
 import { useHistory, useLocation } from 'react-router-dom'
 
@@ -21,8 +18,12 @@ const SearchBookContainer =()=> {
   const primary=!!location.state
 
   useEffect(() => {
+    let isMounted=true
     BookService.getReadLists()
-    .then(data => setReadLists(data))
+    .then(data => {
+      if(isMounted)setReadLists(data)
+    })
+    return ()=>{isMounted=false}
   },[])
 
   useEffect(()=> {
@@ -37,7 +38,6 @@ const SearchBookContainer =()=> {
 
   const resultOnSearchPage= (data) => {
     if(!primary) {
-      console.log('hep')
       history.push({
         pathname: '/etsi',
         state: { book: data }
@@ -75,7 +75,6 @@ return(
       <input id='search-input' className = 'input' placeholder='search books by isbn' value={isbn} onChange={(e)=>setIsbn(e.target.value)} />
       <button id='search-btn' className = 'button' type='submit'>search</button>
     </form>
-    {console.log('bookbyisbn', bookByIsbn)}
     {searchResult()}
   </div>
 )}

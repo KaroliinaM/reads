@@ -16,8 +16,12 @@ const RecommendContainer = () => {
     :recommendations
 
     useEffect(() => {
+        let isMounted=true
         BookService.getRecommendations()
-        .then(data => setRecommendations(data))
+        .then(data => {
+            if(isMounted)setRecommendations(data)
+        })
+        return ()=> {isMounted=false}
     }, [])
 
 
@@ -34,7 +38,6 @@ const RecommendContainer = () => {
         <>
             <Link to='/recommendations'><h1 className='listTitle'>Recommendations</h1></Link>
             <FilterBooks genres={genres} genre={genre} setGenre={setGenre} />
-            {console.log('genre', genre)}
             {listRecommendations()}
         </>
     )

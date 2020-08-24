@@ -187,8 +187,6 @@ describe('bookdata', () => {
         const book2authors=await db.getAuthorsByBookId(response2.body.result.id)
         const book3authors=await db.getAuthorsByBookId(response3.body.result.id)
         const book4authors=await db.getAuthorsByBookId(response4.body.result.id)
-        console.log('authors', book1authors)
-        console.log('response1', response1.body.result.id)
         expect(book1authors[0].name).toBe('Author1')
         expect(book2authors[0].name).toBe('Author2')
         expect(book3authors[0].name).toBe('Author1')

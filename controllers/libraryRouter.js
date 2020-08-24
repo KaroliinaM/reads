@@ -12,7 +12,6 @@ libraryRouter.get('/', (request, response) => {
             if(result.resultCount===0) {
                 response.status(200).send([])
             }
-            console.log(result.resultCount, 'pituus', result.records.length)
             const data=result.records.map(r=> {
                 return r.title.toUpperCase()
             })

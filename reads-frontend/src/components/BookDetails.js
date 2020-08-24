@@ -8,21 +8,17 @@ import Rating from 'react-rating'
 const BookDetails = ({book, setBook, readLists, library}) => {
 
     const handleChange=(e)=>{
-        console.log(e)
         const ratedBook = {...book, rated:e}
         BookService.postRating(ratedBook)
         .then(response => {
-            console.log(response)
             setBook(response)
         })
     }
 
     const addBookToList = (listId) => {
-        console.log('readlist', listId)
         const bookOnList={...book, readlist_id: listId}
         BookService.addBookToList(bookOnList)
         .then(response => {
-            console.log('addedBook', response.result)
             setBook(response.result)
         })
     }

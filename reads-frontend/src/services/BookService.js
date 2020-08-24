@@ -1,5 +1,3 @@
-import React from 'react'
-
 let token=null
 
 const setToken=(newToken)=> {
@@ -49,7 +47,6 @@ const addBookToList = (book) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('success', data)
         return data
     })
 }

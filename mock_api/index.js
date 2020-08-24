@@ -82,7 +82,6 @@ const createdUser={
 }
 
 app.get('/readgeek/:id', checkHeaders, (request, response) => {
-    console.log(request.query)
     if(!!request.query.taste_test) {
       return response.json(res)
     }
@@ -91,7 +90,6 @@ app.get('/readgeek/:id', checkHeaders, (request, response) => {
 })
 
 app.patch('/readgeek/:id', checkHeaders, (request, response) => {
-    console.log(request.body)
     if(!request.body.books) {
       return response.status(401).json({error: 'incorrect input'})
     }
@@ -100,7 +98,6 @@ app.patch('/readgeek/:id', checkHeaders, (request, response) => {
 })
 
 app.get('/openlibrary', (request, response) => {
-  console.log(request.query)
   let book=[]
   if(request.query.bibkeys==='ISBN:9780316015844') book=books.twilight
   if(request.query.bibkeys==='ISBN:9780316087360') book=books.eclipse
@@ -108,7 +105,6 @@ app.get('/openlibrary', (request, response) => {
 })
 
 app.get('/helmet', (request, response) => {
-  console.log(request.query)
   response.status(200).json(helmetBooks.condie)
 })
 

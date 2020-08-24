@@ -11,12 +11,9 @@ recommendationRouter.use(tokenHandler)
 
 
 recommendationRouter.get('/sample', (request, response) => {
-    console.log('toimii')
     const readgeek_id=request.decodedToken.readgeek_id
-    console.log(config.READGEEK_URL)
     recommendAPI.sample(readgeek_id)
         .then(data => {
-            console.log(data.user.taste_test)
             const books=data.user.taste_test.map(book=>{
                 return {
                     authors: [book.author],
@@ -47,7 +44,6 @@ recommendationRouter.post('/rate', (request, response) => {
         
         })
         .then(res => {
-            console.log('res',res)
             ratedBook=res
             recommendAPI.rate(params, readgeek_id)
         })

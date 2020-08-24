@@ -30,7 +30,6 @@ bookRouter.post('/', (request, response) => {
     const readgeek_id=request.decodedToken.readgeek_id
     addToList(book, readgeek_id)
         .then(result=>{
-            console.log('lisäys', result)
             return response.status(201).json({result})
         })
         .catch(error=> console.log(error))

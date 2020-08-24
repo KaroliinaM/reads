@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AddReadListForm from '../components/AddReadListForm'
 import ReadList from '../components/ReadList'
-import Breadcrumbs from '../components/Breadcrumbs'
 import BookService from '../services/BookService'
 
 const ListViewContainer = () => {
@@ -10,8 +9,12 @@ const ListViewContainer = () => {
     const [inputVisible, setInputVisible] = useState(false)
 
     useEffect(() => {
+        let isMounted=true
        BookService.getReadLists()
-        .then(data => setReadLists(data))
+        .then(data => {
+            if(isMounted)setReadLists(data)
+        })
+        return ()=> {isMounted=false}
     }, [])
 
     const toggleVisibility = () => setInputVisible(!inputVisible)

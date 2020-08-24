@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import Rating from 'react-rating'
 import {useHistory} from 'react-router-dom'
-import Book from '../components/Book'
 import BookService from '../services/BookService'
-import ListPicker from '../components/ListPicker'
-import Library from '../components/Library'
 import BookDetails from '../components/BookDetails'
 import LibraryService from '../services/LibraryService'
 

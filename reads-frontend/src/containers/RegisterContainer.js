@@ -20,7 +20,6 @@ const RegisterContainer = ({notifyUser}) => {
         }
         UserService.register(user)
         .then(result => {
-            console.log('result', result)
             notifyUser({style: 'notification-success',text:'user created'})
             history.push('/login')
         })
