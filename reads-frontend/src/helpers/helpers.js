@@ -1,6 +1,6 @@
 export const handleError = (notifyUser, error) => {
-    return error.json()
+  return error.json()
     .then(data => {
-        notifyUser({style: 'notification-error', text: data.error})
+      notifyUser({ style: 'notification-error', text: data.error })
     })
 }
