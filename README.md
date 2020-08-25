@@ -4,3 +4,5 @@ In the application, the user can get recommendations for books they might enjoy.
 
 Link for the application : https://thenextbook.herokuapp.com/
 
+[Hours used](https://github.com/KaroliinaM/reads/blob/master/kirjanpito.md)
+
