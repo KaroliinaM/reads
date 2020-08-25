@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import Input from '../components/Input' 
+import Input from '../components/Input'
 import UserService from '../services/UserService'
 import { handleError } from '../helpers/helpers'
 import PropTypes from 'prop-types'
@@ -42,7 +42,7 @@ const RegisterContainer = ({ notifyUser }) => {
 }
 
 RegisterContainer.propTypes = {
-  notifyUser: PropTypes.func.isRequired
+  notifyUser: PropTypes.func
 }
 
 export default RegisterContainer

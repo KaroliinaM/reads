@@ -44,7 +44,7 @@ const LoginContainer = ({ setUser, notifyUser }) => {
 
 LoginContainer.propTypes = {
   setUser: PropTypes.func.isRequired,
-  notifyUser: PropTypes.object.isRequired
+  notifyUser: PropTypes.func
 }
 
 export default LoginContainer

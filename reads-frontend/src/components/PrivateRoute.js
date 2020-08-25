@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, path, isAuth, ...rest }) => (
 )
 
 PrivateRoute.propTypes = {
-  component: PropTypes.object.isRequired,
+  component: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
   isAuth: PropTypes.bool.isRequired
 }

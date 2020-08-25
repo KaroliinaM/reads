@@ -23,7 +23,7 @@ Input.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 }
 

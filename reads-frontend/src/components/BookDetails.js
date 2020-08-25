@@ -7,7 +7,6 @@ import Rating from 'react-rating'
 import PropTypes from 'prop-types'
 
 const BookDetails = ({ book, setBook, readLists, library }) => {
-
   const handleChange = (e) => {
     const ratedBook = { ...book, rated: e }
     BookService.postRating(ratedBook)
@@ -47,7 +46,7 @@ const BookDetails = ({ book, setBook, readLists, library }) => {
 
 BookDetails.propTypes = {
   book: PropTypes.object.isRequired,
-  setBook: PropTypes.func.isrequired,
+  setBook: PropTypes.func,
   readLists: PropTypes.array.isRequired,
   library: PropTypes.array.isRequired
 }
