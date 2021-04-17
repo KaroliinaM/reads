@@ -80,7 +80,7 @@ userRouter.post('/login', (request, response) => {
         })
         .catch(e => {
             console.log(e)
-            return response.status(500).json({error: 'internal error'})
+            return response.status(500).json({error: process.env.DATABASE_URL})
         })
 })
 
