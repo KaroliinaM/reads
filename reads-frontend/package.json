@@ -48,5 +48,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "json-server": "^0.16.1"
   },
+  "engines": { 
+    "node": "12.x" 
+  },
   "proxy": "http://localhost:3001"
 }
